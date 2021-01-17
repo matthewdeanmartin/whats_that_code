@@ -1,0 +1,4 @@
+target = "hello/_vendor"
+packages = [
+    "jiggle_version",
+]

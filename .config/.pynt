@@ -1,0 +1,30 @@
+[DEFAULT]
+PROJECT_NAME = whats_that_code
+SRC  = .
+PROBLEMS_FOLDER = reports
+REPORTS_FOLDER = reports
+VENV_SHELL = poetry run
+
+MINIMUM_TEST_COVERAGE = 20
+
+# if 1, disables bandit. Bandit disallows all shell commands.
+IS_SHELL_SCRIPT_LIKE = 0
+
+; Below this there should be 0 lint, 0 mypy, etc.
+; Above this follow maximum lint
+SMALL_CODE_BASE_CUTOFF = 50
+
+MAXIMUM_LINT = 6
+MAXIMUM_MYPY = 16
+MAXIMUM_DEAD_CODE = 500
+MAXIMUM_MANIFEST_ERRORS = 0
+
+COMPLEXITY_CUT_OFF = 16
+
+DOCKER_TAG=so_pip:pynt
+
+KNOWN_IP_PREFIX=111.111
+SPEAK_WHEN_BUILD_FAILS=True
+RUN_ALL_TESTS_REGARDLESS_TO_NETWORK=True
+PACKAGE_WITH=poetry
+INSTALL_WITH=pipenv

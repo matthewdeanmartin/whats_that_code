@@ -1,0 +1,91 @@
+[Licenses]
+# lower case
+authorized_licenses :
+    bsd
+    new bsd
+    bsd license
+    new bsd license
+    simplified bsd
+    apache
+    apache 2.0
+    apache software license
+    dual
+    gnu lgpl
+    lgpl with exceptions or zpl
+    isc license
+    isc license (iscl)
+    mit
+    mit license
+    python software foundation license
+    zpl 2.1
+    gpl v3
+    apache license version 2.0
+    apache license 2.0
+    apache license, version 2.0
+    lgpl
+    mpl-2.0
+    apache software
+    mozilla public license 2.0 (mpl 2.0)
+    gnu library or lesser general public license (lgpl)
+    bsd-3-clause
+    bsd-like
+    Public Domain
+    GNU Lesser General Public License v3 (LGPLv3)
+    LGPL v3
+    MIT
+    license.txt
+    public domain, Python, 2-Clause BSD, GPL 3 (see COPYING.txt)
+    GNU General Public License (GPL)
+    BSD
+    Python Software Foundation
+    Apache Software
+    BSD or Apache License, Version 2.0
+    BSD
+    BSD-2-Clause or Apache-2.0
+    Python
+    Python Software Foundation
+    Public Domain <http://unlicense.org>
+    ASL 2
+    Apache Software
+    Historical Permission Notice and Disclaimer (HPND)
+    HPND
+    Mozilla Public License 1.1 (MPL 1.1)
+    GNU General Public License v2 or later (GPLv2+)
+    GNU Lesser General Public License v2 or later (LGPLv2+)
+    Python Software Foundation
+    PSFL
+    GNU Lesser General Public License v3 or later (LGPLv3+)
+    LGPLv3+
+    LGPLv3
+    GNU Lesser General Public License v3 (LGPLv3)
+    GPLv2
+    GNU General Public License v2 (GPLv2)
+    BSD 3-Clause
+    GNU GPL 3
+    GNU General Public License (GPL)
+    3-Clause BSD
+    BSD-2-Clause
+    ISC
+    GNU General Public License v2 or later (GPLv2+)
+    Artistic
+    GNU General Public License (GPL)
+    MIT -or- Apache License 2.0
+    Apache Software
+    Apache-2.0
+    Apache Software License 2.0
+    LGPL+BSD
+    BSD
+    GNU Library or Lesser General Public License (LGPL)
+    MIT/Apache-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
+    Python Software Foundation
+    PSF
+    MPL 2.0
+    Mozilla Public License 2.0 (MPL 2.0)
+
+unauthorized_licenses :
+    foobar
+
+[Authorized Packages]
+# Python software license (see http://zesty.ca/python/uuid.README.txt)
+uuid : 1.30

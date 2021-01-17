@@ -1,0 +1,16 @@
+.build_state
+.mypy_cache
+.pytest_cache
+coverage
+# must include dist or can't install from dist folder!
+docs
+node_modules
+npm-debug.log
+Dockerfile*
+docker-compose*
+.dockerignore
+.git
+.gitignore
+README.md
+LICENSE
+.vscode

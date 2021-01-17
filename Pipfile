@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyrankvote = "*"
+pygments = "*"
+defusedxml = "*"
+
+[dev-packages]
+pytest = "*"
+python-dotenv = "*"
+pyrankvote = "*"
+vermin = "*"
+ifaddr = "*"
+psutil = "*"
+pebble = "*"
+sshtunnel = "*"
+tox = "*"
+checksumdir = "*"
+pytest-cov = "*"
+pytest-timeout = "*"
+pytest-xdist = "*"
+dodgy = "==0.2.1"
+gitpython = "*"
+liccheck = "*"
+wheel = "*"
+requests = "*"
+
+[requires]
+python_version = "3.8"
