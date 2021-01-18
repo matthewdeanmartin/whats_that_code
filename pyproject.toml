@@ -1,65 +1,49 @@
 [tool.poetry]
-name = "language_guessing"
-version = "0.1.0"
+name = "whats_that_code"
+version = "0.1.4"
 description = "Guess programming language from a string or file."
 authors = ["Matthew Martin <matthewdeanmartin@gmail.com>"]
 keywords = ["language detection","programming language detection"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
 ]
 include = [
-    "language_guessing/**/*.py",
-    "language_guessing/**/*.md",
-    "language_guessing/**/*.txt",
-    "language_guessing/**/*.html",
-    "language_guessing/**/*.jinja",
+    "whats_that_code/**/*.py",
+    "whats_that_code/**/*.md",
+    "whats_that_code/**/*.txt",
+    "whats_that_code/**/*.html",
+    "whats_that_code/**/*.jinja",
 ]
 exclude = [
-    "language_guessing/_cache/*.html",
+
 ]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/matthewdeanmartin/language_guessing"
-homepage = "https://github.com/matthewdeanmartin/language_guessing"
-documentation ="https://github.com/matthewdeanmartin/language_guessing"
+repository = "https://github.com/matthewdeanmartin/whats_that_code"
+homepage = "https://github.com/matthewdeanmartin/whats_that_code"
+documentation ="https://github.com/matthewdeanmartin/whats_that_code"
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/matthewdeanmartin/language_guessing/issues"
-"Change Log" = "https://github.com/matthewdeanmartin/language_guessing/blob/main/CHANGES.md"
+"Bug Tracker" = "https://github.com/matthewdeanmartin/whats_that_code/issues"
+"Change Log" = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/docs/CHANGES.md"
 
 [tool.poetry.scripts]
-so_pip = 'language_guessing.__main__:main'
+#guess_that_code = 'whats_that_code.__main__:main'
 
 [tool.poetry.dependencies]
-python = "^3.7"
-black = "*"
-requests = "*"
-py-stackexchange = "*"
-beautifulsoup4 = "*"
-python-dotenv = "*"
-pipreqs = "*"
-pyupgrade = "*"
-2to3 = "*"
-html2text = "*"
-pyflakes = "*"
-stdlib-list = "*"
-jinja2 = "*"
-stackapi = "*"
-pip-upgrader = "*"
-pur = "*"
-pypistats = "*"
-pypinfo = "*"
-nbformat = "*"
+python = "^3.6"
 pyrankvote = "*"
-vermin = "*"
+defusedxml = "*"
+pygments = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "==6.0.1"
@@ -81,10 +65,7 @@ gitpython = "*"
 sshtunnel = "*"
 ifaddr = "*"
 vendorize = "*"
-# dotenv-linter = "==0.1.5"
-# colorama = "==0.4.1"
-# click = "==6.7"
-# hypothesis = "*"
+beautifulsoup4="*"
 
 [tool.black]
 line-length = 88

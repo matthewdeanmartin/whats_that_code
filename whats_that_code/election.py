@@ -7,6 +7,7 @@ import pyrankvote
 from pyrankvote import Ballot, Candidate
 
 from whats_that_code.extension_based import guess_by_extension
+from whats_that_code.guess_by_popularity import language_by_popularity
 from whats_that_code.keyword_based import guess_by_keywords
 from whats_that_code.parsing_based import parses_as_xml
 from whats_that_code.pygments_based import language_by_pygments
@@ -36,7 +37,8 @@ def guess_language_all_methods(
     vote_by_pygments = language_by_pygments(code)
 
     all_possible = set()
-
+    # keeps wanting to guess the obscur langauges.
+    vote_by_popularity = language_by_popularity(all_possible)
     for votes in [
         vote_by_tags,
         vote_by_keyword,
@@ -45,6 +47,7 @@ def guess_language_all_methods(
         vote_by_extension_in_text,
         vote_by_regex_features,
         vote_by_pygments,
+        vote_by_popularity,
     ]:
         for item in votes:
             all_possible.add(item)

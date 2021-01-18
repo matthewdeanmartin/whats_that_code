@@ -15,7 +15,7 @@ if not KNOWN_PYGMENTS:
     def init():
         """Create entries"""
         for key, value in LEXERS.items():
-            print(f' "{key.replace("Lexer","").lower()}", {list(value[3])},')
+            # print(f' "{key.replace("Lexer","").lower()}", {list(value[3])},')
             KNOWN_PYGMENTS[key.replace("Lexer", "").lower()] = list(value[3])
 
     init()

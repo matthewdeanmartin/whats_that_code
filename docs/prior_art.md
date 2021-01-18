@@ -24,4 +24,5 @@ Highlight/Formatter/Line Counter/Decompilation
 
 Research Papers, possibly with no public source
 - [Predicting SO](https://www.researchgate.net/publication/338132359_SCC_Predicting_the_Programming_Language_of_Questions_and_Snippets_of_StackOverflow)
+    - [Source code for above paper](https://github.com/Kamel773/SourceCodeClassification)
 - [Github's OctoLingua](https://github.com/MankaranSingh/GSoC-2020/blob/master/README.md) Closed source classifier?

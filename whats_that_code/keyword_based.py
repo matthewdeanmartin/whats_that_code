@@ -2440,7 +2440,8 @@ def guess_by_keywords(code: str) -> List[str]:
     guesses: Dict[str, int] = {}
     for language, keywords in LANGUAGE_KEY_WORDS.items():
         for word in words:
-            if word in keywords:
+            # small keywords are too common
+            if word in keywords and len(word) > 2:
                 if language in guesses:
                     guesses[language] += 1
                 else:
