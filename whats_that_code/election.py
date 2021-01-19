@@ -9,6 +9,7 @@ from pyrankvote import Ballot, Candidate
 from whats_that_code.extension_based import guess_by_extension
 from whats_that_code.guess_by_popularity import language_by_popularity
 from whats_that_code.keyword_based import guess_by_keywords
+from whats_that_code.known_languages import FILE_EXTENSIONS
 from whats_that_code.parsing_based import parses_as_xml
 from whats_that_code.pygments_based import language_by_pygments
 from whats_that_code.regex_based import language_by_regex_features
@@ -21,25 +22,28 @@ def guess_language_all_methods(
     file_name: str = "",
     surrounding_text: str = "",
     tags: Optional[List[str]] = None,
+    priors: Optional[List[str]] = None,
 ) -> Optional[str]:
     """
     Choose language with multiple algorithms via ranked choice.
 
     Ensemble classifier in fancy talk.
     """
+    vote_by_priors = guess_by_prior_knowledge(priors)
+
     vote_by_keyword = guess_by_keywords(code)
     vote_by_shebang = language_by_shebang(code)
     vote_by_tags = match_tag_to_languages(tags)
-    vote_by_extension = guess_by_extension(file_name)
-    vote_by_extension_in_text = guess_by_extension(surrounding_text)
+    vote_by_extension = guess_by_extension(file_name=file_name)
+    vote_by_extension_in_text = guess_by_extension(text=surrounding_text)
     vote_by_regex_features = language_by_regex_features(code)
-
     vote_by_pygments = language_by_pygments(code)
 
     all_possible = set()
     # keeps wanting to guess the obscur langauges.
     vote_by_popularity = language_by_popularity(all_possible)
-    for votes in [
+
+    all_vote_lists = [
         vote_by_tags,
         vote_by_keyword,
         vote_by_shebang,
@@ -48,7 +52,11 @@ def guess_language_all_methods(
         vote_by_regex_features,
         vote_by_pygments,
         vote_by_popularity,
-    ]:
+        vote_by_priors,
+    ]
+
+    # validate votes, get list of everything voted for
+    for votes in all_vote_lists:
         for item in votes:
             all_possible.add(item)
         for vote in votes:
@@ -57,34 +65,20 @@ def guess_language_all_methods(
             if "." in vote:
                 raise TypeError("Name not extension")
 
+    # TODO: more comprehensive way to deal with "clones"
     # handle xml & php
     can_be_xml = True
     if "xml" in all_possible:
         if not parses_as_xml(code):
-            for votes in [
-                vote_by_tags,
-                vote_by_keyword,
-                vote_by_shebang,
-                vote_by_extension,
-                vote_by_extension_in_text,
-                vote_by_regex_features,
-                vote_by_pygments,
-            ]:
+            for votes in all_vote_lists:
                 if "xml" in votes:
                     votes.remove("xml")
                     can_be_xml = False
 
+    # convert to ballots and hold election
     candidates = {}
     ballots = []
-    for ballot in [
-        vote_by_tags,
-        vote_by_keyword,
-        vote_by_shebang,
-        vote_by_extension,
-        vote_by_extension_in_text,
-        vote_by_regex_features,
-        vote_by_pygments,
-    ]:
+    for ballot in all_vote_lists:
         for candidate in ballot:
             candidates[candidate] = Candidate(candidate)
         if ballot:
@@ -106,3 +100,16 @@ def guess_language_all_methods(
     if not can_be_xml and winners[0].name == "xml":
         raise TypeError()
     return winners[0].name
+
+
+def guess_by_prior_knowledge(priors: Optional[List[str]]) -> List[str]:
+    """Let user tell us what he thinks are likely"""
+    vote_by_priors = []
+    if priors:
+        for prior in priors:
+            if prior in FILE_EXTENSIONS:
+                if prior not in vote_by_priors:
+                    vote_by_priors.append(prior)
+            else:
+                print(f"{prior} is not a known programming language")
+    return vote_by_priors
