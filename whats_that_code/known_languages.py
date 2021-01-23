@@ -250,7 +250,7 @@ FILE_EXTENSIONS = {
     "elixir": [".ex", ".eex", ".exs"],
     "elm": [".elm"],
     "emacslisp": [".el"],
-    "email": [".eml"],
+    # "email": [".eml"], # not a programming language
     "erlang": [".erl", ".hrl", ".es", ".escript"],
     "erlangshell": [".erl-sh"],
     "evoquehtml": [".html"],

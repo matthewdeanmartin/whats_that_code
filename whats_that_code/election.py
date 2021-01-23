@@ -29,18 +29,47 @@ def guess_language_all_methods(
 
     Ensemble classifier in fancy talk.
     """
-    vote_by_priors = guess_by_prior_knowledge(priors)
 
-    vote_by_keyword = guess_by_keywords(code)
+    # very smart voters
     vote_by_shebang = language_by_shebang(code)
-    vote_by_tags = match_tag_to_languages(tags)
     vote_by_extension = guess_by_extension(file_name=file_name)
     vote_by_extension_in_text = guess_by_extension(text=surrounding_text)
-    vote_by_regex_features = language_by_regex_features(code)
-    vote_by_pygments = language_by_pygments(code)
 
-    all_possible = set()
-    # keeps wanting to guess the obscur langauges.
+    # mid-tier voters
+    vote_by_tags = match_tag_to_languages(tags)
+    vote_by_priors = guess_by_prior_knowledge(priors)
+    vote_by_regex_features = language_by_regex_features(code)
+
+    all_but_stupid = set(
+        vote_by_tags
+        + vote_by_shebang
+        + vote_by_extension
+        + vote_by_extension_in_text
+        + vote_by_regex_features
+        + vote_by_priors
+    )
+    # stupid voters
+    vote_by_keyword = guess_by_keywords(code)
+    # dumb voter block can't double their impact
+    vote_by_pygments = [
+        _ for _ in language_by_pygments(code) if _ not in vote_by_keyword
+    ]
+
+    # Only want to hear from stupid voters if no one else votes
+    if all_but_stupid:
+        vote_by_keyword = []
+        vote_by_pygments = []
+
+    all_possible = set(
+        vote_by_tags
+        + vote_by_shebang
+        + vote_by_extension
+        + vote_by_extension_in_text
+        + vote_by_regex_features
+        + vote_by_priors
+        # don't include stupid voters
+    )
+    # above keeps wanting to guess the obscure languages.
     vote_by_popularity = language_by_popularity(all_possible)
 
     all_vote_lists = [
