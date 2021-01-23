@@ -34,9 +34,9 @@ def guess_language_all_methods(
     vote_by_shebang = language_by_shebang(code)
     vote_by_extension = guess_by_extension(file_name=file_name)
     vote_by_extension_in_text = guess_by_extension(text=surrounding_text)
+    vote_by_tags = match_tag_to_languages(tags)
 
     # mid-tier voters
-    vote_by_tags = match_tag_to_languages(tags)
     vote_by_priors = guess_by_prior_knowledge(priors)
     vote_by_regex_features = language_by_regex_features(code)
 
@@ -73,15 +73,23 @@ def guess_language_all_methods(
     vote_by_popularity = language_by_popularity(all_possible)
 
     all_vote_lists = [
+        # if this has any info, in probably is really good. Give 'em two votes
         vote_by_tags,
-        vote_by_keyword,
         vote_by_shebang,
         vote_by_extension,
         vote_by_extension_in_text,
-        vote_by_regex_features,
-        vote_by_pygments,
-        vote_by_popularity,
+        # ad hoc way to give smart algo's more votes
+        vote_by_tags,
+        vote_by_shebang,
+        vote_by_extension,
+        vote_by_extension_in_text,
+        # mid tier
         vote_by_priors,
+        vote_by_regex_features,
+        vote_by_popularity,
+        # dummies
+        vote_by_keyword,
+        vote_by_pygments,
     ]
 
     # validate votes, get list of everything voted for
