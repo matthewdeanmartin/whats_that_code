@@ -23,7 +23,7 @@ def match_tag_to_languages(tags: List[str]) -> List[str]:
     weak_guesses = set()
     for tag in tags:
         for key, value in RELATED_TAGS.items():
-            if tag in value:
+            if tag in value[0:3]:
                 weak_guesses.add(key)
 
     new_weak_guesses = []
