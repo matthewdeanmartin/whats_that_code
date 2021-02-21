@@ -34,7 +34,7 @@ import os
 import subprocess
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'navio_tasks'))
+sys.path.append(os.path.join(os.path.dirname(__file__), "navio_tasks"))
 
 try:
     from dotenv import load_dotenv
@@ -382,7 +382,6 @@ def bandit() -> None:
     # /scripts/ folder
     # build.py itself
     do_bandit(IS_SHELL_SCRIPT_LIKE)
-
 
 
 @task(flake8)
