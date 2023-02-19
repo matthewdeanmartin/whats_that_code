@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "whats_that_code"
-version = "0.1.10"
+version = "0.1.11"
 description = "Guess programming language from a string or file."
 authors = ["Matthew Martin <matthewdeanmartin@gmail.com>"]
 keywords = ["language detection","programming language detection"]
@@ -15,6 +15,9 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 include = [
     "whats_that_code/**/*.py",

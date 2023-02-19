@@ -5,7 +5,7 @@ import os
 
 from whats_that_code.election import guess_language_all_methods
 from whats_that_code.known_languages import FILE_EXTENSIONS
-
+import pytest
 
 def locate_file(file_name: str, executing_file: str) -> str:
     """
@@ -28,7 +28,14 @@ def test_with_source_classifier():
     total = 0
     right = 0
     wrong = 0
-    files = locate_file("../../examples/sourceclassifier-master/sources", __file__)
+    try:
+        files = locate_file("../../examples/sourceclassifier-master/sources", __file__)
+    except TypeError:
+        pytest.skip("don't have a bunch of files downloaded to verify against")
+
+    if not os.path.exists(files):
+        pytest.skip("don't have a bunch of files downloaded to verify against")
+
     for subdir, dirs, files in os.walk(files):
 
         for file_name in files:

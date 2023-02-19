@@ -34,6 +34,8 @@ import os
 import subprocess
 import sys
 
+sys.path.append(os.path.join(os.path.dirname(__file__), "navio_tasks"))
+
 try:
     from dotenv import load_dotenv
 except ModuleNotFoundError:
@@ -80,7 +82,6 @@ from navio_tasks.commands.cli_flake8 import do_flake8
 from navio_tasks.commands.cli_get_secrets import do_git_secrets
 from navio_tasks.commands.cli_mypy import do_mypy, evaluated_mypy_results
 from navio_tasks.commands.cli_pylint import do_lint, evaluated_lint_results
-from navio_tasks.commands.cli_pyt import do_python_taint
 from navio_tasks.commands.cli_pytest import do_pytest, do_pytest_coverage
 from navio_tasks.commands.cli_tox import do_tox
 from navio_tasks.commands.lib_dodgy import do_dodgy
@@ -383,16 +384,6 @@ def bandit() -> None:
     do_bandit(IS_SHELL_SCRIPT_LIKE)
 
 
-@task(formatting, compile_py)
-@skip_if_no_change("python_taint")
-@timed()
-def python_taint() -> None:
-    """
-    Security linting with pyt
-    """
-    do_python_taint()
-
-
 @task(flake8)
 @skip_if_no_change("mccabe")
 @timed()
@@ -634,7 +625,6 @@ def jiggle_version() -> None:
     flake8,
     dodgy_check,
     bandit,
-    python_taint,
     mccabe,
     pin_dependencies,
     jiggle_version,
@@ -675,7 +665,6 @@ def parallel_checks() -> None:
         do_flake8,
         do_dodgy,
         do_bandit,
-        do_python_taint,
         do_mccabe,
         do_check_manifest,
         do_liccheck,
@@ -725,7 +714,6 @@ def parallel_checks() -> None:
     flake8,
     dodgy_check,
     bandit,
-    python_taint,
     mccabe,
     check_manifest,
     liccheck,  #

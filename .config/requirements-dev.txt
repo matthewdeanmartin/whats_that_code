@@ -10,6 +10,7 @@
 # `Pipfile.lock` and then regenerate `requirements*.txt`.
 ################################################################################
 
+beautifulsoup4
 checksumdir
 dodgy==0.2.1
 gitpython

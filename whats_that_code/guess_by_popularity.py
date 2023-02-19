@@ -4,11 +4,12 @@ rank
 """
 from typing import List, Set
 
-from whats_that_code.known_languages import POPULARITY, POPULARITY_LIST
+from whats_that_code.known_languages import POPULARITY_LIST
 
 
 def language_by_popularity(guesses: Set[str]) -> List[str]:
     """Guess by parsing"""
+    # TODO: maybe take into account ranking, use cutoffs.
     if not guesses:
         return []
     votes = []

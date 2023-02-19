@@ -7,6 +7,7 @@ name = "pypi"
 pyrankvote = "*"
 pygments = "*"
 defusedxml = "*"
+navio-builder-win = ">=0.1.57"
 
 [dev-packages]
 pytest = "*"
@@ -28,6 +29,8 @@ liccheck = "*"
 wheel = "*"
 requests = "*"
 beautifulsoup4 = "*"
+mypy = "*"
+pre-commit = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.11"
