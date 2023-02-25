@@ -15,7 +15,8 @@ Badges
 ------
 [![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/whats_that_code?longCache=true&style=flat-square)](https://libraries.io/github/matthewdeanmartin/whats_that_code/sourcerank)
 
-[![Downloads](https://pepy.tech/badge/whats_that_code/month)](https://pepy.tech/project/whats_that_code/month)
+[![Downloads](https://static.pepy.tech/badge/whats-that-code/month)](https://pepy.tech/project/whats-that-code)
+
 
 [![CodeFactor](https://www.codefactor.io/repository/github/matthewdeanmartin/whats_that_code/badge)](https://www.codefactor.io/repository/github/matthewdeanmartin/whats_that_code)
 
