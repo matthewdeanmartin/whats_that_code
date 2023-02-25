@@ -11,11 +11,20 @@ I created this because I wanted
 
 Tested on python 3.6 through 3.9.
 
+Badges
+------
+[![Libraries.io SourceRank](https://img.shields.io/librariesio/sourcerank/pypi/whats_that_code?longCache=true&style=flat-square)](https://libraries.io/github/matthewdeanmartin/whats_that_code/sourcerank)
+
+[![Downloads](https://pepy.tech/badge/whats_that_code/month)](https://pepy.tech/project/whats_that_code/month)
+
+[![CodeFactor](https://www.codefactor.io/repository/github/matthewdeanmartin/whats_that_code/badge)](https://www.codefactor.io/repository/github/matthewdeanmartin/whats_that_code)
+
 ## Usage
-```
-> code = "def yo():\n   print('hello')"
-> guess_language_all_methods(code, file_name="yo.py")
-["python"]
+```python
+from whats_that_code.election import guess_language_all_methods
+code = "def yo():\n   print('hello')"
+result = guess_language_all_methods(code, file_name="yo.py")
+assert result == ["python"]
 ```
 
 ## How it Works

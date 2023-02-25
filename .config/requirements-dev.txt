@@ -16,7 +16,9 @@ dodgy==0.2.1
 gitpython
 ifaddr
 liccheck
+mypy
 pebble
+pre-commit
 psutil
 pyrankvote
 pytest

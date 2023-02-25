@@ -7,6 +7,7 @@ from whats_that_code.election import guess_language_all_methods
 from whats_that_code.known_languages import FILE_EXTENSIONS
 import pytest
 
+
 def locate_file(file_name: str, executing_file: str) -> str:
     """
     Find file relative to a source file, e.g.
