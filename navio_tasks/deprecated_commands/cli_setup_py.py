@@ -102,7 +102,7 @@ def do_package() -> None:
             for root, _, files in os.walk(startpath):
                 level = root.replace(startpath, "").count(os.sep)
                 indent = " " * 4 * level
-                inform("{}{}/".format(indent, os.path.basename(root)))
+                inform(f"{indent}{os.path.basename(root)}/")
                 subindent = " " * 4 * (level + 1)
                 for file in files:
                     inform(f"{subindent}{file}")

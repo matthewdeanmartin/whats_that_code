@@ -74,7 +74,7 @@ if PIPENV_ACTIVE or POETRY_ACTIVE:
 
 PYTHON = "python"
 IS_DJANGO = False
-IS_GITLAB = "GITLAB_CI" in os.environ
+IS_GITLAB = "GITLAB_CI" in os.environ or "CI" in os.environ
 IS_WINDOWS = platform.system() == "Windows"
 IS_ALPINE_DOCKER = os.path.exists("/etc/alpine-release")
 IS_JENKINS = "FROM_JENKINS" in os.environ and os.environ["FROM_JENKINS"] == "TRUE"

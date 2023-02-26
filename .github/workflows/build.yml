@@ -1,0 +1,33 @@
+name: Build and Test
+
+on: [ push ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v3
+            -   uses: actions/setup-python@v4
+                with:
+                    python-version: '3.11'
+                    cache: 'pipenv' # caching pipenv dependencies
+            -   name: Install pipenv and pipx
+                run: |
+                    pip install pipenv && pip install pipx
+
+            -   name: Install global dependencies
+                run: |
+                    pipx install isort && pipx install black && pipx install bandit && pipx install pylint && \
+                    pipx install pre-commit && pipx install pygount && pipx install vulture && \
+                    pipx install flake8 && \
+                    pipx inject flake8 dlint mccabe pyflakes pep8-naming flake8-bugbear && \
+                    pipx install "pipenv-to-requirements==0.9.*" && \
+                    pipx inject pipenv-to-requirements "pipenv==2022.9.8" && \
+                    pipx install safety && pipx install pyupgrade
+
+            -   name: Install Dependencies
+                run: pipenv install --dev --skip-lock
+
+            -   name: Run nb
+                run: pipenv run nb package
