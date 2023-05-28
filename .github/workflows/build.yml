@@ -24,10 +24,37 @@ jobs:
                     pipx inject flake8 dlint mccabe pyflakes pep8-naming flake8-bugbear && \
                     pipx install "pipenv-to-requirements==0.9.*" && \
                     pipx inject pipenv-to-requirements "pipenv==2022.9.8" && \
-                    pipx install safety && pipx install pyupgrade
+                    pipx install safety && pipx install pyupgrade && pipx install poetry
 
             -   name: Install Dependencies
                 run: pipenv install --dev --skip-lock
 
             -   name: Run nb
                 run: pipenv run nb package
+            -   name: Upload Package
+                uses: actions/upload-artifact@v3.1.2
+                with:
+                  name: packages
+                  path: dist/
+                  if-no-files-found: error
+                  retention-days: 1
+
+
+    pypi-publish:
+        name: Upload release to PyPI
+        runs-on: ubuntu-latest
+        environment:
+            name: pypi
+            url: https://pypi.org/p/whats_that_code
+        permissions:
+            id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+        # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        steps:
+            -   name: Get packages
+                uses: actions/download-artifact@v3.0.2
+                with:
+                    name: packages
+                    path: dist/
+            -   name: Publish package distributions to PyPI
+                uses: pypa/gh-action-pypi-publish@release/v1
+        needs: build

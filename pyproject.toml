@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "whats_that_code"
-version = "0.1.11"
+version = "0.2.0"
 description = "Guess programming language from a string or file."
 authors = ["Matthew Martin <matthewdeanmartin@gmail.com>"]
 keywords = ["language detection","programming language detection"]
