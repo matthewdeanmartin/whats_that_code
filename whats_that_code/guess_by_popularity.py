@@ -2,6 +2,7 @@
 Take everyone elses votes. If a vote is for something popular, vote for it in popularity
 rank
 """
+
 from typing import List, Set
 
 from whats_that_code.known_languages import POPULARITY_LIST

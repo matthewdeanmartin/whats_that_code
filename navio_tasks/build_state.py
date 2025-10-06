@@ -11,6 +11,7 @@ Strategies
 
 Is it worse is lint counting. Move to different module?
 """
+
 import functools
 import hashlib
 import os

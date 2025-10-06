@@ -1,6 +1,7 @@
 """
 Register scripts
 """
+
 import os
 import shlex
 import sys

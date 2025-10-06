@@ -2,6 +2,7 @@
 Precommit is a generic checker/build tool. It can contain a few or lots of
 tools, many of them not python specific.
 """
+
 import shlex
 import sys
 

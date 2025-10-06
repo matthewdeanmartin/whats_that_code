@@ -1,6 +1,7 @@
 """
 Guess by extension
 """
+
 import os
 from typing import List
 

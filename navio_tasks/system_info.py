@@ -1,6 +1,7 @@
 """
 Infering what machine we are on.
 """
+
 import os
 import platform
 import re

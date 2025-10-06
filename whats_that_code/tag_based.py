@@ -1,6 +1,7 @@
 """
 Guess by SO Tag
 """
+
 from typing import List
 
 from whats_that_code.known_languages import FILE_EXTENSIONS

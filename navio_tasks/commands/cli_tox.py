@@ -1,6 +1,7 @@
 """
 See if everything works with python 3.8 and upcoming libraries
 """
+
 import shlex
 
 from navio_tasks import settings as settings

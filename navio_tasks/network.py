@@ -1,6 +1,7 @@
 """
 Builds fail when they're not on VPN or can't reach remote servers
 """
+
 import ifaddr
 import requests
 

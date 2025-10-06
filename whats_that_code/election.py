@@ -1,6 +1,7 @@
 """
 Ranked choice election
 """
+
 from typing import List, Optional
 
 import pyrankvote

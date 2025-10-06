@@ -6,7 +6,6 @@ Expect few issues
 All issues should be addressable immediately.
 """
 
-
 from navio_tasks.cli_commands import check_command_exists, execute, prepinform_simple
 
 

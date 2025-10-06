@@ -1,6 +1,7 @@
 """
 Extract commit comments from git to a report. Makes for a lousy CHANGELOG.md
 """
+
 import shlex
 
 from navio_tasks.cli_commands import (

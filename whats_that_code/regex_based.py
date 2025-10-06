@@ -3,6 +3,7 @@ Fast detect python.
 
 https://github.com/TomCrypto/Codex/blob/master/codex.py
 """
+
 from typing import Dict, List
 
 from whats_that_code.codex_markers import MARKERS

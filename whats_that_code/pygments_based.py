@@ -1,6 +1,7 @@
 """
 Guess with pygments which can have an accuracy of 10% on SO questions (seems low?)
 """
+
 from typing import List
 
 from pygments import lexers
