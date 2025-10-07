@@ -1,6 +1,7 @@
 """
 Classify 'em
 """
+
 import os
 
 from whats_that_code.election import guess_language_all_methods

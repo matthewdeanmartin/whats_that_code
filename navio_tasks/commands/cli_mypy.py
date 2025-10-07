@@ -1,6 +1,7 @@
 """
 Type checking. Hardest to fix, most likely to find a real bug.
 """
+
 import subprocess
 import sys
 from typing import List

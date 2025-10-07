@@ -5,6 +5,7 @@ Should break build on any issues.
 Expect few issues
 All issues should be addressable immediately.
 """
+
 import subprocess
 
 from navio_tasks import settings as settings

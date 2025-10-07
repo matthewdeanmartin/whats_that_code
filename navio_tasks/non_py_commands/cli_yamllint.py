@@ -1,6 +1,7 @@
 """
 Check yaml, but doesn't reformat it
 """
+
 from navio_tasks.cli_commands import check_command_exists, execute
 from navio_tasks.settings import PROJECT_NAME, VENV_SHELL
 from navio_tasks.utils import inform

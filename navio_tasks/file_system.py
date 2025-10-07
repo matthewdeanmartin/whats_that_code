@@ -1,6 +1,7 @@
 """
 File system related
 """
+
 import os
 
 from navio_tasks.settings import PROBLEMS_FOLDER, REPORTS_FOLDER

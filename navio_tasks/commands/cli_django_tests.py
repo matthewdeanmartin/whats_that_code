@@ -5,6 +5,7 @@ Should break build on any issues.
 Expect few issues
 All issues should be addressable immediately.
 """
+
 import os
 
 from navio_tasks.cli_commands import config_pythonpath, execute_with_environment

@@ -3,6 +3,7 @@ Related tag data from StackOverflow
 CC-BY-SA
 ref: https://api.stackexchange.com/docs/related-tags
 """
+
 from typing import Dict, List
 
 RELATED_TAGS: Dict[str, List[str]] = {

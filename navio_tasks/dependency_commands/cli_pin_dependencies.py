@@ -1,6 +1,7 @@
 """
 Pin deps
 """
+
 import os
 
 from navio_tasks import settings as settings

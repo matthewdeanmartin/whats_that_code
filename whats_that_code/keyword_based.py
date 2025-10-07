@@ -1,6 +1,7 @@
 """
 Guess by counting known reserved keywords.
 """
+
 from typing import Dict, List
 
 # words from forked github repo, so covered by GitHub Terms of Service regarding forked repos.

@@ -3,6 +3,7 @@ Settings loaded from pynt.ini
 
 Maybe move to pyproject.toml?
 """
+
 import configparser
 import os
 import platform

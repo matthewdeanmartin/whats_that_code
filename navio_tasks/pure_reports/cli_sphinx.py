@@ -1,6 +1,7 @@
 """
 Generate docs based on rst.
 """
+
 from navio_tasks.cli_commands import (
     check_command_exists,
     config_pythonpath,

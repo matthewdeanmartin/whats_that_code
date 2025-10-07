@@ -1,6 +1,7 @@
 """
 Upload to pypi. Pypi is public, don't do that unless you mean to.
 """
+
 import os
 
 from navio_tasks.cli_commands import check_command_exists, execute

@@ -1,6 +1,7 @@
 """
 Security tool. Unsupported since 3.9
 """
+
 import sys
 
 from navio_tasks.cli_commands import check_command_exists, execute, prepinform_simple

@@ -6,6 +6,7 @@ Expect few issues
 All issues should be addressable immediately.
 ----------
 """
+
 import multiprocessing
 
 from navio_tasks.cli_commands import (

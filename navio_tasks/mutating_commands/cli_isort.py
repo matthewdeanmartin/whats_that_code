@@ -1,6 +1,7 @@
 """
 Reorg imports. Constant 4 way battle between black, isort, pycharm and mscode
 """
+
 from navio_tasks.cli_commands import check_command_exists, execute, prepinform_simple
 
 

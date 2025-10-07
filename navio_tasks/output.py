@@ -1,6 +1,7 @@
 """
 Console output related
 """
+
 import subprocess
 import sys
 

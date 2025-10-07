@@ -1,6 +1,7 @@
 """
 Increase version number, but only the last number in a semantic version triplet
 """
+
 import shlex
 
 from git import InvalidGitRepositoryError, Repo

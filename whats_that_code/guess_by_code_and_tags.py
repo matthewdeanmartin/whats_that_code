@@ -1,6 +1,7 @@
 """
 What programming language is this text
 """
+
 from typing import List, Tuple
 
 from whats_that_code.election import guess_language_all_methods

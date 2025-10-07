@@ -1,6 +1,7 @@
 """
 Code checks, but tool is a node app.
 """
+
 from navio_tasks.cli_commands import check_command_exists, execute, prepinform_simple
 from navio_tasks.utils import inform
 
