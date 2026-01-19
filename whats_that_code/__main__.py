@@ -15,6 +15,7 @@ Options:
   --quiet                      No informational logging
 
 """
+
 import logging
 import sys
 
