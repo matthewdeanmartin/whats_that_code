@@ -9,7 +9,6 @@ import sys
 from subprocess import CalledProcessError, check_call
 from typing import Any, Iterable
 
-
 __license__ = "MIT License"
 __contact__ = "http://rags.github.com/pynt-contrib/"
 

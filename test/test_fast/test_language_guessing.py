@@ -55,13 +55,11 @@ def test_language_by_regex_features():
 
 
 def test_language_by_pygments():
-    assert language_by_pygments(
-        """// Your First C++ Program
+    assert language_by_pygments("""// Your First C++ Program
 
 #include <iostream>
 
 int main() {
     std::cout << "Hello World!";
     return 0;
-}"""
-    )
+}""")
