@@ -70,6 +70,7 @@ dev = [
 
 [tool.uv]
 default-groups = ["dev"]
+universal = true
 
 [tool.black]
 line-length = 88
