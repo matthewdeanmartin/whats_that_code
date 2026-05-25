@@ -1,9 +1,12 @@
-[tool.poetry]
+[project]
 name = "whats_that_code"
 version = "0.2.0"
 description = "Guess programming language from a string or file."
-authors = ["Matthew Martin <matthewdeanmartin@gmail.com>"]
-keywords = ["language detection","programming language detection"]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.8"
+authors = [{ name = "Matthew Martin", email = "matthewdeanmartin@gmail.com" }]
+keywords = ["language detection", "programming language detection"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -19,6 +22,25 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
+dependencies = [
+    "pyrankvote",
+    "defusedxml",
+    "pygments",
+]
+
+[project.urls]
+Repository = "https://github.com/matthewdeanmartin/whats_that_code"
+Homepage = "https://github.com/matthewdeanmartin/whats_that_code"
+Documentation = "https://github.com/matthewdeanmartin/whats_that_code"
+"Bug Tracker" = "https://github.com/matthewdeanmartin/whats_that_code/issues"
+"Change Log" = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/docs/CHANGES.md"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["whats_that_code"]
 include = [
     "whats_that_code/**/*.py",
     "whats_that_code/**/*.md",
@@ -26,45 +48,31 @@ include = [
     "whats_that_code/**/*.html",
     "whats_that_code/**/*.jinja",
 ]
-exclude = [
 
+[dependency-groups]
+dev = [
+    "pytest==6.0.1",
+    "pytest-cov>=2.10.1",
+    "pytest-timeout",
+    "pytest-xdist>=2.1.0",
+    "pip-check==2.6",
+    "checksumdir==1.1.7",
+    "dodgy==0.2.1",
+    "gitchangelog==3.0.4",
+    "liccheck==0.4.3",
+    "psutil==5.6.7",
+    "pebble==4.5.0",
+    "gitpython",
+    "ifaddr",
+    "vendorize",
+    "jiggle-version>=2.1.0",
+    "troml-dev-status>=0.6.0; python_version >= '3.9'",
+    "dont-be-lazy>=0.1.2; python_version >= '3.10'",
+    "pydoc-fork>=3.0.0; python_version >= '3.10'",
 ]
-license = "MIT"
-readme = "README.md"
-repository = "https://github.com/matthewdeanmartin/whats_that_code"
-homepage = "https://github.com/matthewdeanmartin/whats_that_code"
-documentation ="https://github.com/matthewdeanmartin/whats_that_code"
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/matthewdeanmartin/whats_that_code/issues"
-"Change Log" = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/docs/CHANGES.md"
-
-[tool.poetry.scripts]
-#guess_that_code = 'whats_that_code.__main__:main'
-
-[tool.poetry.dependencies]
-python = "^3.6"
-pyrankvote = "*"
-defusedxml = "*"
-pygments = "*"
-
-[tool.poetry.dev-dependencies]
-pytest = "==6.0.1"
-pytest-cov = ">=2.10.1"
-pytest-timeout = "*"
-pytest-xdist = ">=2.1.0"
-pip-check = "==2.6"
-checksumdir = "==1.1.7"
-requests = "==2.22.0"
-dodgy = "==0.2.1"
-gitchangelog = "==3.0.4"
-liccheck = "==0.4.3"
-psutil = "==5.6.7"
-pebble = "==4.5.0"
-python-dotenv = "==0.11.0"
-gitpython = "*"
-ifaddr = "*"
-vendorize = "*"
+[tool.uv]
+default-groups = ["dev"]
 
 [tool.black]
 line-length = 88
@@ -89,9 +97,6 @@ exclude = '''
                      # the root of the project
 )
 '''
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -114,3 +119,4 @@ known_first_party = ["so_pip"]
 line_length = 88
 multi_line_output = 3
 use_parentheses = true
+
