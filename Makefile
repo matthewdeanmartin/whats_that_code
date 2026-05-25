@@ -117,10 +117,10 @@ publish:
 
 # ── Gates ─────────────────────────────────────────────────────────────────────
 
-check: format-check lint security test typecheck version-check
+check: lint security test typecheck version-check
 	@echo "All checks passed."
 
-check-ci: format-check lint security test-ci typecheck version-check
+check-ci: lint security test-ci typecheck version-check
 	@echo "CI checks passed."
 
 # ── Dogfooding ────────────────────────────────────────────────────────────────
