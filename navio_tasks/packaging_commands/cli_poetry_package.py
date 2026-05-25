@@ -1,3 +1,0 @@
-"""
-Run `poetry build`
-"""
