@@ -35,7 +35,7 @@ def guess_language_all_methods(
     vote_by_shebang = language_by_shebang(code)
     vote_by_extension = guess_by_extension(file_name=file_name)
     vote_by_extension_in_text = guess_by_extension(text=surrounding_text)
-    vote_by_tags = match_tag_to_languages(tags)
+    vote_by_tags = match_tag_to_languages(tags or [])
 
     # mid-tier voters
     vote_by_priors = guess_by_prior_knowledge(priors)

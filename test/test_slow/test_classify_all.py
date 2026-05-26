@@ -4,9 +4,10 @@ Classify 'em
 
 import os
 
+import pytest
+
 from whats_that_code.election import guess_language_all_methods
 from whats_that_code.known_languages import FILE_EXTENSIONS
-import pytest
 
 
 def locate_file(file_name: str, executing_file: str) -> str:
@@ -47,19 +48,19 @@ def test_with_source_classifier():
             with open(file_path, encoding="utf-8", errors="ignore") as code_file:
                 total += 1
                 guess = guess_language_all_methods(code_file.read())
-                neither = True
+                _neither = True
                 if guess in ["c", "cpp"] and (
                     file_name.endswith(".gcc") or file_name.endswith(".gcc")
                 ):
                     right += 1
-                    neither = False
+                    _neither = False
                 elif guess in ["php", "xml", "html"] and (
                     file_name.endswith(".php")
                     or file_name.endswith(".xml")
                     or file_name.endswith(".html")
                 ):
                     right += 1
-                    neither = False
+                    _neither = False
                 elif guess in FILE_EXTENSIONS:
                     extensions = FILE_EXTENSIONS[guess]
                     one_does = False
@@ -69,11 +70,11 @@ def test_with_source_classifier():
                     if not one_does:
                         print(file_path, guess)
                         wrong += 1
-                        neither = False
+                        _neither = False
 
                     else:
                         right += 1
-                        neither = False
+                        _neither = False
 
     # 68% !!
     print(f"right {right}... {right/total}%")

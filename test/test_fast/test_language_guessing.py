@@ -1,6 +1,6 @@
 from whats_that_code.election import guess_language_all_methods
-from whats_that_code.keyword_based import guess_by_keywords
 from whats_that_code.guess_by_code_and_tags import assign_extension
+from whats_that_code.keyword_based import guess_by_keywords
 from whats_that_code.pygments_based import language_by_pygments
 from whats_that_code.regex_based import language_by_regex_features
 

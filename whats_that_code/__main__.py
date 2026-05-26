@@ -24,7 +24,7 @@ import docopt
 from whats_that_code import _version as meta
 
 # Do these need to stick around?
-LOGGERS = []
+LOGGERS: list[logging.Logger] = []
 
 LOGGER = logging.getLogger(__name__)
 

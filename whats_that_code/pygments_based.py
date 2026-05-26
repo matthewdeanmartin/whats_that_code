@@ -9,7 +9,7 @@ from pygments.lexers import LEXERS
 
 from whats_that_code.known_languages import FILE_EXTENSIONS
 
-KNOWN_PYGMENTS = {}
+KNOWN_PYGMENTS: dict[str, list[str]] = {}
 
 if not KNOWN_PYGMENTS:
 
