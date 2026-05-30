@@ -55,3 +55,10 @@ extraction tool I wrote.
 slow startup and not pure python.
 - [pygments](https://pygments.org/docs/api/#pygments.lexers.guess_lexer) pure python, but sometimes lousy identification
 rates.
+
+## Project Links
+
+- [GitHub](https://github.com/matthewdeanmartin/whats_that_code)
+- [PyPI](https://pypi.org/project/whats-that-code/)
+- [Bug Tracker](https://github.com/matthewdeanmartin/whats_that_code/issues)
+- [Change Log](https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md)

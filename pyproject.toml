@@ -33,7 +33,7 @@ Repository = "https://github.com/matthewdeanmartin/whats_that_code"
 Homepage = "https://github.com/matthewdeanmartin/whats_that_code"
 Documentation = "https://github.com/matthewdeanmartin/whats_that_code"
 "Bug Tracker" = "https://github.com/matthewdeanmartin/whats_that_code/issues"
-"Change Log" = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/docs/CHANGES.md"
+"Change Log" = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md"
 
 [build-system]
 requires = ["hatchling>=1.27.0"]
