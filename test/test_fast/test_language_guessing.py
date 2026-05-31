@@ -30,9 +30,7 @@ def test_election_bash():
 
 
 def test_election():
-    assert guess_language_all_methods(
-        "public static void main(args[]){\n   system.out.writeln('');}"
-    )
+    assert guess_language_all_methods("public static void main(args[]){\n   system.out.writeln('');}")
 
 
 def test_election2():

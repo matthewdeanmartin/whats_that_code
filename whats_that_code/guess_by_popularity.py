@@ -4,7 +4,12 @@ from whats_that_code.known_languages import POPULARITY_LIST
 
 
 def language_by_popularity(guesses: set[str]) -> list[str]:
-    """Guess by popularity rank among candidates"""
+    """Return the candidate languages that are popular, most-popular first.
+
+    Iterating ``POPULARITY_LIST`` (not the input set) makes the order both
+    deterministic — independent of PYTHONHASHSEED, see spec/phase4_notes.md — and
+    meaningful: this ballot ranks common languages ahead of rare ones.
+    """
     if not guesses:
         return []
-    return [guess for guess in guesses if guess in POPULARITY_LIST]
+    return [language for language in POPULARITY_LIST if language in guesses]

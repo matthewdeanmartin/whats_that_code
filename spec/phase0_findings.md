@@ -30,7 +30,11 @@ context.
 
 ## Latent bugs (do NOT fix in Phase 0)
 
-### 1. `objective-C` (capital C) key — can crash the election
+> **Update — #1, #2, #6 were fixed in Phase 4 (2026-05-31).** See
+> `spec/phase4_notes.md` and `spec/accuracy_log.md`. The notes below are the
+> original Phase 0 findings, kept for context.
+
+### 1. `objective-C` (capital C) key — can crash the election ✅ FIXED (Phase 4)
 `FILE_EXTENSIONS` and `RELATED_TAGS` both contain a key spelled `objective-C`
 (capital C). `election.py` validates every vote with
 `if vote.lower() != vote: raise TypeError("Bad casing")`. So if the extension or
@@ -41,7 +45,7 @@ of extensions whose files are currently un-classifiable (they crash).
 `objectivec` entry) — strictly an improvement, but it changes behavior, so it needs
 the characterization corpus in place first.
 
-### 2. Several shebangs raise `TypeError` instead of returning
+### 2. Several shebangs raise `TypeError` instead of returning ✅ FIXED (Phase 4)
 `shebang_based.language_by_shebang` ends with
 `if possible not in FILE_EXTENSIONS: raise TypeError()`. These shebang values are
 **not** keys in `FILE_EXTENSIONS`, so matching their shebang raises:
@@ -67,7 +71,7 @@ backwards compatibility; flagged as non-language labels.
 A legacy `FILE_EXTENSIONS`/`RELATED_TAGS` label. The election only rejects
 uppercase and `.` in votes, so a space is tolerated. Left as-is.
 
-### 6. Output is nondeterministic run-to-run (two causes)
+### 6. Output is nondeterministic run-to-run (two causes) ✅ FIXED (Phase 4)
 `guess_language_all_methods` is **not** reproducible. There are two sources, and
 Phase 1 work pinned down which dominates:
 

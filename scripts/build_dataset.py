@@ -28,7 +28,7 @@ import json
 import shutil
 import subprocess
 import sys
-from datetime import datetime, UTC
+from datetime import UTC, datetime
 from pathlib import Path
 
 # Make the package importable when run from the repo root.

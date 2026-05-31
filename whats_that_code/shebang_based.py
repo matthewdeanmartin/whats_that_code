@@ -1,7 +1,7 @@
 """Guess a language based on shebang"""
 
 # http://dcjtech.info/topic/list-of-shebang-interpreter-directives/
-from whats_that_code.known_languages import FILE_EXTENSIONS
+from whats_that_code.languages import canonical, is_known
 
 SHEBANGS = {
     "#!/usr/bin/python": "python",
@@ -35,7 +35,14 @@ SHEBANGS = {
 
 
 def language_by_shebang(test: str) -> list[str]:
-    """Identify by shebang"""
+    """Identify by shebang.
+
+    Shebang values are canonicalized (e.g. the malformed ``.awk`` -> ``awk``,
+    ``make`` -> ``makefile``) and filtered to known labels. Previously any value
+    not present as a ``FILE_EXTENSIONS`` key (``.awk``/``ash``/``lisp``/``make``/
+    ``sed``) raised ``TypeError`` — a latent crash (spec/phase0_findings.md #2).
+    Sorted output keeps the election deterministic (spec/phase4_notes.md).
+    """
     possibles: set[str] = set()
     for key, value in SHEBANGS.items():
         if key in test:
@@ -43,7 +50,4 @@ def language_by_shebang(test: str) -> list[str]:
         if key.strip("#!/") in test:
             possibles.add(value)
 
-    for possible in possibles:
-        if possible not in FILE_EXTENSIONS:
-            raise TypeError()
-    return list(possibles)
+    return sorted({canonical(possible) for possible in possibles if is_known(possible)})

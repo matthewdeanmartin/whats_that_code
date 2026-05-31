@@ -9,6 +9,11 @@ import json
 
 import defusedxml.ElementTree
 
+try:  # stdlib on 3.11+, absent on 3.10 (the project supports >=3.10)
+    import tomllib as _tomllib
+except ModuleNotFoundError:  # pragma: no cover - only on 3.10
+    _tomllib = None  # type: ignore[assignment]
+
 
 def parses_as_python(code: str) -> bool:
     """Validate by ast parsing"""
@@ -39,6 +44,21 @@ def parses_as_xml(code: str) -> bool:
         return False
 
 
+def parses_as_toml(code: str) -> bool:
+    """Validate by tomllib (3.11+). Always False on 3.10 (no tomllib).
+
+    Guarded so a bare ``key = value`` or single ``[section]`` does not count —
+    those parse as TOML but are too weak a signal to be useful.
+    """
+    if _tomllib is None or "=" not in code:
+        return False
+    try:
+        parsed = _tomllib.loads(code)
+        return bool(parsed)
+    except Exception:  # pylint: disable=broad-exception-caught
+        return False
+
+
 def language_by_parsing(code: str) -> list[str]:
     """Guess by parsing"""
     if not code or not code.strip():
@@ -50,4 +70,6 @@ def language_by_parsing(code: str) -> list[str]:
         guesses.append("json")
     if parses_as_xml(code):
         guesses.append("xml")
+    if parses_as_toml(code):
+        guesses.append("toml")
     return guesses

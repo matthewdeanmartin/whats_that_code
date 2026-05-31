@@ -7,7 +7,7 @@
     "pythonhashseed": "0",
     "random_seed": 0,
     "split": "test",
-    "use_parsers": false
+    "use_parsers": true
   },
   "languages": {
     "abnf": {
@@ -53,22 +53,22 @@
       "with_filename_rate": 0.0
     },
     "c": {
-      "code_only": 2,
-      "code_only_rate": 0.6667,
+      "code_only": 3,
+      "code_only_rate": 1.0,
       "n": 3,
       "with_filename": 3,
       "with_filename_rate": 1.0
     },
     "c#": {
-      "code_only": 0,
-      "code_only_rate": 0.0,
+      "code_only": 1,
+      "code_only_rate": 0.5,
       "n": 2,
       "with_filename": 1,
       "with_filename_rate": 0.5
     },
     "c++": {
-      "code_only": 0,
-      "code_only_rate": 0.0,
+      "code_only": 4,
+      "code_only_rate": 0.8,
       "n": 5,
       "with_filename": 2,
       "with_filename_rate": 0.4
@@ -249,18 +249,18 @@
       "with_filename_rate": 1.0
     },
     "java": {
-      "code_only": 2,
-      "code_only_rate": 0.6667,
+      "code_only": 3,
+      "code_only_rate": 1.0,
       "n": 3,
       "with_filename": 3,
       "with_filename_rate": 1.0
     },
     "javascript": {
-      "code_only": 1,
-      "code_only_rate": 0.2,
+      "code_only": 4,
+      "code_only_rate": 0.8,
       "n": 5,
-      "with_filename": 3,
-      "with_filename_rate": 0.6
+      "with_filename": 4,
+      "with_filename_rate": 0.8
     },
     "json": {
       "code_only": 1,
@@ -298,11 +298,11 @@
       "with_filename_rate": 1.0
     },
     "lua": {
-      "code_only": 0,
-      "code_only_rate": 0.0,
+      "code_only": 1,
+      "code_only_rate": 0.5,
       "n": 2,
-      "with_filename": 0,
-      "with_filename_rate": 0.0
+      "with_filename": 1,
+      "with_filename_rate": 0.5
     },
     "makefile": {
       "code_only": 0,
@@ -452,11 +452,11 @@
       "with_filename_rate": 1.0
     },
     "ruby": {
-      "code_only": 0,
-      "code_only_rate": 0.0,
+      "code_only": 3,
+      "code_only_rate": 0.6,
       "n": 5,
-      "with_filename": 0,
-      "with_filename_rate": 0.0
+      "with_filename": 3,
+      "with_filename_rate": 0.6
     },
     "sas": {
       "code_only": 0,
@@ -578,11 +578,11 @@
       "with_filename_rate": 1.0
     },
     "xml": {
-      "code_only": 3,
-      "code_only_rate": 0.4286,
+      "code_only": 7,
+      "code_only_rate": 1.0,
       "n": 7,
-      "with_filename": 2,
-      "with_filename_rate": 0.2857
+      "with_filename": 7,
+      "with_filename_rate": 1.0
     }
   },
   "mispredictions": [
@@ -622,42 +622,12 @@
       "true": "befunge"
     },
     {
-      "file": "c/linguist__commit.c",
-      "pred": "java",
-      "true": "c"
-    },
-    {
-      "file": "c#/linguist__MongoExpressionVisitor.cs",
-      "pred": "java",
-      "true": "c#"
-    },
-    {
       "file": "c#/linguist__chart-process-memory.linq",
       "pred": "delphi",
       "true": "c#"
     },
     {
-      "file": "c++/linguist__16F88.h",
-      "pred": "ruby",
-      "true": "c++"
-    },
-    {
-      "file": "c++/linguist__CsvStreamer.h",
-      "pred": "java",
-      "true": "c++"
-    },
-    {
       "file": "c++/linguist__NoDiscard.h",
-      "pred": "haskell",
-      "true": "c++"
-    },
-    {
-      "file": "c++/linguist__PackageInfoParser.cpp",
-      "pred": "java",
-      "true": "c++"
-    },
-    {
-      "file": "c++/linguist__crypter.cpp",
       "pred": "haskell",
       "true": "c++"
     },
@@ -877,28 +847,8 @@
       "true": "jasmin"
     },
     {
-      "file": "java/linguist__clojure-util.java",
-      "pred": "python",
-      "true": "java"
-    },
-    {
-      "file": "javascript/linguist__classes-old.js",
-      "pred": "delphi",
-      "true": "javascript"
-    },
-    {
-      "file": "javascript/linguist__classes.js",
-      "pred": "delphi",
-      "true": "javascript"
-    },
-    {
       "file": "javascript/linguist__entry.mjs",
       "pred": "haskell",
-      "true": "javascript"
-    },
-    {
-      "file": "javascript/linguist__itau.gs",
-      "pred": "delphi",
       "true": "javascript"
     },
     {
@@ -933,11 +883,6 @@
     },
     {
       "file": "lua/linguist__treegen.p8",
-      "pred": "haskell",
-      "true": "lua"
-    },
-    {
-      "file": "lua/linguist__vidya-file-modder.pd_lua",
       "pred": "haskell",
       "true": "lua"
     },
@@ -1132,27 +1077,12 @@
       "true": "red"
     },
     {
-      "file": "ruby/linguist__filenames_.pryrc",
-      "pred": "python",
-      "true": "ruby"
-    },
-    {
       "file": "ruby/linguist__filenames_.simplecov",
       "pred": "haskell",
       "true": "ruby"
     },
     {
       "file": "ruby/linguist__filenames_Appraisals",
-      "pred": "haskell",
-      "true": "ruby"
-    },
-    {
-      "file": "ruby/linguist__filenames_Fastfile",
-      "pred": "python",
-      "true": "ruby"
-    },
-    {
-      "file": "ruby/linguist__filenames_Podfile",
       "pred": "haskell",
       "true": "ruby"
     },
@@ -1340,62 +1270,42 @@
       "file": "x10/linguist__Integrate.x10",
       "pred": "delphi",
       "true": "x10"
-    },
-    {
-      "file": "xml/linguist__Application.xib",
-      "pred": "haskell",
-      "true": "xml"
-    },
-    {
-      "file": "xml/linguist__JSBrowser.jsproj",
-      "pred": "python",
-      "true": "xml"
-    },
-    {
-      "file": "xml/linguist__MDM.admx",
-      "pred": "c#",
-      "true": "xml"
-    },
-    {
-      "file": "xml/linguist__NDepends_Example.ndproj",
-      "pred": "python",
-      "true": "xml"
     }
   ],
   "overall": {
-    "code_only_lenient_accuracy": 0.1243,
-    "code_only_strict_accuracy": 0.1186,
-    "code_only_strict_correct": 21,
+    "code_only_lenient_accuracy": 0.226,
+    "code_only_strict_accuracy": 0.2203,
+    "code_only_strict_correct": 39,
     "files": 177,
-    "with_filename_lenient_accuracy": 0.5763,
-    "with_filename_strict_accuracy": 0.5593,
-    "with_filename_strict_correct": 99
+    "with_filename_lenient_accuracy": 0.6328,
+    "with_filename_strict_accuracy": 0.6158,
+    "with_filename_strict_correct": 109
   },
   "top_confusions": {
     "abnf>delphi": 1,
     "ampl>delphi": 1,
-    "c++>haskell": 2,
-    "c++>java": 2,
+    "apacheconf>python": 1,
+    "applescript>haskell": 1,
+    "bash>python": 1,
+    "bash>scdoc": 1,
+    "befunge>php": 1,
+    "c#>delphi": 1,
     "clojure>ruby": 3,
     "cypher>ruby": 2,
     "d>c++": 2,
     "emacslisp>php": 2,
     "fortran>postgresql": 2,
     "golo>python": 4,
-    "javascript>delphi": 3,
-    "lua>haskell": 2,
     "matlab>delphi": 3,
     "nit>python": 5,
     "ocaml>haskell": 2,
     "pan>python": 3,
-    "ruby>haskell": 3,
-    "ruby>python": 2,
+    "ruby>haskell": 2,
     "smali>php": 2,
     "supercollider>javascript": 2,
     "swift>haskell": 3,
     "tex>ruby": 2,
     "text>haskell": 3,
-    "typescript>java": 2,
-    "xml>python": 2
+    "typescript>java": 2
   }
 }

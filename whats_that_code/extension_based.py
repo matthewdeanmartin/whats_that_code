@@ -33,4 +33,6 @@ def guess_by_extension(file_name: str = "", text: str = "") -> list[str]:
                 if extension == alternative:
                     guesses.add(key)
 
-    return list(guesses)
+    # sorted (not list(set)) so ballot order is deterministic regardless of
+    # PYTHONHASHSEED — see spec/phase4_notes.md (deterministic election).
+    return sorted(guesses)

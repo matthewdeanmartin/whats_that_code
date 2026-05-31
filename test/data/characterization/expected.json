@@ -16,17 +16,14 @@
       123,
       1000
     ],
-    "stable_entries": 52,
-    "unstable_entries": 17
+    "stable_entries": 69,
+    "unstable_entries": 0
   },
   "entries": {
     "bash/deploy.sh": {
       "code_only": {
-        "observed": [
-          "bash",
-          "php"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "bash"
       },
       "with_filename": {
         "stable": true,
@@ -39,11 +36,8 @@
     },
     "c/hello.c": {
       "code_only": {
-        "observed": [
-          "delphi",
-          "haskell"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "haskell"
       },
       "with_filename": {
         "stable": true,
@@ -60,11 +54,8 @@
         "value": "haskell"
       },
       "with_filename": {
-        "observed": [
-          "c++",
-          "cpp"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "c++"
       },
       "with_tag": {
         "stable": true,
@@ -73,35 +64,22 @@
     },
     "csharp/Hello.cs": {
       "code_only": {
-        "observed": [
-          "c#",
-          "delphi",
-          "javascript"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "c#"
       },
       "with_filename": {
-        "observed": [
-          "c#",
-          "csharp"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "c#"
       },
       "with_tag": {
-        "observed": [
-          "c#",
-          "csharp"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "csharp"
       }
     },
     "go/main.go": {
       "code_only": {
-        "observed": [
-          "delphi",
-          "haskell"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "delphi"
       },
       "with_filename": {
         "stable": true,
@@ -118,11 +96,8 @@
         "value": "html"
       },
       "with_filename": {
-        "observed": [
-          "evoquehtml",
-          "html"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "evoquehtml"
       },
       "with_tag": {
         "stable": true,
@@ -131,12 +106,8 @@
     },
     "java/Main.java": {
       "code_only": {
-        "observed": [
-          "delphi",
-          "haskell",
-          "java"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "java"
       },
       "with_filename": {
         "stable": true,
@@ -205,19 +176,12 @@
     },
     "perl/script.pl": {
       "code_only": {
-        "observed": [
-          "delphi",
-          "php"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "php"
       },
       "with_filename": {
-        "observed": [
-          "perl6",
-          "php",
-          "prolog"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "perl"
       },
       "with_tag": {
         "stable": true,
@@ -240,11 +204,8 @@
     },
     "python/comprehension.py": {
       "code_only": {
-        "observed": [
-          "haskell",
-          "python"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "python"
       },
       "with_filename": {
         "stable": true,
@@ -285,11 +246,8 @@
     },
     "rust/main.rs": {
       "code_only": {
-        "observed": [
-          "delphi",
-          "haskell"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "delphi"
       },
       "with_filename": {
         "stable": true,
@@ -320,28 +278,18 @@
         "value": "delphi"
       },
       "with_filename": {
-        "observed": [
-          "delphi",
-          "sql"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "sql"
       },
       "with_tag": {
-        "observed": [
-          "delphi",
-          "sql"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "sql"
       }
     },
     "swift/main.swift": {
       "code_only": {
-        "observed": [
-          "delphi",
-          "haskell",
-          "python"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "python"
       },
       "with_filename": {
         "stable": true,
@@ -372,11 +320,8 @@
         "value": "xml"
       },
       "with_filename": {
-        "observed": [
-          "evoquexml",
-          "xml"
-        ],
-        "stable": false
+        "stable": true,
+        "value": "evoquexml"
       },
       "with_tag": {
         "stable": true,

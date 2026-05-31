@@ -70,9 +70,7 @@ MARKERS: dict[str, list[Pattern[str]]] = {
         _compiled_regex(
             r"\s*\w+:\s*(Integer|integer|String|string|Boolean|boolean|Byte|byte|ShortInt|shortint|Word|word|SmallInt|smallint|LongWord|longword|Cardinal|cardinal|LongInt|longint|Int64|int64|Single|single|Double|double|Currency|currency|Extended|extended|Char|char|WideChar|widechar|AnsiChar|ansichar|ShortString|shortstring|AnsiString|ansistring|WideString|widestring|T\w+)(;|\))"
         ),
-        _compiled_regex(
-            r"(override|virtual|Override|Virtual|Overload|overload|Cdecl|cdecl|Stdcall|stdcall);"
-        ),
+        _compiled_regex(r"(override|virtual|Override|Virtual|Overload|overload|Cdecl|cdecl|Stdcall|stdcall);"),
         _compiled_regex(r"^\s*function\s*\w+(\((.*?)\))?\s*:\s*\w+;"),
         _compiled_regex(r"^\s*procedure\s*\w+(\((.*?)\))?;"),
         _compiled_regex(r"^\s*property\s+\w+\s*:\s*\w+(.*?);"),
@@ -87,9 +85,7 @@ MARKERS: dict[str, list[Pattern[str]]] = {
     ],
     "python": [
         # Python markers
-        _compiled_regex(
-            r"^(\s*from\s+[\.\w]+)?\s*import\s+[\*\.,\w]+(,\s*[\*\.,\w]+)*(\s+as\s+\w+)?$"
-        ),
+        _compiled_regex(r"^(\s*from\s+[\.\w]+)?\s*import\s+[\*\.,\w]+(,\s*[\*\.,\w]+)*(\s+as\s+\w+)?$"),
         _compiled_regex(r"^\s*def\s+\w+\((.*?):$", dotall=False),
         _compiled_regex(r"^\s*if\s(.*?):$(.*?)(^\s*else:)?$", dotall=False),
         _compiled_regex(r"^\s*if\s(.*?):$(.*?)(^\s*elif:)?$", dotall=False),
@@ -226,13 +222,9 @@ MARKERS: dict[str, list[Pattern[str]]] = {
         _compiled_regex(r"string\.\w+"),
         _compiled_regex(r"///"),
         _compiled_regex(r"///\s*<\w+>$"),
-        _compiled_regex(
-            r"\[\w+(\.\w+)*\(?[^\]]*\]\s*(public|protected|private|internal|\w+(\s+\w+)*\()(.*?)"
-        ),
+        _compiled_regex(r"\[\w+(\.\w+)*\(?[^\]]*\]\s*(public|protected|private|internal|\w+(\s+\w+)*\()(.*?)"),
         _compiled_regex(r"(sealed\s+)?class\s*\{(.*?)\}"),
-        _compiled_regex(
-            r"(sealed\s+)?class\s+\w+(\.\w+)*\s*:\s*\w+(\.\w+)*\s*\{(.*?)\}"
-        ),
+        _compiled_regex(r"(sealed\s+)?class\s+\w+(\.\w+)*\s*:\s*\w+(\.\w+)*\s*\{(.*?)\}"),
         _compiled_regex(r"get\s*{"),
         _compiled_regex(r"set\s*{"),
         _compiled_regex(r"private\s+get\s*{"),

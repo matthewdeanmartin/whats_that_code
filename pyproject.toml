@@ -24,6 +24,21 @@ dependencies = [
     "pyrankvote",
     "defusedxml",
     "pygments",
+    # re2 powers the (linear-time, ~6x faster) regex marker matching — the
+    # detector's hottest path. Results are identical to stdlib `re`; the code keeps
+    # a defensive `re` fallback (whats_that_code/regex_based.py) so an install on a
+    # platform without a re2 wheel still works, just slower.
+    "google-re2",
+]
+
+[project.optional-dependencies]
+# Optional parser-based detection (spec/spec.md Phase 3). Opt-in via
+# Options(use_parsers=True): a clean parse is strong evidence for a language.
+# Without this extra the parser trick still works using only the stdlib validators
+# (python/json/xml/toml); installing it adds ~26 tree-sitter grammars.
+fast = [
+    "tree-sitter>=0.23",
+    "tree-sitter-language-pack>=1.0",
 ]
 
 [project.urls]
@@ -90,6 +105,10 @@ dev = [
     "pyclean>=3.0.0",
     # dead code analysis (advisory)
     "vulture>=2.11",
+    # the optional [fast] extra, so tests exercise the tree-sitter parser path
+    # (google-re2 is a core dependency now, so it is already present)
+    "tree-sitter>=0.23",
+    "tree-sitter-language-pack>=1.0",
     "deadcode>=2.4.0",
     # API surface / doc checks
     "griffe>=1.0.0",

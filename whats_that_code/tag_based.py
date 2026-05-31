@@ -24,4 +24,6 @@ def match_tag_to_languages(tags: list[str]) -> list[str]:
                 weak_guesses.add(key)
 
     new_weak_guesses = [guess for guess in weak_guesses if guess not in strong_guesses]
-    return list(strong_guesses) + new_weak_guesses
+    # strong guesses rank ahead of weak; sort within each group so ballot order is
+    # deterministic regardless of PYTHONHASHSEED (see spec/phase4_notes.md).
+    return sorted(strong_guesses) + sorted(new_weak_guesses)

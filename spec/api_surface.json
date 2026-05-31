@@ -235,6 +235,29 @@
       "type": "class"
     }
   },
+  "whats_that_code.parser_detect": {
+    "TREE_SITTER_AVAILABLE": {
+      "type": "attribute"
+    },
+    "detect_by_parsing": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        },
+        {
+          "annotation": "set[str] | None",
+          "default": "None",
+          "kind": "positional or keyword",
+          "name": "candidates"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
   "whats_that_code.parsing_based": {
     "language_by_parsing": {
       "parameters": [
@@ -261,6 +284,18 @@
       "type": "function"
     },
     "parses_as_python": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        }
+      ],
+      "returns": "bool",
+      "type": "function"
+    },
+    "parses_as_toml": {
       "parameters": [
         {
           "annotation": "str",
@@ -308,6 +343,9 @@
     }
   },
   "whats_that_code.regex_based": {
+    "FAST_AVAILABLE": {
+      "type": "attribute"
+    },
     "language_by_regex_features": {
       "parameters": [
         {
@@ -321,6 +359,12 @@
           "default": "False",
           "kind": "positional or keyword",
           "name": "just_code_is_valid"
+        },
+        {
+          "annotation": "bool",
+          "default": "True",
+          "kind": "positional or keyword",
+          "name": "use_fast"
         }
       ],
       "returns": "list[str]",

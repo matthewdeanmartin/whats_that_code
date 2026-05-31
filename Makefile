@@ -20,7 +20,7 @@ ABOUT_FILE := whats_that_code/__about__.py
 	spell \
 	docs-check docs-check-docstrings docs-check-links docs-check-pydoctest griffe \
 	api-snapshot api-check \
-	data split evaluate evaluate-baseline \
+	data split evaluate evaluate-baseline bench \
 	build-docs \
 	dead-code vulture deadcode \
 	explore refurb crosshair deptry import-linter \
@@ -200,6 +200,10 @@ evaluate:
 evaluate-baseline:
 	@echo "=== Recording new baseline at spec/eval_baseline.json ==="
 	@PYTHONHASHSEED=0 $(UV) run python scripts/evaluate.py --split test --out spec/eval_baseline.json
+
+bench:
+	@echo "=== Profiling guess_language_all_methods (Phase 3) ==="
+	@$(UV) run python scripts/bench.py --limit 5 --profile
 
 # ── Dead code analysis (advisory — non-blocking) ─────────────────────────────
 

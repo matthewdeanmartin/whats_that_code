@@ -28,9 +28,16 @@ class Options:
             tag, or caller-supplied prior). This is the "don't match on rare
             languages" feature. ``None`` (the default) applies no suppression, so
             the result is identical to calling the function without options.
+        use_parsers: If True, also identify the language by actually parsing the
+            code (the "parser trick", see ``whats_that_code.parser_detect``):
+            stdlib validators (python/json/xml/toml) always, plus many more
+            grammars when the ``whats_that_code[fast]`` extra is installed. A clean
+            parse is treated as strong evidence. ``False`` (the default) never runs
+            parsers, so the result is identical to calling without options.
     """
 
     min_tier: str | None = None
+    use_parsers: bool = False
 
     def __post_init__(self) -> None:
         if self.min_tier is not None and self.min_tier not in TIERS:

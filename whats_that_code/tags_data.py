@@ -3,6 +3,7 @@ Related tag data from StackOverflow
 CC-BY-SA
 ref: https://api.stackexchange.com/docs/related-tags
 """
+
 # pylint: disable=too-many-lines
 
 RELATED_TAGS: dict[str, list[str]] = {
@@ -112,7 +113,7 @@ RELATED_TAGS: dict[str, list[str]] = {
         "reference",
     ],
     "jupyter notebook": [],
-    "objective-C": [
+    "objectivec": [
         "objective-c",
         "ios",
         "iphone",
@@ -7155,7 +7156,6 @@ RELATED_TAGS: dict[str, list[str]] = {
         "shell",
         "memory-management",
     ],
-    "objectivec": [],
     "objectivecpp": [],
     "objectivej": [],
     "ocaml": [

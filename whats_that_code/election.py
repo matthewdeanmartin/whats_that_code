@@ -1,5 +1,7 @@
 """Ranked choice election"""
 
+import random
+
 import pyrankvote
 from pyrankvote import Ballot, Candidate
 
@@ -7,8 +9,9 @@ from whats_that_code.extension_based import guess_by_extension
 from whats_that_code.guess_by_popularity import language_by_popularity
 from whats_that_code.keyword_based import guess_by_keywords
 from whats_that_code.known_languages import FILE_EXTENSIONS
-from whats_that_code.languages import meets_tier
+from whats_that_code.languages import canonical, meets_tier
 from whats_that_code.options import Options
+from whats_that_code.parser_detect import detect_by_parsing
 from whats_that_code.parsing_based import parses_as_xml
 from whats_that_code.pygments_based import language_by_pygments
 from whats_that_code.regex_based import language_by_regex_features
@@ -53,15 +56,18 @@ def guess_language_all_methods(
         + vote_by_regex_features
         + vote_by_priors
     )
-    # stupid voters
-    vote_by_keyword = guess_by_keywords(code)
-    # dumb voter block can't double their impact
-    vote_by_pygments = [_ for _ in language_by_pygments(code) if _ not in vote_by_keyword]
-
-    # Only want to hear from stupid voters if no one else votes
+    # Stupid voters only get heard when no one else votes, so don't even *run* them
+    # otherwise — guess_by_keywords and especially pygments.guess_lexer are the most
+    # expensive calls in the election. (Previously they were always computed and
+    # then discarded; skipping them when a smart voter has already spoken is a pure
+    # speed win and leaves the result identical — the discarded votes never mattered.)
     if all_but_stupid:
         vote_by_keyword = []
         vote_by_pygments = []
+    else:
+        vote_by_keyword = guess_by_keywords(code)
+        # dumb voter block can't double their impact
+        vote_by_pygments = [_ for _ in language_by_pygments(code) if _ not in vote_by_keyword]
 
     all_possible = set(
         vote_by_tags
@@ -74,17 +80,30 @@ def guess_language_all_methods(
     # above keeps wanting to guess the obscure languages.
     vote_by_popularity = language_by_popularity(all_possible)
 
+    # Opt-in parser trick: confirm/identify languages by actually parsing the code
+    # (see whats_that_code.parser_detect). Default off → vote_by_parser stays []
+    # and the ballots below are unchanged. When candidates already exist we restrict
+    # parsing to them (precise disambiguation); otherwise we identify from scratch.
+    vote_by_parser: list[str] = []
+    if options is not None and options.use_parsers:
+        proposed = all_possible | set(vote_by_keyword) | set(vote_by_pygments)
+        parser_candidates = {canonical(c) for c in proposed} or None
+        vote_by_parser = detect_by_parsing(code, candidates=parser_candidates)
+
     all_vote_lists = [
         # if this has any info, it probably is really good. Give 'em two votes
         vote_by_tags,
         vote_by_shebang,
         vote_by_extension,
         vote_by_extension_in_text,
+        # a clean parse is strong evidence too — double it like the other smart voters
+        vote_by_parser,
         # ad hoc way to give smart algos more votes
         vote_by_tags,
         vote_by_shebang,
         vote_by_extension,
         vote_by_extension_in_text,
+        vote_by_parser,
         # mid tier
         vote_by_priors,
         vote_by_regex_features,
@@ -101,7 +120,12 @@ def guess_language_all_methods(
     # so a `.zig` file is still Zig even when Zig is "rare".
     if options is not None and options.min_tier is not None:
         strong_evidence = set(
-            vote_by_tags + vote_by_shebang + vote_by_extension + vote_by_extension_in_text + vote_by_priors
+            vote_by_tags
+            + vote_by_shebang
+            + vote_by_extension
+            + vote_by_extension_in_text
+            + vote_by_priors
+            + vote_by_parser
         )
         _suppress_below_tier(all_vote_lists, options.min_tier, strong_evidence)
 
@@ -137,7 +161,17 @@ def guess_language_all_methods(
     if len(candidates) == 1:
         return next(iter(candidates.values())).name
 
-    election_result = pyrankvote.instant_runoff_voting(list(candidates.values()), ballots)
+    # pyrankvote breaks IRV ties using the unseeded `random` module, which made the
+    # result vary run-to-run (spec/phase0_findings.md #6). Seed it deterministically
+    # for the duration of the election, then restore the caller's RNG state so we
+    # don't disturb their random stream. Combined with the sorted vote lists above,
+    # this makes guess_language_all_methods fully reproducible.
+    _rng_state = random.getstate()
+    random.seed(0)
+    try:
+        election_result = pyrankvote.instant_runoff_voting(list(candidates.values()), ballots)
+    finally:
+        random.setstate(_rng_state)
 
     winners = election_result.get_winners()
     if not winners:

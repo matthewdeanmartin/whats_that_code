@@ -89,16 +89,23 @@ def load_targets(corpus: Path, which: str) -> list[tuple[str, Path]]:
     return targets
 
 
-def evaluate(corpus: Path, which: str, limit: int | None, seed: int | None = 0, min_tier: str | None = None) -> dict:
+def evaluate(
+    corpus: Path,
+    which: str,
+    limit: int | None,
+    seed: int | None = 0,
+    min_tier: str | None = None,
+    use_parsers: bool = False,
+) -> dict:
     # pyrankvote breaks ties with the unseeded `random` module, which is the
     # dominant source of run-to-run variance (see spec/phase0_findings.md). Seed it
     # so the harness is reproducible; pass seed=None to sample the nondeterminism.
     if seed is not None:
         random.seed(seed)
-    # min_tier exercises the Phase 2 opt-in rare-language suppression. Default
-    # (None) is the historical behavior; the baseline must always be recorded
-    # with min_tier=None.
-    options = Options(min_tier=min_tier) if min_tier is not None else None
+    # min_tier / use_parsers exercise the opt-in Phase 2/3 features. Default
+    # (None / False) is the historical behavior; the baseline must always be
+    # recorded with both off.
+    options = Options(min_tier=min_tier, use_parsers=use_parsers) if (min_tier is not None or use_parsers) else None
     targets = load_targets(corpus, which)
     if limit is not None:
         # keep it stratified-ish: cap per language
@@ -166,6 +173,7 @@ def evaluate(corpus: Path, which: str, limit: int | None, seed: int | None = 0, 
             "split": which,
             "limit_per_language": limit,
             "min_tier": min_tier,
+            "use_parsers": use_parsers,
             "random_seed": seed,
             "pythonhashseed": os.environ.get("PYTHONHASHSEED", "random"),
             "files": total,
@@ -254,6 +262,11 @@ def main(argv: list[str]) -> int:
         choices=["common", "uncommon", "rare"],
         help="Phase 2 rare-language suppression (Options(min_tier=...)); default off = historical behavior",
     )
+    parser.add_argument(
+        "--use-parsers",
+        action="store_true",
+        help="Phase 3 parser trick (Options(use_parsers=True)); needs [fast] extra for full effect",
+    )
     args = parser.parse_args(argv)
 
     if not args.corpus.exists():
@@ -261,7 +274,9 @@ def main(argv: list[str]) -> int:
         return 1
 
     seed = None if args.seed == -1 else args.seed
-    report = evaluate(args.corpus, args.split, args.limit, seed=seed, min_tier=args.min_tier)
+    report = evaluate(
+        args.corpus, args.split, args.limit, seed=seed, min_tier=args.min_tier, use_parsers=args.use_parsers
+    )
     print_report(report)
     if args.baseline and args.baseline.exists():
         diff_baseline(report, args.baseline)
