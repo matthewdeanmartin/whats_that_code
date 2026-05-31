@@ -1,0 +1,315 @@
+{
+  "whats_that_code.__main__": {
+    "LOGGER": {
+      "type": "attribute"
+    },
+    "main": {
+      "parameters": [],
+      "returns": "int",
+      "type": "function"
+    }
+  },
+  "whats_that_code.codex_markers": {
+    "MARKERS": {
+      "type": "attribute"
+    }
+  },
+  "whats_that_code.election": {
+    "guess_by_prior_knowledge": {
+      "parameters": [
+        {
+          "annotation": "list[str] | None",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "priors"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    },
+    "guess_language_all_methods": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        },
+        {
+          "annotation": "str",
+          "default": "''",
+          "kind": "positional or keyword",
+          "name": "file_name"
+        },
+        {
+          "annotation": "str",
+          "default": "''",
+          "kind": "positional or keyword",
+          "name": "surrounding_text"
+        },
+        {
+          "annotation": "list[str] | None",
+          "default": "None",
+          "kind": "positional or keyword",
+          "name": "tags"
+        },
+        {
+          "annotation": "list[str] | None",
+          "default": "None",
+          "kind": "positional or keyword",
+          "name": "priors"
+        }
+      ],
+      "returns": "str | None",
+      "type": "function"
+    }
+  },
+  "whats_that_code.extension_based": {
+    "guess_by_extension": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": "''",
+          "kind": "positional or keyword",
+          "name": "file_name"
+        },
+        {
+          "annotation": "str",
+          "default": "''",
+          "kind": "positional or keyword",
+          "name": "text"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.guess_by_code_and_tags": {
+    "GUESS": {
+      "type": "attribute"
+    },
+    "assign_extension": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "all_code"
+        },
+        {
+          "annotation": "list[str]",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "tags"
+        }
+      ],
+      "returns": "tuple[str, str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.guess_by_popularity": {
+    "language_by_popularity": {
+      "parameters": [
+        {
+          "annotation": "set[str]",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "guesses"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.keyword_based": {
+    "LANGUAGE_KEY_WORDS": {
+      "type": "attribute"
+    },
+    "guess_by_keywords": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.known_languages": {
+    "CLONES": {
+      "type": "attribute"
+    },
+    "FILE_EXTENSIONS": {
+      "type": "attribute"
+    },
+    "POPULARITY": {
+      "type": "attribute"
+    },
+    "POPULARITY_LIST": {
+      "type": "attribute"
+    }
+  },
+  "whats_that_code.languages": {
+    "ALIASES": {
+      "type": "attribute"
+    },
+    "CANONICAL": {
+      "type": "attribute"
+    },
+    "canonical": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "name"
+        }
+      ],
+      "returns": "str",
+      "type": "function"
+    },
+    "is_known": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "name"
+        }
+      ],
+      "returns": "bool",
+      "type": "function"
+    }
+  },
+  "whats_that_code.parsing_based": {
+    "language_by_parsing": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    },
+    "parses_as_json": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        }
+      ],
+      "returns": "bool",
+      "type": "function"
+    },
+    "parses_as_python": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        }
+      ],
+      "returns": "bool",
+      "type": "function"
+    },
+    "parses_as_xml": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        }
+      ],
+      "returns": "bool",
+      "type": "function"
+    }
+  },
+  "whats_that_code.pygments_based": {
+    "KNOWN_PYGMENTS": {
+      "type": "attribute"
+    },
+    "init": {
+      "parameters": [],
+      "returns": "None",
+      "type": "function"
+    },
+    "language_by_pygments": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "code"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.regex_based": {
+    "language_by_regex_features": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "text"
+        },
+        {
+          "annotation": "bool",
+          "default": "False",
+          "kind": "positional or keyword",
+          "name": "just_code_is_valid"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.shebang_based": {
+    "SHEBANGS": {
+      "type": "attribute"
+    },
+    "language_by_shebang": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "test"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.tag_based": {
+    "match_tag_to_languages": {
+      "parameters": [
+        {
+          "annotation": "list[str]",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "tags"
+        }
+      ],
+      "returns": "list[str]",
+      "type": "function"
+    }
+  },
+  "whats_that_code.tags_data": {
+    "RELATED_TAGS": {
+      "type": "attribute"
+    }
+  }
+}

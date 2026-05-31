@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <setting name="debug" value="true"/>
+  <setting name="level" value="3"/>
+</config>

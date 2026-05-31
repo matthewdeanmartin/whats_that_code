@@ -139,7 +139,12 @@ sonar-unit-test-results.xml
 .DS_Store/
 .DS_Store
 data/
+# Re-include curated test fixtures (negating the parent dir first is required,
+# otherwise child negations are ignored because test/data is itself excluded).
+!/test/data/
 !/test/data/sample_files/
+!/test/data/characterization/
+!/test/data/characterization/**
 package/
 output
 

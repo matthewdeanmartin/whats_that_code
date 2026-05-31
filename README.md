@@ -9,7 +9,7 @@ I created this because I wanted
 - a pure python programming language detector
 - no machine learning dependencies
 
-Tested on python 3.6 through 3.9.
+Tested on python 3.10 through 3.14.
 
 Badges
 ------
@@ -25,7 +25,7 @@ Badges
 from whats_that_code.election import guess_language_all_methods
 code = "def yo():\n   print('hello')"
 result = guess_language_all_methods(code, file_name="yo.py")
-assert result == ["python"]
+assert result == "python"  # returns a single language name (str), or None if unknown
 ```
 
 ## How it Works

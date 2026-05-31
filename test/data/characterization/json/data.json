@@ -1,0 +1,6 @@
+{
+  "name": "sample",
+  "version": 2,
+  "tags": ["a", "b", "c"],
+  "nested": { "enabled": true }
+}

@@ -19,6 +19,7 @@ ABOUT_FILE := whats_that_code/__about__.py
 	lint lint-check ruff-fix ruff-check pylint pylint-tests pylint-spelling \
 	spell \
 	docs-check docs-check-docstrings docs-check-links docs-check-pydoctest griffe \
+	api-snapshot api-check \
 	build-docs \
 	dead-code vulture deadcode \
 	explore refurb crosshair deptry import-linter \
@@ -60,6 +61,8 @@ help:
 	@echo "  docs-check-pydoctest   pydoctest docstring example tests"
 	@echo "  docs-check-links       linkcheckMarkdown"
 	@echo "  griffe                 griffe API surface check (advisory)"
+	@echo "  api-snapshot           Update spec/api_surface.json (public API snapshot)"
+	@echo "  api-check              Fail if public API changed vs snapshot (in check-ci)"
 	@echo "  build-docs             Build mkdocs documentation"
 	@echo ""
 	@echo "  dead-code              vulture + deadcode (advisory, non-blocking)"
@@ -161,6 +164,14 @@ docs-check-links:
 griffe:
 	@echo "=== griffe API surface check (advisory) ==="
 	@$(UV) run griffe check $(PACKAGE) || true
+
+api-snapshot:
+	@echo "=== Updating public API snapshot (spec/api_surface.json) ==="
+	@$(UV) run python scripts/api_snapshot.py
+
+api-check:
+	@echo "=== Checking public API surface against snapshot ==="
+	@$(UV) run python scripts/api_snapshot.py --check
 
 build-docs:
 	@$(UV) run mkdocs build
@@ -299,10 +310,10 @@ publish:
 	@echo "Publishing via uv (set UV_PUBLISH_TOKEN or configure OIDC trusted publishing)"
 	@$(UV) publish
 
-check: lint-check security test typecheck version-check
+check: lint-check security test typecheck version-check api-check
 	@echo "All checks passed."
 
-check-ci: lint-check security test-ci typecheck version-check
+check-ci: lint-check security test-ci typecheck version-check api-check
 	@echo "CI checks passed."
 
 prerelease: check dev-status docs-check smoke spell publish-check
