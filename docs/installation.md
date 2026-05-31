@@ -45,6 +45,9 @@ python -m whats_that_code --version
 |---------|---------|
 | `pygments` | Fallback lexer-based classifier |
 | `pyrankvote` | Instant-runoff voting for the ensemble |
-| `defusedxml` | Safe XML parsing for XML/HTML detection |
+| `lxml` | XML parsing for the XML/HTML vote validator |
+| `google-re2` | Fast linear-time regex for the regex-feature classifier (falls back to `re` if unavailable) |
+| `tree-sitter` | Parser-based detection engine (opt-in via `Options(use_parsers=True)`) |
+| `tree-sitter-language-pack` | Bundled tree-sitter grammars for ~26 languages (opt-in, same as above) |
 
 These are installed automatically with `pip install whats_that_code`.

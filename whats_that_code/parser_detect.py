@@ -4,7 +4,7 @@ The "parser trick": if code parses cleanly under language X's grammar, that is
 strong evidence it is X. Two layers:
 
 * **stdlib validators** (always available, no extra): Python (``ast``), JSON,
-  XML (``defusedxml``), and TOML (``tomllib`` on 3.11+). See ``parsing_based``.
+  XML (``lxml``), and TOML (``tomllib`` on 3.11+). See ``parsing_based``.
 * **tree-sitter grammars** (optional ``whats_that_code[fast]`` extra): dozens of
   real grammars via ``tree-sitter-language-pack``, used to confirm/disambiguate
   many more languages (go, rust, ruby, java, …) that have no stdlib parser.

@@ -7,7 +7,7 @@ Only works for Python, JSON, and XML where lightweight parsers are available.
 import ast
 import json
 
-import defusedxml.ElementTree
+from lxml import etree as _lxml_etree
 
 try:  # stdlib on 3.11+, absent on 3.10 (the project supports >=3.10)
     import tomllib as _tomllib
@@ -38,7 +38,8 @@ def parses_as_xml(code: str) -> bool:
     if "<" not in code or ">" not in code:
         return False
     try:
-        defusedxml.ElementTree.fromstring(code, forbid_dtd=True)
+        parser = _lxml_etree.XMLParser(resolve_entities=False, no_network=True)
+        _lxml_etree.fromstring(code.encode(), parser)
         return True
     except Exception:  # pylint: disable=broad-exception-caught
         return False

@@ -80,6 +80,7 @@ def guess_language_all_methods(
     surrounding_text: str = "",
     tags: list[str] | None = None,
     priors: list[str] | None = None,
+    options: Options | None = None,
 ) -> str | None:
     ...
 ```
@@ -91,6 +92,29 @@ def guess_language_all_methods(
 | `surrounding_text` | `str` | Surrounding prose that may contain filename clues |
 | `tags` | `list[str]` | Tags from Q&A systems or metadata |
 | `priors` | `list[str]` | Language names you expect are likely |
+| `options` | `Options` | Optional tuning (see below) |
+
+### Options
+
+`Options` is an opt-in dataclass from `whats_that_code.options` that keeps the public API
+stable while allowing new tuning knobs. The default (`None`) reproduces the standard
+behavior exactly.
+
+```python
+from whats_that_code.options import Options
+
+# Suppress detections of obscure/rare languages unless backed by a file extension,
+# shebang, tag, or prior.
+language = guess_language_all_methods(code, options=Options(min_tier="common"))
+
+# Also run stdlib + tree-sitter parsers to confirm/identify languages.
+language = guess_language_all_methods(code, options=Options(use_parsers=True))
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `min_tier` | `str \| None` | `None` | If `"common"` or `"uncommon"`, suppress rare-language candidates lacking strong evidence |
+| `use_parsers` | `bool` | `False` | Run stdlib validators (Python/JSON/XML/TOML) and tree-sitter grammars as an extra classifier |
 
 ## Command-line interface
 
@@ -114,11 +138,7 @@ whats_that_code -f script.py
 
 The filename is passed automatically as a hint, so the extension classifier also votes.
 
-### Options
-
-| Flag | Description |
-|------|-------------|
-| `-c CODE`, `--code CODE` | Source code string to identify |
+### Flags
 | `-f FILE`, `--file FILE` | Path to a source file |
 | `--verbose` | Enable debug logging |
 | `--version` | Print the version and exit |

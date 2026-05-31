@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Replace navio task runner with a plain Makefile
+- Native code libraries for checking if code parses to a particular language
+- Performance tuning for regex
 
 ## [0.2.0] - 2023-05-28
 

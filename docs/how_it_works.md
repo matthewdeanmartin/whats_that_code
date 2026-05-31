@@ -46,12 +46,24 @@ Counts reserved keywords from a large keyword table covering many languages. Bec
 
 Runs `pygments.lexers.guess_lexer` and maps the result back to the internal language list. Pygments can confuse Python and Java, so its result is filtered and only included when the smarter classifiers abstain.
 
-### 9. Parsing-based validator
+### 9. Parsing-based validator and classifier
 
-After all classifiers vote, the pipeline validates certain fragile guesses:
+**Always-on validation:** if any classifier voted for `xml`, the code is parsed with
+`lxml`. If it does not parse cleanly, the `xml` vote is removed.
 
-- **XML/HTML/PHP** — if any classifier voted for `xml`, the code is parsed with `defusedxml`. If it does not parse cleanly, the `xml` vote is removed.
-- The parser also checks whether the code is valid Python (via `ast.parse`) or JSON (via `json.loads`) and can add those as candidate guesses.
+**Opt-in parser classifier:** when `Options(use_parsers=True)` is passed, the pipeline
+also tries to identify the language by *actually parsing* the code:
+
+- **stdlib validators** (no extra required): Python (`ast`), JSON (`json`), XML (`lxml`),
+  and TOML (`tomllib`, Python 3.11+).
+- **tree-sitter grammars** (`tree-sitter-language-pack` extra): ~26 curated grammars
+  (Go, Rust, C, C++, Java, JavaScript, TypeScript, Ruby, …) that reject unrelated code
+  reliably.
+
+A clean parse counts as strong evidence and is double-weighted in the election.
+When other classifiers have already proposed candidates, parsing is restricted to those
+candidates (precise disambiguation). With no prior candidates it runs across the full
+curated grammar set.
 
 ## Voting algorithm
 
@@ -65,6 +77,7 @@ Voters (ballots)
 ├── Shebang classifier      × 2
 ├── Extension classifier    × 2
 ├── Extension-in-text       × 2
+├── Parser classifier       × 2  ← only when Options(use_parsers=True)
 ├── Prior-knowledge         × 1
 ├── Regex-feature           × 1
 ├── Popularity tiebreaker   × 1
@@ -90,10 +103,13 @@ The IRV winner is returned as the detected language.
 | `tag_based.py` | Tag → language mapping |
 | `keyword_based.py` | Reserved-keyword counting |
 | `regex_based.py` | Structural regex feature counting |
-| `parsing_based.py` | Python / JSON / XML parse validation |
+| `parsing_based.py` | Python / JSON / XML / TOML parse validation |
+| `parser_detect.py` | Opt-in parser classifier (stdlib + tree-sitter grammars) |
 | `pygments_based.py` | Pygments lexer wrapper |
 | `guess_by_popularity.py` | Popularity-based tiebreaker |
 | `known_languages.py` | Master language / extension / popularity tables |
+| `languages.py` | Canonical language registry, aliases, and rarity tiers |
+| `options.py` | `Options` dataclass for opt-in tuning knobs |
 | `codex_markers.py` | Regex patterns (derived from the Codex project) |
 | `tags_data.py` | Tag → language relationship data |
 | `__main__.py` | CLI entry point |

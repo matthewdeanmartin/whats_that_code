@@ -2,7 +2,7 @@
 
 `whats_that_code` is a pure-Python programming language detection library. Given a code snippet — with or without a filename, file extension, or tag — it returns the most likely language name.
 
-It is intentionally dependency-light. The only runtime dependencies are `pygments`, `pyrankvote`, and `defusedxml`. There are no machine-learning frameworks to install or model files to download.
+It is intentionally dependency-light. The runtime dependencies are `pygments`, `pyrankvote`, `lxml`, `google-re2`, `tree-sitter`, and `tree-sitter-language-pack`. There are no machine-learning frameworks to install or model files to download.
 
 ## What it does
 
