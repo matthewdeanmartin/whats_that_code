@@ -21,25 +21,24 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-    "pyrankvote",
-    "defusedxml",
-    "pygments",
+    "pyrankvote>=2.0.0",
+    "lxml>=5.0.0",
+    "pygments>=2.20.0",
     # re2 powers the (linear-time, ~6x faster) regex marker matching — the
     # detector's hottest path. Results are identical to stdlib `re`; the code keeps
     # a defensive `re` fallback (whats_that_code/regex_based.py) so an install on a
     # platform without a re2 wheel still works, just slower.
-    "google-re2",
-]
-
-[project.optional-dependencies]
-# Optional parser-based detection (spec/spec.md Phase 3). Opt-in via
-# Options(use_parsers=True): a clean parse is strong evidence for a language.
-# Without this extra the parser trick still works using only the stdlib validators
-# (python/json/xml/toml); installing it adds ~26 tree-sitter grammars.
-fast = [
+    "google-re2>=1.1.0",
+    # parser-based detection (spec/spec.md Phase 3). Opt-in via
+    # Options(use_parsers=True): a clean parse is strong evidence for a language.
+    # Without this extra the parser trick still works using only the stdlib validators
+    # (python/json/xml/toml); installing it adds ~26 tree-sitter grammars.
     "tree-sitter>=0.23",
     "tree-sitter-language-pack>=1.0",
 ]
+
+
+
 
 [project.urls]
 Repository = "https://github.com/matthewdeanmartin/whats_that_code"
@@ -175,7 +174,7 @@ disallow_untyped_defs = false
 disallow_untyped_calls = false
 
 [[tool.mypy.overrides]]
-module = ["pygments", "pygments.*", "defusedxml", "defusedxml.*", "pyrankvote", "pyrankvote.*"]
+module = ["pygments", "pygments.*", "pyrankvote", "pyrankvote.*"]
 ignore_missing_imports = true
 
 [tool.ruff]

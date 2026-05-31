@@ -3807,15 +3807,11 @@ version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "defusedxml" },
-    { name = "google-re2" },
+    { name = "google-re2", marker = "python_full_version < '3.15'" },
     { name = "pygments" },
     { name = "pyrankvote" },
-]
-
-[package.optional-dependencies]
-fast = [
-    { name = "tree-sitter" },
-    { name = "tree-sitter-language-pack" },
+    { name = "tree-sitter", marker = "python_full_version < '3.15'" },
+    { name = "tree-sitter-language-pack", marker = "python_full_version < '3.15'" },
 ]
 
 [package.dev-dependencies]
@@ -3871,13 +3867,12 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "defusedxml" },
-    { name = "google-re2" },
+    { name = "google-re2", marker = "python_full_version < '3.15'" },
     { name = "pygments" },
     { name = "pyrankvote" },
-    { name = "tree-sitter", marker = "extra == 'fast'", specifier = ">=0.23" },
-    { name = "tree-sitter-language-pack", marker = "extra == 'fast'", specifier = ">=1.0" },
+    { name = "tree-sitter", marker = "python_full_version < '3.15'", specifier = ">=0.23" },
+    { name = "tree-sitter-language-pack", marker = "python_full_version < '3.15'", specifier = ">=1.0" },
 ]
-provides-extras = ["fast"]
 
 [package.metadata.requires-dev]
 dev = [

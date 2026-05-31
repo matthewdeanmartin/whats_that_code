@@ -95,7 +95,7 @@ def evaluate(
     limit: int | None,
     seed: int | None = 0,
     min_tier: str | None = None,
-    use_parsers: bool = False,
+    use_parsers: bool = True,
 ) -> dict:
     # pyrankvote breaks ties with the unseeded `random` module, which is the
     # dominant source of run-to-run variance (see spec/phase0_findings.md). Seed it
