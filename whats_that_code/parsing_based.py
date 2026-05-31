@@ -33,14 +33,33 @@ def parses_as_json(code: str) -> bool:
         return False
 
 
+_XHTML_NS = "http://www.w3.org/1999/xhtml"
+
+
+def _is_html_root(root) -> bool:
+    """Return True if the XML root element indicates an HTML/XHTML document."""
+    tag = root.tag
+    # lxml uses Clark notation: {namespace}localname
+    if isinstance(tag, str):
+        if tag == "html" or tag.lower() == "html":
+            return True
+        if tag == f"{{{_XHTML_NS}}}html":
+            return True
+    return False
+
+
 def parses_as_xml(code: str) -> bool:
-    """If it parses as xml, it probably is xml or something like it"""
+    """If it parses as xml, it probably is xml or something like it.
+
+    Returns False when the root element is ``<html>`` (including XHTML), so
+    that well-formed XHTML files are not misidentified as generic XML.
+    """
     if "<" not in code or ">" not in code:
         return False
     try:
         parser = _lxml_etree.XMLParser(resolve_entities=False, no_network=True)
-        _lxml_etree.fromstring(code.encode(), parser)
-        return True
+        root = _lxml_etree.fromstring(code.encode(), parser)
+        return not _is_html_root(root)
     except Exception:  # pylint: disable=broad-exception-caught
         return False
 

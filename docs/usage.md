@@ -139,6 +139,7 @@ whats_that_code -f script.py
 The filename is passed automatically as a hint, so the extension classifier also votes.
 
 ### Flags
+
 | `-f FILE`, `--file FILE` | Path to a source file |
 | `--verbose` | Enable debug logging |
 | `--version` | Print the version and exit |

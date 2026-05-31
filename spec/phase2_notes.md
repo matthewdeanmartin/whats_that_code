@@ -7,11 +7,11 @@ default path is byte-for-byte unchanged.
 
 ## What was added
 
-- **Rarity tiers in `whats_that_code/languages.py`.** `TIERS = ("rare",
-  "uncommon", "common")` (ordered low→high), `COMMON` / `UNCOMMON` curated
+- **Rarity tiers in `whats_that_code/languages.py`.** `TIERS = ("rare", "uncommon", "common")` (ordered low→high), `COMMON` / `UNCOMMON` curated
   frozensets, and `tier(name) -> str` / `meets_tier(name, min_tier) -> bool`.
   Anything not in `COMMON` or `UNCOMMON` — including labels outside `CANONICAL`
   (e.g. an arbitrary Pygments lexer name) — is `"rare"`.
+
   - `COMMON` = the PYPL top-28 (`known_languages.POPULARITY_LIST`) **plus** the
     ubiquitous markup/data/config/shell languages PYPL does not rank (html, css,
     json, xml, yaml, sql, bash, markdown, makefile, docker, ini, toml,
@@ -81,11 +81,11 @@ aggregate and the isolated-file checks, not single-sample per-language deltas.
 ## How to add a new language (the additive recipe)
 
 1. Add its label to `languages.CANONICAL` (lowercase, no dot).
-2. Give it data in at least one table — usually `known_languages.FILE_EXTENSIONS`
+1. Give it data in at least one table — usually `known_languages.FILE_EXTENSIONS`
    (extension) and/or `tags_data.RELATED_TAGS` (tag). Regex/keyword markers are
    optional.
-3. Assign a tier: add it to `COMMON` or `UNCOMMON` in `languages.py`, or leave it
+1. Assign a tier: add it to `COMMON` or `UNCOMMON` in `languages.py`, or leave it
    out for `"rare"`. Tier choice only affects the opt-in suppression path, so it is
    safe to revise later with the harness (Phase 4).
-4. `make api-check` and the characterization test must stay green; emitted
+1. `make api-check` and the characterization test must stay green; emitted
    spellings of existing labels never change.

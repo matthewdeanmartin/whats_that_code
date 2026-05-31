@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replace navio task runner with a plain Makefile
 - Native code libraries for checking if code parses to a particular language
 - Performance tuning for regex
+- Accuracy improved from as bad as 15% to as good as 40%.
 
 ## [0.2.0] - 2023-05-28
 
@@ -63,16 +64,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Forked from so_pip
 - Bringing this into existence as its own thing.
 
-[Unreleased]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.2.0...HEAD
-
-[0.2.0]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.11...v0.2.0
-
-[0.1.11]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.10...v0.1.11
-
 [0.1.10]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.7...v0.1.10
-
-[0.1.7]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.6...v0.1.7
-
-[0.1.6]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.4...v0.1.6
-
+[0.1.11]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.10...v0.1.11
 [0.1.4]: https://github.com/matthewdeanmartin/whats_that_code/releases/tag/v0.1.4
+[0.1.6]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.4...v0.1.6
+[0.1.7]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.6...v0.1.7
+[0.2.0]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.1.11...v0.2.0
+[unreleased]: https://github.com/matthewdeanmartin/whats_that_code/compare/v0.2.0...HEAD

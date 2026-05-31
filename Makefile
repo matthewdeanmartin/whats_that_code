@@ -260,7 +260,6 @@ test:
 	@$(UV) run pytest -q \
 		--cov=$(PACKAGE) \
 		--cov-report=html \
-		--junitxml=junit.xml \
 		--timeout=60 \
 		test/
 
@@ -268,7 +267,6 @@ test-ci:
 	@$(UV) run pytest -q -n auto --dist=loadfile \
 		--cov=$(PACKAGE) \
 		--cov-report=xml \
-		--junitxml=junit.xml \
 		--timeout=60 \
 		test/
 

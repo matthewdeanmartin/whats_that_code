@@ -31,7 +31,7 @@ back to the stdlib validators.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable # noqa: UP035
 
 from whats_that_code.languages import COMMON, UNCOMMON, canonical
 from whats_that_code.parsing_based import parses_as_json, parses_as_python, parses_as_toml, parses_as_xml
@@ -84,7 +84,7 @@ def _call(value):
     return value() if callable(value) else value
 
 
-def _make_tree_sitter():
+def _make_tree_sitter()->Callable[[str, str], bool] | None:
     """Return a ``clean(label, code) -> bool`` closure, or None if unusable."""
     try:
         from tree_sitter_language_pack import get_parser  # pylint: disable=import-outside-toplevel

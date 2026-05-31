@@ -71,12 +71,12 @@ A separate `tox` workflow runs `tox -e py` across Python 3.10–3.13 on Ubuntu a
 ## Adding a new language
 
 1. Add the language name and its file extensions to `known_languages.py` (`FILE_EXTENSIONS` dict).
-2. Add a popularity rank entry to `POPULARITY` if the language is commonly known.
-3. Add regex feature markers to `codex_markers.py` (`MARKERS` dict) if distinctive patterns exist.
-4. Add keyword lists to `keyword_based.py` (`LANGUAGE_KEY_WORDS` dict).
-5. Add shebang entries to `shebang_based.py` (`SHEBANGS` dict) if the language has a standard shebang.
-6. Add tag relationships to `tags_data.py` (`RELATED_TAGS` dict) if the language has well-known ecosystem tags.
-7. Add or update tests in `test/`.
+1. Add a popularity rank entry to `POPULARITY` if the language is commonly known.
+1. Add regex feature markers to `codex_markers.py` (`MARKERS` dict) if distinctive patterns exist.
+1. Add keyword lists to `keyword_based.py` (`LANGUAGE_KEY_WORDS` dict).
+1. Add shebang entries to `shebang_based.py` (`SHEBANGS` dict) if the language has a standard shebang.
+1. Add tag relationships to `tags_data.py` (`RELATED_TAGS` dict) if the language has well-known ecosystem tags.
+1. Add or update tests in `test/`.
 
 ## Running tests
 
@@ -93,10 +93,10 @@ uv run pytest test/test_election.py
 ## Submitting changes
 
 1. Fork the repository.
-2. Create a branch named `feature/your-change` or `fix/your-fix`.
-3. Write or update tests to cover your change.
-4. Run `uv run make check-ci` and confirm it passes.
-5. Open a pull request against `main`.
+1. Create a branch named `feature/your-change` or `fix/your-fix`.
+1. Write or update tests to cover your change.
+1. Run `uv run make check-ci` and confirm it passes.
+1. Open a pull request against `main`.
 
 ## Code style
 

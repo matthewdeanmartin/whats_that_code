@@ -1,4 +1,4 @@
-"""Take everyone elses votes. If a vote is for something popular, vote for it in popularity rank"""
+"""Take the votes from everyone else. If a vote is for something popular, vote for it in popularity rank"""
 
 from whats_that_code.known_languages import POPULARITY_LIST
 

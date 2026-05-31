@@ -1,0 +1,5 @@
+{
+    "include_paths": ["pip_ui/**/*.py"],
+    "fail_on_missing_docstring": false,
+    "parser": "google"
+}

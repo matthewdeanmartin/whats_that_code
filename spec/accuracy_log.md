@@ -9,11 +9,11 @@ Append a row when you change default behavior; never edit history. The current
 `spec/eval_baseline.json` is the last "default" row below; `spec/eval_with_parsers.json`
 is the last `--use-parsers` row.
 
-| Date       | Change                                                           | code-only | with-filename | Notes                                             |
+| Date | Change | code-only | with-filename | Notes |
 |------------|------------------------------------------------------------------|-----------|---------------|---------------------------------------------------|
-| 2026-05-31 | **Phase 1 baseline** (nondeterministic; one sample)              | 13.0%     | 48.0%         | random tie-breaks; numbers wobbled run-to-run     |
-| 2026-05-31 | **Phase 4: deterministic election + crash fixes**                | 11.9%     | **55.9%**     | keystone — see below                              |
-| 2026-05-31 | *(opt-in)* `Options(use_parsers=True)` on the deterministic base | **22.0%** | **61.6%**     | Phase 3 parser trick; needs no change to defaults |
+| 2026-05-31 | **Phase 1 baseline** (nondeterministic; one sample) | 13.0% | 48.0% | random tie-breaks; numbers wobbled run-to-run |
+| 2026-05-31 | **Phase 4: deterministic election + crash fixes** | 11.9% | **55.9%** | keystone — see below |
+| 2026-05-31 | *(opt-in)* `Options(use_parsers=True)` on the deterministic base | **22.0%** | **61.6%** | Phase 3 parser trick; needs no change to defaults |
 
 ## 2026-05-31 — Deterministic election + latent-crash fixes
 

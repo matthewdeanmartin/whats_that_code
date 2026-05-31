@@ -35,6 +35,7 @@ context.
 > original Phase 0 findings, kept for context.
 
 ### 1. `objective-C` (capital C) key — can crash the election ✅ FIXED (Phase 4)
+
 `FILE_EXTENSIONS` and `RELATED_TAGS` both contain a key spelled `objective-C`
 (capital C). `election.py` validates every vote with
 `if vote.lower() != vote: raise TypeError("Bad casing")`. So if the extension or
@@ -46,6 +47,7 @@ of extensions whose files are currently un-classifiable (they crash).
 the characterization corpus in place first.
 
 ### 2. Several shebangs raise `TypeError` instead of returning ✅ FIXED (Phase 4)
+
 `shebang_based.language_by_shebang` ends with
 `if possible not in FILE_EXTENSIONS: raise TypeError()`. These shebang values are
 **not** keys in `FILE_EXTENSIONS`, so matching their shebang raises:
@@ -55,6 +57,7 @@ the characterization corpus in place first.
 value to `awk`), or make the guard skip-and-warn instead of raising.
 
 ### 3. `cpp` and `c++` (and `objectivec`) are duplicate languages
+
 `FILE_EXTENSIONS` has both `cpp` and `c++` as separate keys denoting the same
 language; `codex_markers` emits `cpp` while keyword/popularity emit `c++`. Both
 remain valid emittable labels for backwards compatibility. A future major version
@@ -62,16 +65,19 @@ could collapse them via `languages.canonical()`, but that changes emitted spelli
 and must be a deliberate, announced change.
 
 ### 4. `email` and `code` are not languages
+
 `RELATED_TAGS` has an `email` key (so the tag classifier can "guess" `email` as a
 language); `codex_markers` has a `code` sentinel meaning "generic code" (excluded
 from the election unless `just_code_is_valid=True`). Kept in `CANONICAL` for
 backwards compatibility; flagged as non-language labels.
 
 ### 5. `jupyter notebook` contains a space
+
 A legacy `FILE_EXTENSIONS`/`RELATED_TAGS` label. The election only rejects
 uppercase and `.` in votes, so a space is tolerated. Left as-is.
 
 ### 6. Output is nondeterministic run-to-run (two causes) ✅ FIXED (Phase 4)
+
 `guess_language_all_methods` is **not** reproducible. There are two sources, and
 Phase 1 work pinned down which dominates:
 
@@ -80,7 +86,7 @@ Phase 1 work pinned down which dominates:
    the winner changes from run to run *even with `PYTHONHASHSEED` fixed*. Verified
    in Phase 1: with `random.seed(0)` set, `scripts/evaluate.py` returns identical
    numbers every run; without it they wobble several points.
-2. **Set-iteration order (secondary).** Several voters return `list(some_set)`
+1. **Set-iteration order (secondary).** Several voters return `list(some_set)`
    (`extension_based`, `tag_based`), so ballot order depends on `PYTHONHASHSEED`.
 
 Measured on the characterization corpus (69 cases) across 8 hash seeds: 52 stable /
@@ -101,6 +107,7 @@ seeds `random` (default `--seed 0`) so the baseline in `spec/eval_baseline.json`
 reproducible.
 
 ## Note on Pygments
+
 `pygments_based.language_by_pygments` can emit *any* lowercased Pygments lexer name
 and even mutates `FILE_EXTENSIONS` at runtime. The static registry cannot enumerate
 that open-ended set; the characterization corpus (frozen outputs) is the practical

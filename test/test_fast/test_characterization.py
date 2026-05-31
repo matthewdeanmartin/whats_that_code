@@ -69,7 +69,13 @@ def test_characterization(rel, language_dir, filename, code):
     actual = _axis_outputs(code, language_dir, filename)
     for axis, record in expected.items():
         got = actual[axis]
+
+
         if record["stable"]:
+            # Can't tell these apart anymore?
+            # if got == "html" and record["value"] == "xml" or \
+            #     got == "xml" and record["value"] == "html":
+            #     continue
             assert got == record["value"], (
                 f"{rel} [{axis}] changed: expected {record['value']!r}, got {got!r}. "
                 f"If intentional, regenerate with scripts/gen_characterization.py."

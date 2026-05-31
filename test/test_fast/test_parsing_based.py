@@ -33,6 +33,28 @@ def test_parses_as_xml_invalid():
     assert not parses_as_xml("<unclosed>")
 
 
+def test_parses_as_xml_rejects_html_root():
+    """Valid XHTML should NOT be reported as XML."""
+    xhtml = '<?xml version="1.0"?><html><head/><body><p>hi</p></body></html>'
+    assert not parses_as_xml(xhtml)
+
+
+def test_parses_as_xml_rejects_xhtml_namespace():
+    """XHTML with explicit namespace should NOT be reported as XML."""
+    xhtml = (
+        '<?xml version="1.0"?>'
+        '<html xmlns="http://www.w3.org/1999/xhtml">'
+        "<head/><body/>"
+        "</html>"
+    )
+    assert not parses_as_xml(xhtml)
+
+
+def test_parses_as_xml_accepts_non_html_root():
+    """XML with a non-html root element should still be XML."""
+    assert parses_as_xml("<feed><entry/></feed>")
+
+
 def test_language_by_parsing_empty():
     assert language_by_parsing("") == []
     assert language_by_parsing("   ") == []
