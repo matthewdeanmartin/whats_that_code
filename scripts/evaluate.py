@@ -40,6 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from whats_that_code.election import guess_language_all_methods
 from whats_that_code.known_languages import CLONES
 from whats_that_code.languages import canonical
+from whats_that_code.options import Options
 
 REPO = Path(__file__).resolve().parent.parent
 DEFAULT_CORPUS = REPO / "corpus" / "data"
@@ -88,12 +89,16 @@ def load_targets(corpus: Path, which: str) -> list[tuple[str, Path]]:
     return targets
 
 
-def evaluate(corpus: Path, which: str, limit: int | None, seed: int | None = 0) -> dict:
+def evaluate(corpus: Path, which: str, limit: int | None, seed: int | None = 0, min_tier: str | None = None) -> dict:
     # pyrankvote breaks ties with the unseeded `random` module, which is the
     # dominant source of run-to-run variance (see spec/phase0_findings.md). Seed it
     # so the harness is reproducible; pass seed=None to sample the nondeterminism.
     if seed is not None:
         random.seed(seed)
+    # min_tier exercises the Phase 2 opt-in rare-language suppression. Default
+    # (None) is the historical behavior; the baseline must always be recorded
+    # with min_tier=None.
+    options = Options(min_tier=min_tier) if min_tier is not None else None
     targets = load_targets(corpus, which)
     if limit is not None:
         # keep it stratified-ish: cap per language
@@ -119,8 +124,8 @@ def evaluate(corpus: Path, which: str, limit: int | None, seed: int | None = 0) 
     for true_label, path in targets:
         code = path.read_text(encoding="utf-8", errors="ignore")
         guesses = {
-            "code_only": guess_language_all_methods(code),
-            "with_filename": guess_language_all_methods(code, file_name=path.name),
+            "code_only": guess_language_all_methods(code, options=options),
+            "with_filename": guess_language_all_methods(code, file_name=path.name, options=options),
         }
         t = norm(true_label)
         total += 1
@@ -160,6 +165,7 @@ def evaluate(corpus: Path, which: str, limit: int | None, seed: int | None = 0) 
             "corpus": str(corpus.relative_to(REPO)) if corpus.is_relative_to(REPO) else str(corpus),
             "split": which,
             "limit_per_language": limit,
+            "min_tier": min_tier,
             "random_seed": seed,
             "pythonhashseed": os.environ.get("PYTHONHASHSEED", "random"),
             "files": total,
@@ -242,6 +248,12 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--out", type=Path, default=None, help="write JSON report here")
     parser.add_argument("--baseline", type=Path, default=None, help="diff overall + per-language vs this report")
     parser.add_argument("--seed", type=int, default=0, help="seed for pyrankvote tie-breaks (-1 = don't seed)")
+    parser.add_argument(
+        "--min-tier",
+        default=None,
+        choices=["common", "uncommon", "rare"],
+        help="Phase 2 rare-language suppression (Options(min_tier=...)); default off = historical behavior",
+    )
     args = parser.parse_args(argv)
 
     if not args.corpus.exists():
@@ -249,7 +261,7 @@ def main(argv: list[str]) -> int:
         return 1
 
     seed = None if args.seed == -1 else args.seed
-    report = evaluate(args.corpus, args.split, args.limit, seed=seed)
+    report = evaluate(args.corpus, args.split, args.limit, seed=seed, min_tier=args.min_tier)
     print_report(report)
     if args.baseline and args.baseline.exists():
         diff_baseline(report, args.baseline)

@@ -7,6 +7,8 @@ from whats_that_code.extension_based import guess_by_extension
 from whats_that_code.guess_by_popularity import language_by_popularity
 from whats_that_code.keyword_based import guess_by_keywords
 from whats_that_code.known_languages import FILE_EXTENSIONS
+from whats_that_code.languages import meets_tier
+from whats_that_code.options import Options
 from whats_that_code.parsing_based import parses_as_xml
 from whats_that_code.pygments_based import language_by_pygments
 from whats_that_code.regex_based import language_by_regex_features
@@ -20,11 +22,17 @@ def guess_language_all_methods(
     surrounding_text: str = "",
     tags: list[str] | None = None,
     priors: list[str] | None = None,
+    options: Options | None = None,
 ) -> str | None:
     """
     Choose language with multiple algorithms via ranked choice.
 
     Ensemble classifier in fancy talk.
+
+    ``options`` is an opt-in :class:`whats_that_code.options.Options`. The default
+    (``None``) reproduces today's behavior exactly; passing
+    ``Options(min_tier="common")`` suppresses rare-language candidates unless they
+    are backed by strong evidence (extension/shebang/tag/prior).
     """
 
     # very smart voters
@@ -86,6 +94,17 @@ def guess_language_all_methods(
         vote_by_pygments,
     ]
 
+    # Opt-in rare-language suppression. Default (options is None / min_tier None)
+    # leaves the ballots untouched, so behavior is identical to before. When a
+    # min_tier is set we drop below-tier candidates from every ballot — but never
+    # those backed by strong evidence (a matching extension/shebang/tag/prior),
+    # so a `.zig` file is still Zig even when Zig is "rare".
+    if options is not None and options.min_tier is not None:
+        strong_evidence = set(
+            vote_by_tags + vote_by_shebang + vote_by_extension + vote_by_extension_in_text + vote_by_priors
+        )
+        _suppress_below_tier(all_vote_lists, options.min_tier, strong_evidence)
+
     # validate votes, get list of everything voted for
     for votes in all_vote_lists:
         for item in votes:
@@ -127,6 +146,19 @@ def guess_language_all_methods(
     if not can_be_xml and winners[0].name == "xml":
         raise TypeError()
     return winners[0].name
+
+
+def _suppress_below_tier(vote_lists: list[list[str]], min_tier: str, strong_evidence: set[str]) -> None:
+    """Drop below-``min_tier`` candidates from each ballot, in place.
+
+    A candidate survives if it is at least as common as ``min_tier`` *or* it
+    appears in ``strong_evidence`` (the extension/shebang/tag/prior votes). The
+    lists are mutated in place; the same list object may appear more than once in
+    ``vote_lists`` (smart voters are double-weighted) — re-filtering it is
+    idempotent, so that is safe.
+    """
+    for votes in vote_lists:
+        votes[:] = [v for v in votes if v in strong_evidence or meets_tier(v, min_tier)]
 
 
 def guess_by_prior_knowledge(priors: list[str] | None) -> list[str]:

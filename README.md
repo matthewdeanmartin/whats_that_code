@@ -28,6 +28,23 @@ result = guess_language_all_methods(code, file_name="yo.py")
 assert result == "python"  # returns a single language name (str), or None if unknown
 ```
 
+### Suppressing rare languages (opt-in)
+
+Pass an `Options` to avoid guessing obscure languages unless there is strong
+evidence (a matching file extension, shebang, or tag). The default is unchanged —
+no suppression — so existing callers are unaffected.
+
+```python
+from whats_that_code.election import guess_language_all_methods
+from whats_that_code.options import Options
+
+# "common" keeps only mainstream languages; "uncommon" also keeps established ones.
+guess_language_all_methods(code, options=Options(min_tier="common"))
+
+# A .zig file is still detected as Zig even though Zig is below "common":
+guess_language_all_methods(code, file_name="x.zig", options=Options(min_tier="common"))  # -> "zig"
+```
+
 ## How it Works
 1) Inspects file extension if available.
 2) Inspects shebang

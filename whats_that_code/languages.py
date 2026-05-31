@@ -501,3 +501,151 @@ def canonical(name: str) -> str:
 def is_known(name: str) -> bool:
     """True if ``name`` resolves to a label in :data:`CANONICAL` (or is an alias)."""
     return canonical(name) in CANONICAL
+
+
+# ── Rarity tiers (spec/spec.md Phase 2) ──────────────────────────────────────
+#
+# Each canonical label has a rarity tier. The tiers exist solely so a caller can
+# opt out of obscure-language matches via ``Options(min_tier=...)`` (see
+# whats_that_code/options.py). They change NO default behavior: tiers are only
+# consulted when a caller passes a non-default ``Options`` to the election.
+#
+# ``TIERS`` is ordered least→most common, so ``_TIER_RANK`` gives a comparable
+# integer. ``COMMON`` and ``UNCOMMON`` are curated allow-lists; everything else
+# in CANONICAL (and any label not in CANONICAL at all, e.g. an arbitrary Pygments
+# lexer name) is treated as ``"rare"``. These two sets are deliberately
+# conservative and are expected to be *tuned* in Phase 4 using the eval harness —
+# moving a label between tiers only affects the opt-in suppression path, never the
+# default answer, so it is safe to adjust.
+TIERS: tuple[str, str, str] = ("rare", "uncommon", "common")
+_TIER_RANK: dict[str, int] = {name: rank for rank, name in enumerate(TIERS)}
+
+# "common": the PYPL top-28 (known_languages.POPULARITY_LIST) plus the ubiquitous
+# markup/config/shell languages that PYPL does not rank but that any detector must
+# treat as mainstream. Both spellings of dual-spelled languages are listed so a
+# match is recognized as common however it was emitted (e.g. c# / csharp).
+COMMON: frozenset[str] = frozenset(
+    {
+        # PYPL top-28
+        "python",
+        "java",
+        "javascript",
+        "c#",
+        "csharp",
+        "c++",
+        "php",
+        "r",
+        "objectivec",
+        "swift",
+        "typescript",
+        "matlab",
+        "kotlin",
+        "go",
+        "vba",
+        "ruby",
+        "rust",
+        "scala",
+        "vbnet",
+        "lua",
+        "ada",
+        "dart",
+        "abap",
+        "perl",
+        "julia",
+        "groovy",
+        "cobol",
+        "haskell",
+        "delphi",
+        # ubiquitous markup / data / config / shell (not PYPL-ranked)
+        "c",
+        "html",
+        "css",
+        "json",
+        "xml",
+        "yaml",
+        "sql",
+        "bash",
+        "shell",
+        "markdown",
+        "makefile",
+        "docker",
+        "ini",
+        "toml",
+        "powershell",
+        "batch",
+        "batchfile",
+        "sass",
+        "scss",
+        "lesscss",
+    }
+)
+
+# "uncommon": established languages that are widely known but not mainstream by
+# PYPL standards. A caller asking for ``min_tier="uncommon"`` keeps these; one
+# asking for ``min_tier="common"`` drops them (absent strong extension/shebang/tag
+# evidence). Everything not in COMMON or UNCOMMON is "rare".
+UNCOMMON: frozenset[str] = frozenset(
+    {
+        "elixir",
+        "erlang",
+        "clojure",
+        "clojurescript",
+        "fsharp",
+        "ocaml",
+        "scheme",
+        "racket",
+        "lisp",
+        "commonlisp",
+        "emacslisp",
+        "elm",
+        "crystal",
+        "nimrod",
+        "zig",
+        "solidity",
+        "terraform",
+        "prolog",
+        "fortran",
+        "fortranfixed",
+        "vala",
+        "nix",
+        "tcl",
+        "vhdl",
+        "verilog",
+        "systemverilog",
+        "cmake",
+        "coffeescript",
+        "livescript",
+        "gdscript",
+        "reason",
+        "smalltalk",
+        "d",
+        "nasm",
+        "gas",
+    }
+)
+
+
+def tier(name: str) -> str:
+    """Return the rarity tier (``"common"`` / ``"uncommon"`` / ``"rare"``) of a label.
+
+    Resolves ``name`` through :func:`canonical` first, so spelling variants and
+    casing are handled. Any label not explicitly listed in :data:`COMMON` or
+    :data:`UNCOMMON` — including labels outside :data:`CANONICAL` entirely — is
+    ``"rare"``.
+    """
+    resolved = canonical(name)
+    if resolved in COMMON:
+        return "common"
+    if resolved in UNCOMMON:
+        return "uncommon"
+    return "rare"
+
+
+def meets_tier(name: str, min_tier: str) -> bool:
+    """True if ``name``'s tier is at least as common as ``min_tier``.
+
+    e.g. ``meets_tier("zig", "common")`` is False (zig is uncommon) while
+    ``meets_tier("python", "common")`` and ``meets_tier("zig", "uncommon")`` are
+    True. Raises ``KeyError`` if ``min_tier`` is not one of :data:`TIERS`.
+    """
+    return _TIER_RANK[tier(name)] >= _TIER_RANK[min_tier]

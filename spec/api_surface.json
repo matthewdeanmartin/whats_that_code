@@ -58,6 +58,12 @@
           "default": "None",
           "kind": "positional or keyword",
           "name": "priors"
+        },
+        {
+          "annotation": "Options | None",
+          "default": "None",
+          "kind": "positional or keyword",
+          "name": "options"
         }
       ],
       "returns": "str | None",
@@ -159,6 +165,15 @@
     "CANONICAL": {
       "type": "attribute"
     },
+    "COMMON": {
+      "type": "attribute"
+    },
+    "TIERS": {
+      "type": "attribute"
+    },
+    "UNCOMMON": {
+      "type": "attribute"
+    },
     "canonical": {
       "parameters": [
         {
@@ -182,6 +197,42 @@
       ],
       "returns": "bool",
       "type": "function"
+    },
+    "meets_tier": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "name"
+        },
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "min_tier"
+        }
+      ],
+      "returns": "bool",
+      "type": "function"
+    },
+    "tier": {
+      "parameters": [
+        {
+          "annotation": "str",
+          "default": null,
+          "kind": "positional or keyword",
+          "name": "name"
+        }
+      ],
+      "returns": "str",
+      "type": "function"
+    }
+  },
+  "whats_that_code.options": {
+    "Options": {
+      "methods": {},
+      "type": "class"
     }
   },
   "whats_that_code.parsing_based": {

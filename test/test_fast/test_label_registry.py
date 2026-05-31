@@ -10,7 +10,7 @@ the whole point of the guard. See spec/spec.md Phase 0.
 from whats_that_code.codex_markers import MARKERS
 from whats_that_code.keyword_based import LANGUAGE_KEY_WORDS
 from whats_that_code.known_languages import FILE_EXTENSIONS, POPULARITY_LIST
-from whats_that_code.languages import ALIASES, CANONICAL, canonical, is_known
+from whats_that_code.languages import ALIASES, CANONICAL, COMMON, UNCOMMON, canonical, is_known
 from whats_that_code.shebang_based import SHEBANGS
 from whats_that_code.tags_data import RELATED_TAGS
 
@@ -71,3 +71,17 @@ def test_canonical_resolves_known_drift():
     assert canonical("objective-C") == "objectivec"  # the capital-C key bug
     assert canonical("cpp") == "c++"
     assert canonical("make") == "makefile"
+
+
+def test_tier_sets_are_canonical_labels():
+    """Every label in a rarity tier must be a real canonical label (Phase 2)."""
+    common_unknown = sorted(COMMON - CANONICAL)
+    uncommon_unknown = sorted(UNCOMMON - CANONICAL)
+    assert not common_unknown, f"COMMON labels not in CANONICAL: {common_unknown}"
+    assert not uncommon_unknown, f"UNCOMMON labels not in CANONICAL: {uncommon_unknown}"
+
+
+def test_tier_sets_are_disjoint():
+    """A label has exactly one tier; it cannot be both common and uncommon."""
+    overlap = sorted(COMMON & UNCOMMON)
+    assert not overlap, f"Labels in both COMMON and UNCOMMON: {overlap}"
