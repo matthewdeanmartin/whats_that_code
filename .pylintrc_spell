@@ -1,0 +1,6 @@
+[SPELLING]
+spelling-dict=en_US
+spelling-private-dict-file=private_dictionary.txt
+
+[MESSAGES CONTROL]
+disable=all

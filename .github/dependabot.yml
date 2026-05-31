@@ -1,0 +1,16 @@
+---
+version: 2
+updates:
+  # GitHub Actions — quarterly, security-only outside of that
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: quarterly
+    open-pull-requests-limit: 5
+    # Only auto-open PRs for security advisories between quarterly bumps.
+    # For routine version bumps we rely on `make gha-upgrade` run manually.
+    ignore:
+      - dependency-name: '*'
+        update-types: [version-update:semver-minor, version-update:semver-patch]
+    cooldown:
+      default-days: 7

@@ -39,9 +39,9 @@ def test_with_source_classifier():
     if not os.path.exists(files):
         pytest.skip("don't have a bunch of files downloaded to verify against")
 
-    for subdir, dirs, files in os.walk(files):
+    for subdir, _dirs, filenames in os.walk(files):
 
-        for file_name in files:
+        for file_name in filenames:
             # if not "java" in file_name:
             #     continue
             file_path = subdir + os.sep + file_name
@@ -49,16 +49,13 @@ def test_with_source_classifier():
                 total += 1
                 guess = guess_language_all_methods(code_file.read())
                 _neither = True
-                if guess in ["c", "cpp"] and (
+                if (guess in ["c", "cpp"] and (
                     file_name.endswith(".gcc") or file_name.endswith(".gcc")
-                ):
-                    right += 1
-                    _neither = False
-                elif guess in ["php", "xml", "html"] and (
+                )) or (guess in ["php", "xml", "html"] and (
                     file_name.endswith(".php")
                     or file_name.endswith(".xml")
                     or file_name.endswith(".html")
-                ):
+                )):
                     right += 1
                     _neither = False
                 elif guess in FILE_EXTENSIONS:

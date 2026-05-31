@@ -1,0 +1,47 @@
+[MASTER]
+jobs=1
+py-version=3.13
+
+[MESSAGES CONTROL]
+disable=
+    fixme,
+    too-many-arguments,
+    too-many-positional-arguments,
+    too-many-instance-attributes,
+    too-many-public-methods,
+    too-many-locals,
+    too-many-branches,
+    too-many-statements,
+    too-few-public-methods,
+    duplicate-code,
+    import-error,
+    logging-fstring-interpolation,
+    redefined-outer-name,
+    unused-argument,
+    protected-access,
+    missing-docstring,
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    attribute-defined-outside-init,
+    invalid-name,
+    line-too-long
+
+[FORMAT]
+max-line-length=120
+
+[DESIGN]
+max-args=10
+
+[BASIC]
+good-names=i,j,k,e,f,n,v,x,y,_
+
+[REPORTS]
+output-format=text
+score=yes
+
+[SIMILARITIES]
+min-similarity-lines=10
+
+[SCORING]
+fail-under=9.0

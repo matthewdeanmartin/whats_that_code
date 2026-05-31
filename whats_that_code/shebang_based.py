@@ -1,10 +1,6 @@
-"""
-Guess a language based on shebang
-"""
+"""Guess a language based on shebang"""
 
 # http://dcjtech.info/topic/list-of-shebang-interpreter-directives/
-from typing import List
-
 from whats_that_code.known_languages import FILE_EXTENSIONS
 
 SHEBANGS = {
@@ -16,7 +12,6 @@ SHEBANGS = {
     "#!/bin/bash": "bash",
     "#!/usr/bin/env bash": "bash",
     "#!/bin/busybox sh": "bash",
-    # "#!/bin/csh": ".csh",  # right extension?
     "#!/usr/local/bin/groovy": "groovy",
     "#!/usr/bin/env groovy": "groovy",
     "#!/usr/bin/env jsc": "javascript",
@@ -36,15 +31,12 @@ SHEBANGS = {
     "#!/bin/sed -f": "sed",
     "#!/usr/bin/sed -f": "sed",
     "#!/usr/bin/env sed": "sed",
-    # "#!/bin/sh": "bash",
-    # "#!/usr/xpg4/bin/sh": ".sh",
-    # "#!/bin/tcsh": ".tcsh",
 }
 
 
-def language_by_shebang(test: str) -> List[str]:
+def language_by_shebang(test: str) -> list[str]:
     """Identify by shebang"""
-    possibles = set()
+    possibles: set[str] = set()
     for key, value in SHEBANGS.items():
         if key in test:
             possibles.add(value)

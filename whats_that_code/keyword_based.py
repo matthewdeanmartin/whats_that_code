@@ -2,13 +2,11 @@
 Guess by counting known reserved keywords.
 """
 
-from typing import Dict, List
-
 # words from forked github repo, so covered by GitHub Terms of Service regarding forked repos.
 # https://github.com/matthewdeanmartin/Reserved-Key-Words-list-of-various-programming-languages
 
 # pylint: disable=too-many-lines
-LANGUAGE_KEY_WORDS = final = {
+LANGUAGE_KEY_WORDS: dict[str, set[str]] = {
     "coldfusion": {
         "of",
         "table",
@@ -2435,21 +2433,14 @@ LANGUAGE_KEY_WORDS = final = {
 }
 
 
-def guess_by_keywords(code: str) -> List[str]:
+def guess_by_keywords(code: str) -> list[str]:
     """Keyword counting guesser"""
     words = code.strip().split()
-    guesses: Dict[str, int] = {}
+    guesses: dict[str, int] = {}
     for language, keywords in LANGUAGE_KEY_WORDS.items():
         for word in words:
             # small keywords are too common
             if word in keywords and len(word) > 2:
-                if language in guesses:
-                    guesses[language] += 1
-                else:
-                    guesses[language] = 1
+                guesses[language] = guesses.get(language, 0) + 1
 
-    results = [
-        language
-        for language, score in sorted(guesses.items(), key=lambda item: -item[1])
-    ]
-    return results
+    return [language for language, _score in sorted(guesses.items(), key=lambda item: -item[1])]

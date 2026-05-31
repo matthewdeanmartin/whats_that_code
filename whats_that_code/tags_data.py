@@ -3,10 +3,9 @@ Related tag data from StackOverflow
 CC-BY-SA
 ref: https://api.stackexchange.com/docs/related-tags
 """
+# pylint: disable=too-many-lines
 
-from typing import Dict, List
-
-RELATED_TAGS: Dict[str, List[str]] = {
+RELATED_TAGS: dict[str, list[str]] = {
     "batchfile": [],
     "c#": [
         "c#",

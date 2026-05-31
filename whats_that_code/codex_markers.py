@@ -12,8 +12,9 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+# pylint: disable=line-too-long
 import re
-from typing import Dict, List, Pattern
+from re import Pattern
 
 
 def _compiled_regex(pattern: str, dotall: bool = True) -> Pattern[str]:
@@ -22,7 +23,7 @@ def _compiled_regex(pattern: str, dotall: bool = True) -> Pattern[str]:
     return re.compile(pattern, flags)
 
 
-MARKERS: Dict[str, List[Pattern[str]]] = {
+MARKERS: dict[str, list[Pattern[str]]] = {
     # Markers applicable to several languages
     # Code, not, say, English
     "code": [

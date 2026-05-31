@@ -3,10 +3,10 @@ name = "whats_that_code"
 version = "0.2.0"
 description = "Guess programming language from a string or file."
 readme = "README.md"
-license = "MIT"
-requires-python = ">=3.8"
 authors = [{ name = "Matthew Martin", email = "matthewdeanmartin@gmail.com" }]
 keywords = ["language detection", "programming language detection"]
+license = "MIT"
+requires-python = ">=3.10"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -14,13 +14,11 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     "pyrankvote",
@@ -30,10 +28,10 @@ dependencies = [
 
 [project.urls]
 Repository = "https://github.com/matthewdeanmartin/whats_that_code"
-Homepage = "https://github.com/matthewdeanmartin/whats_that_code"
-Documentation = "https://github.com/matthewdeanmartin/whats_that_code"
-"Bug Tracker" = "https://github.com/matthewdeanmartin/whats_that_code/issues"
-"Change Log" = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md"
+Documentation = "https://whats-that-code.readthedocs.io/en/latest/"
+Changelog = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md"
+homepage = "https://github.com/matthewdeanmartin/whats_that_code"
+issues = "https://github.com/matthewdeanmartin/whats_that_code/issues"
 
 [build-system]
 requires = ["hatchling>=1.27.0"]
@@ -49,23 +47,59 @@ include = [
     "whats_that_code/**/*.jinja",
 ]
 
+[tool.hatch.build.targets.sdist]
+include = ["/README.md", "LICENSE", "/whats_that_code", "/test"]
+
 [dependency-groups]
 dev = [
-    "pytest",
-    "pytest-cov>=2.10.1",
-    "pytest-timeout",
-    "pytest-xdist>=2.1.0",
-    "tox",
-    "black",
-    "isort",
-    "pylint",
-    "mypy",
-    "bandit",
-    "vulture",
+    "dont-be-lazy>=0.1.2",
+    "pydoc-fork>=3.0.0",
+
+    "bandit>=1.9.4",
+    "black>=26.0.0",
+    "isort>=6.0.0",
     "jiggle-version>=2.1.0",
-    "troml-dev-status>=0.6.0; python_version >= '3.9'",
-    "dont-be-lazy>=0.1.2; python_version >= '3.10'",
-    "pydoc-fork>=3.0.0; python_version >= '3.10'",
+    "codespell>=2.4.1",
+    "mdformat>=1.0.0",
+    "metametameta>=0.1.5",
+    "mypy>=1.18.0",
+    "pylint[spelling]>=4.0.0",
+    "pytest>=8.4.0",
+    "pytest-cov>=6.0.0",
+    "pytest-xdist>=3.5.0",
+    "pytest-randomly>=3.15.0",
+    "pytest-sugar>=0.9.7",
+    "pytest-mock>=3.14.0",
+    "pytest-timeout>=2.4.0",
+    "hypothesis>=6.100.0",
+    "ruff>=0.12.0",
+    "troml-dev-status>=0.6.0",
+    "pre-commit>=4.0.0",
+    "pip-audit>=2.7.0",
+    "tox>=4.0",
+    "tox-uv>=1.0",
+    "gha-update>=0.1.0; python_version >= '3.12'",
+    "pyyaml>=6.0",
+    "yamlfix>=1.19.0",
+    "interrogate>=1.5.0",
+    "linkcheckmd>=1.4.0",
+    "pyenchant>=3.2.2",
+    "mkdocs>=1.6.0",
+    "mkdocstrings[python]>=0.26.0",
+    "git2md>=0.1.0",
+    "pyclean>=3.0.0",
+    # dead code analysis (advisory)
+    "vulture>=2.11",
+    "deadcode>=2.4.0",
+    # API surface / doc checks
+    "griffe>=1.0.0",
+    "pydoclint>=0.8.0; python_version >= '3.10'",
+    "pydoctest==0.2.1",
+    # advisory / exploratory tools (standalone make targets, not quality gates)
+    "refurb>=2.0.0; python_version >= '3.10'",
+    "crosshair-tool>=0.0.80; python_version >= '3.10'",
+    "deptry>=0.20.0",
+    "import-linter>=2.0",
 ]
 
 [tool.uv]
@@ -73,16 +107,27 @@ default-groups = ["dev"]
 
 [tool.uv.pip]
 universal = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["test"]
+addopts = "-q --timeout=60"
+norecursedirs = ["vendor", "scripts", "dist", "build"]
+markers = [
+    "slow: performance benchmarks (run with -m slow)",
+    "integration: integration tests (run with -m integration)",
+]
+junit_family = "xunit1"
+
 [tool.black]
-line-length = 88
-target-version = ['py37']
+line-length = 120
+target-version = ["py311"]
 include = '\.pyi?$'
 exclude = '''
-
 (
   /(
-      \.eggs         # exclude a few common directories in the
-    | \.git          # root of the project
+      \.eggs
+    | \.git
     | \.hg
     | \.mypy_cache
     | \.tox
@@ -92,30 +137,68 @@ exclude = '''
     | build
     | dist
   )/
-  | foo.py           # also separately exclude a file named foo.py in
-                     # the root of the project
 )
 '''
 
-[tool.pytest.ini_options]
-minversion = "6.0"
-testpaths = [
-    "tests",
-]
-junit_family = "xunit1"
-norecursedirs = ["vendor", "scripts"]
-# don't know how to do this in toml
-#addopts = "--strict-markers"
-#markers =
-#	slow: marks tests as slow (deselect with '-m "not slow"')
-#	fast: marks tests as fast (deselect with '-m "not fast"')
-
 [tool.isort]
-default_section = "THIRDPARTY"
-force_grid_wrap = 0
-include_trailing_comma = true
-known_first_party = ["so_pip"]
-line_length = 88
-multi_line_output = 3
-use_parentheses = true
+profile = "black"
+line_length = 120
+py_version = 311
+skip_gitignore = true
 
+[tool.mypy]
+python_version = "3.11"
+packages = ["whats_that_code", "test"]
+
+[[tool.mypy.overrides]]
+module = "test.*"
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+
+[[tool.mypy.overrides]]
+module = ["pygments", "pygments.*", "defusedxml", "defusedxml.*", "pyrankvote", "pyrankvote.*"]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "B",   # bugbear
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "UP",  # pyupgrade
+    "SIM", # simplify
+    "RUF", # ruff-specific
+    "W",   # pycodestyle warnings
+]
+ignore = [
+    "E501",   # line too long (black handles this)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"test/*.py" = ["B011", "S101"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.bandit]
+exclude_dirs = ["test"]
+skips = ["B101"]
+
+[tool.coverage.report]
+exclude_also = [
+    "def __repr__",
+    "if self\\.debug",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "except ImportError",
+    "except ModuleNotFoundError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.importlinter]
+root_packages = ["whats_that_code"]

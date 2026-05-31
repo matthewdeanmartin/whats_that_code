@@ -1,0 +1,18 @@
+# Add project-specific words here, one per line.
+# These words will be ignored by codespell and pylint spelling checks.
+whats
+pyrankvote
+pygments
+shebang
+shebangs
+codex
+coldfusion
+groovy
+busybox
+jsc
+rhino
+sbcl
+pycparser
+pyesprima
+xpath
+xquery

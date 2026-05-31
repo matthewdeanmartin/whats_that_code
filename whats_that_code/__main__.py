@@ -1,39 +1,42 @@
-# noinspection PyPep8
-"""whats_that_code/identify sourcode
-Usage:
-  whats_that_code <code>
-  whats_that_code <file>
-  so_pip (-h | --help)
-  so_pip --version
+"""whats_that_code — identify source code from a string or file."""
 
-Options:
-  -h --help                    Show this screen.
-  -v --version                 Show version.
-  -c --code=<code>             Source code.
-  -f --file=<file>             Path to file
-  --verbose                    Show logging
-  --quiet                      No informational logging
-
-"""
-
+import argparse
 import logging
 import sys
 
-import docopt
-
 from whats_that_code import _version as meta
-
-# Do these need to stick around?
-LOGGERS: list[logging.Logger] = []
+from whats_that_code.election import guess_language_all_methods
 
 LOGGER = logging.getLogger(__name__)
 
 
 def main() -> int:
-    """Get the args object from command parameters"""
-    arguments = docopt.docopt(__doc__, version=f"so_pip {meta.__version__}")
-    LOGGER.debug(arguments)
-    return 0
+    """Entry point: guess language from code string or file."""
+    parser = argparse.ArgumentParser(description="Guess the programming language of a code snippet or file.")
+    parser.add_argument("--version", action="version", version=f"whats_that_code {meta.__version__}")
+    parser.add_argument("--verbose", action="store_true", help="Enable debug logging")
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("-c", "--code", metavar="CODE", help="Source code string to identify")
+    source.add_argument("-f", "--file", metavar="FILE", help="Path to source file to identify")
+    args = parser.parse_args()
+
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG)
+
+    if args.file:
+        with open(args.file, encoding="utf-8") as fh:
+            code = fh.read()
+        file_name = args.file
+    else:
+        code = args.code
+        file_name = ""
+
+    result = guess_language_all_methods(code=code, file_name=file_name)
+    if result:
+        print(result)
+        return 0
+    print("Unknown", file=sys.stderr)
+    return 1
 
 
 if __name__ == "__main__":

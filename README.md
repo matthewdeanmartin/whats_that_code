@@ -33,7 +33,7 @@ assert result == ["python"]
 2) Inspects shebang
 3) Looks for keywords
 4) Counts regexes for common patterns
-5) Attemps to parse python, json, yaml
+5) Attempts to parse python, json, yaml
 6) Inspects tags if available.
 
 Each is imperfect and can error. The classifier then combines the results of each using a voting algorithm

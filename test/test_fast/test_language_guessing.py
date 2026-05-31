@@ -6,18 +6,18 @@ from whats_that_code.regex_based import language_by_regex_features
 
 
 def test_assign_extension():
-    extension, language = assign_extension("print('hello')", tags=["python", "stuff"])
+    extension, _language = assign_extension("print('hello')", tags=["python", "stuff"])
     assert extension == ".py"
 
 
 def test_assign_extension2():
-    extension, language = assign_extension("", tags=["python", "stuff"])
+    extension, _language = assign_extension("", tags=["python", "stuff"])
     assert extension == ""
 
 
 def test_assign_extension3():
     # bash is hard to guess.
-    extension, language = assign_extension("pip install foo", tags=["python", "stuff"])
+    extension, _language = assign_extension("pip install foo", tags=["python", "stuff"])
     assert extension == ".py"
 
     # extension,language= assign_extension("public static void class Foo {System.out.println('yo')}",True)

@@ -1,0 +1,37 @@
+site_name: whats_that_code
+site_url: https://whats-that-code.readthedocs.io/
+site_author: Matthew Martin <matthewdeanmartin@gmail.com>
+site_description: Guess programming language from a string or file.
+repo_url: https://github.com/matthewdeanmartin/whats_that_code
+theme:
+  name: readthedocs
+  features: [navigation.footer]
+edit_uri: edit/main/docs/
+markdown_extensions:
+  - attr_list
+  - codehilite
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - How it works: how_it_works.md
+  - Prior art: prior_art.md
+  - Data sources: Data.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+validation:
+  nav:
+    omitted_files: warn
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google

@@ -1,8 +1,4 @@
-"""
-Ranked choice election
-"""
-
-from typing import List, Optional
+"""Ranked choice election"""
 
 import pyrankvote
 from pyrankvote import Ballot, Candidate
@@ -22,9 +18,9 @@ def guess_language_all_methods(
     code: str,
     file_name: str = "",
     surrounding_text: str = "",
-    tags: Optional[List[str]] = None,
-    priors: Optional[List[str]] = None,
-) -> Optional[str]:
+    tags: list[str] | None = None,
+    priors: list[str] | None = None,
+) -> str | None:
     """
     Choose language with multiple algorithms via ranked choice.
 
@@ -52,9 +48,7 @@ def guess_language_all_methods(
     # stupid voters
     vote_by_keyword = guess_by_keywords(code)
     # dumb voter block can't double their impact
-    vote_by_pygments = [
-        _ for _ in language_by_pygments(code) if _ not in vote_by_keyword
-    ]
+    vote_by_pygments = [_ for _ in language_by_pygments(code) if _ not in vote_by_keyword]
 
     # Only want to hear from stupid voters if no one else votes
     if all_but_stupid:
@@ -68,18 +62,17 @@ def guess_language_all_methods(
         + vote_by_extension_in_text
         + vote_by_regex_features
         + vote_by_priors
-        # don't include stupid voters
     )
     # above keeps wanting to guess the obscure languages.
     vote_by_popularity = language_by_popularity(all_possible)
 
     all_vote_lists = [
-        # if this has any info, in probably is really good. Give 'em two votes
+        # if this has any info, it probably is really good. Give 'em two votes
         vote_by_tags,
         vote_by_shebang,
         vote_by_extension,
         vote_by_extension_in_text,
-        # ad hoc way to give smart algo's more votes
+        # ad hoc way to give smart algos more votes
         vote_by_tags,
         vote_by_shebang,
         vote_by_extension,
@@ -103,18 +96,16 @@ def guess_language_all_methods(
             if "." in vote:
                 raise TypeError("Name not extension")
 
-    # TODO: more comprehensive way to deal with "clones"
     # handle xml & php
     can_be_xml = True
-    if "xml" in all_possible:
-        if not parses_as_xml(code):
-            for votes in all_vote_lists:
-                if "xml" in votes:
-                    votes.remove("xml")
-                    can_be_xml = False
+    if "xml" in all_possible and not parses_as_xml(code):
+        for votes in all_vote_lists:
+            if "xml" in votes:
+                votes.remove("xml")
+                can_be_xml = False
 
     # convert to ballots and hold election
-    candidates = {}
+    candidates: dict[str, Candidate] = {}
     ballots = []
     for ballot in all_vote_lists:
         for candidate in ballot:
@@ -125,11 +116,9 @@ def guess_language_all_methods(
         # else abstains
 
     if len(candidates) == 1:
-        return list(candidates.values())[0].name
+        return next(iter(candidates.values())).name
 
-    election_result = pyrankvote.instant_runoff_voting(
-        list(candidates.values()), ballots
-    )
+    election_result = pyrankvote.instant_runoff_voting(list(candidates.values()), ballots)
 
     winners = election_result.get_winners()
     if not winners:
@@ -140,7 +129,7 @@ def guess_language_all_methods(
     return winners[0].name
 
 
-def guess_by_prior_knowledge(priors: Optional[List[str]]) -> List[str]:
+def guess_by_prior_knowledge(priors: list[str] | None) -> list[str]:
     """Let user tell us what he thinks are likely"""
     vote_by_priors = []
     if priors:

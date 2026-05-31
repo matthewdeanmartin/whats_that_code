@@ -15,6 +15,10 @@
 - improve shebang code to cover more
 
 ## Release 3.0 goals
-- Classify code vs not-code, e.g. code of unknown language vs probably orindary english.
+- Classify code vs not-code, e.g. code of unknown language vs probably ordinary english.
     - ref: https://softwareengineering.stackexchange.com/questions/87611/simple-method-for-reliably-detecting-code-in-text
 - Detect language of a collection of files, e.g. detect a python package (which could contain other files)
+
+
+
+

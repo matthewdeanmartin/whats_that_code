@@ -1,17 +1,12 @@
-"""
-Guess by extension
-"""
+"""Guess by extension"""
 
 import os
-from typing import List
 
 from whats_that_code.known_languages import FILE_EXTENSIONS
 
 
-def guess_by_extension(file_name: str = "", text: str = "") -> List[str]:
-    """
-    Guess by extensions
-    """
+def guess_by_extension(file_name: str = "", text: str = "") -> list[str]:
+    """Guess by extensions"""
     if not file_name and not text:
         return []
     _, extension_part = os.path.splitext(file_name)
@@ -19,10 +14,9 @@ def guess_by_extension(file_name: str = "", text: str = "") -> List[str]:
     if not extension_part:
         return []
 
-    guesses = set()
+    guesses: set[str] = set()
     extensions = []
     if file_name:
-        # TODO: use
         extensions.append(extension_part)
     if text:
         words = [_ for _ in text.split(" ") if "." in _]
