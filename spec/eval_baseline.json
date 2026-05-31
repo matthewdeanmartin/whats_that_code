@@ -1,0 +1,1384 @@
+{
+  "_meta": {
+    "corpus": "corpus/data",
+    "files": 177,
+    "limit_per_language": null,
+    "pythonhashseed": "0",
+    "random_seed": 0,
+    "split": "test"
+  },
+  "languages": {
+    "abnf": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "ampl": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "apacheconf": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "applescript": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "bash": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "befunge": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "c": {
+      "code_only": 2,
+      "code_only_rate": 0.6667,
+      "n": 3,
+      "with_filename": 3,
+      "with_filename_rate": 1.0
+    },
+    "c#": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 1,
+      "with_filename_rate": 0.5
+    },
+    "c++": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 5,
+      "with_filename": 2,
+      "with_filename_rate": 0.4
+    },
+    "chapel": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "cirru": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 3,
+      "with_filename_rate": 1.0
+    },
+    "clojure": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "coffeescript": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "commonlisp": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "crystal": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "cuda": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "cypher": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 1,
+      "with_filename_rate": 0.5
+    },
+    "d": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 3,
+      "with_filename_rate": 1.0
+    },
+    "ebnf": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "elixir": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "emacslisp": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 5,
+      "with_filename": 1,
+      "with_filename_rate": 0.2
+    },
+    "erlang": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "fennel": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "forth": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 1,
+      "with_filename_rate": 0.5
+    },
+    "fortran": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "gap": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "gdscript": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "go": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "golo": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 4,
+      "with_filename": 2,
+      "with_filename_rate": 0.5
+    },
+    "haskell": {
+      "code_only": 1,
+      "code_only_rate": 1.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "html": {
+      "code_only": 1,
+      "code_only_rate": 0.5,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "hy": {
+      "code_only": 1,
+      "code_only_rate": 0.5,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "ini": {
+      "code_only": 1,
+      "code_only_rate": 0.3333,
+      "n": 3,
+      "with_filename": 1,
+      "with_filename_rate": 0.3333
+    },
+    "jasmin": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "java": {
+      "code_only": 3,
+      "code_only_rate": 1.0,
+      "n": 3,
+      "with_filename": 3,
+      "with_filename_rate": 1.0
+    },
+    "javascript": {
+      "code_only": 4,
+      "code_only_rate": 0.8,
+      "n": 5,
+      "with_filename": 4,
+      "with_filename_rate": 0.8
+    },
+    "json": {
+      "code_only": 1,
+      "code_only_rate": 0.5,
+      "n": 2,
+      "with_filename": 1,
+      "with_filename_rate": 0.5
+    },
+    "julia": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "koka": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "lasso": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "logos": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "lua": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "makefile": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "markdown": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "matlab": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 4,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "modelica": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "nasm": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "ncl": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "nit": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 5,
+      "with_filename": 4,
+      "with_filename_rate": 0.8
+    },
+    "objectivec": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "ocaml": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 1,
+      "with_filename_rate": 0.5
+    },
+    "pan": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 4,
+      "with_filename": 3,
+      "with_filename_rate": 0.75
+    },
+    "pawn": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "perl": {
+      "code_only": 2,
+      "code_only_rate": 0.4,
+      "n": 5,
+      "with_filename": 2,
+      "with_filename_rate": 0.4
+    },
+    "php": {
+      "code_only": 2,
+      "code_only_rate": 1.0,
+      "n": 2,
+      "with_filename": 2,
+      "with_filename_rate": 1.0
+    },
+    "pike": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "pony": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "powershell": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 1,
+      "with_filename_rate": 0.5
+    },
+    "praat": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "prolog": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "python": {
+      "code_only": 2,
+      "code_only_rate": 0.5,
+      "n": 4,
+      "with_filename": 2,
+      "with_filename_rate": 0.5
+    },
+    "r": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "red": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 2,
+      "with_filename_rate": 1.0
+    },
+    "ruby": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 5,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "sas": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "sass": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "shen": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 2,
+      "with_filename_rate": 1.0
+    },
+    "sieve": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "smali": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 3,
+      "with_filename_rate": 1.0
+    },
+    "sparql": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "stata": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "supercollider": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "swift": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 4,
+      "with_filename": 4,
+      "with_filename_rate": 1.0
+    },
+    "swig": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "tex": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "text": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 5,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "toml": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "turtle": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 1,
+      "with_filename": 1,
+      "with_filename_rate": 1.0
+    },
+    "typescript": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 3,
+      "with_filename_rate": 1.0
+    },
+    "verilog": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 3,
+      "with_filename": 0,
+      "with_filename_rate": 0.0
+    },
+    "x10": {
+      "code_only": 0,
+      "code_only_rate": 0.0,
+      "n": 2,
+      "with_filename": 2,
+      "with_filename_rate": 1.0
+    },
+    "xml": {
+      "code_only": 3,
+      "code_only_rate": 0.4286,
+      "n": 7,
+      "with_filename": 2,
+      "with_filename_rate": 0.2857
+    }
+  },
+  "mispredictions": [
+    {
+      "file": "abnf/linguist__toml.abnf",
+      "pred": "delphi",
+      "true": "abnf"
+    },
+    {
+      "file": "ampl/linguist__toy.ampl",
+      "pred": "delphi",
+      "true": "ampl"
+    },
+    {
+      "file": "apacheconf/linguist__filenames_.htaccess",
+      "pred": "python",
+      "true": "apacheconf"
+    },
+    {
+      "file": "applescript/linguist__Crazy_Message_Text.applescript",
+      "pred": "haskell",
+      "true": "applescript"
+    },
+    {
+      "file": "bash/linguist__filenames_.flaskenv",
+      "pred": "scdoc",
+      "true": "bash"
+    },
+    {
+      "file": "bash/linguist__filenames_.tmux.conf",
+      "pred": "python",
+      "true": "bash"
+    },
+    {
+      "file": "befunge/linguist__beer7.bf",
+      "pred": "php",
+      "true": "befunge"
+    },
+    {
+      "file": "c/linguist__commit.c",
+      "pred": "java",
+      "true": "c"
+    },
+    {
+      "file": "c#/linguist__MongoExpressionVisitor.cs",
+      "pred": "java",
+      "true": "c#"
+    },
+    {
+      "file": "c#/linguist__chart-process-memory.linq",
+      "pred": "java",
+      "true": "c#"
+    },
+    {
+      "file": "c++/linguist__16F88.h",
+      "pred": "ruby",
+      "true": "c++"
+    },
+    {
+      "file": "c++/linguist__CsvStreamer.h",
+      "pred": "java",
+      "true": "c++"
+    },
+    {
+      "file": "c++/linguist__NoDiscard.h",
+      "pred": "haskell",
+      "true": "c++"
+    },
+    {
+      "file": "c++/linguist__PackageInfoParser.cpp",
+      "pred": "java",
+      "true": "c++"
+    },
+    {
+      "file": "c++/linguist__crypter.cpp",
+      "pred": "haskell",
+      "true": "c++"
+    },
+    {
+      "file": "chapel/linguist__quicksort.chpl",
+      "pred": "javascript",
+      "true": "chapel"
+    },
+    {
+      "file": "cirru/linguist__demo.cirru",
+      "pred": "haskell",
+      "true": "cirru"
+    },
+    {
+      "file": "cirru/linguist__parentheses.cirru",
+      "pred": "text only",
+      "true": "cirru"
+    },
+    {
+      "file": "cirru/linguist__webpack.config.cirru",
+      "pred": "haskell",
+      "true": "cirru"
+    },
+    {
+      "file": "clojure/linguist__for.clj",
+      "pred": "ruby",
+      "true": "clojure"
+    },
+    {
+      "file": "clojure/linguist__hiccup.hic",
+      "pred": "ruby",
+      "true": "clojure"
+    },
+    {
+      "file": "clojure/linguist__unit-test.cl2",
+      "pred": "ruby",
+      "true": "clojure"
+    },
+    {
+      "file": "coffeescript/linguist__intro.coffee",
+      "pred": "python",
+      "true": "coffeescript"
+    },
+    {
+      "file": "commonlisp/linguist__config.sexp",
+      "pred": "scdoc",
+      "true": "commonlisp"
+    },
+    {
+      "file": "commonlisp/linguist__sample.lsp",
+      "pred": "ruby",
+      "true": "commonlisp"
+    },
+    {
+      "file": "crystal/linguist__transformer.cr",
+      "pred": "python",
+      "true": "crystal"
+    },
+    {
+      "file": "cuda/linguist__vectorAdd.cu",
+      "pred": "python",
+      "true": "cuda"
+    },
+    {
+      "file": "cypher/linguist__db_export_res.cypher",
+      "pred": "ruby",
+      "true": "cypher"
+    },
+    {
+      "file": "cypher/linguist__load_from_json.cypher",
+      "pred": "ruby",
+      "true": "cypher"
+    },
+    {
+      "file": "d/linguist__function.d",
+      "pred": "c++",
+      "true": "d"
+    },
+    {
+      "file": "d/linguist__mpq.d",
+      "pred": "javascript",
+      "true": "d"
+    },
+    {
+      "file": "d/linguist__template_function.d",
+      "pred": "c++",
+      "true": "d"
+    },
+    {
+      "file": "ebnf/linguist__object.ebnf",
+      "pred": "delphi",
+      "true": "ebnf"
+    },
+    {
+      "file": "elixir/linguist__integer.ex",
+      "pred": "ruby",
+      "true": "elixir"
+    },
+    {
+      "file": "emacslisp/linguist__.emacs.desktop",
+      "pred": "haskell",
+      "true": "emacslisp"
+    },
+    {
+      "file": "emacslisp/linguist__ess-julia.el",
+      "pred": "php",
+      "true": "emacslisp"
+    },
+    {
+      "file": "emacslisp/linguist__filenames_Cask",
+      "pred": "c++",
+      "true": "emacslisp"
+    },
+    {
+      "file": "emacslisp/linguist__filenames_Project.ede",
+      "pred": "ruby",
+      "true": "emacslisp"
+    },
+    {
+      "file": "emacslisp/linguist__filenames__emacs",
+      "pred": "haskell",
+      "true": "emacslisp"
+    },
+    {
+      "file": "erlang/linguist__compiler.app",
+      "pred": "tex",
+      "true": "erlang"
+    },
+    {
+      "file": "erlang/linguist__lfe_scan.xrl",
+      "pred": "javascript",
+      "true": "erlang"
+    },
+    {
+      "file": "fennel/linguist__utils.fnl",
+      "pred": "c#",
+      "true": "fennel"
+    },
+    {
+      "file": "forth/linguist__KataDiversion.fth",
+      "pred": "haskell",
+      "true": "forth"
+    },
+    {
+      "file": "forth/linguist__macros.frt",
+      "pred": "delphi",
+      "true": "forth"
+    },
+    {
+      "file": "fortran/linguist__sample1.f",
+      "pred": "scdoc",
+      "true": "fortran"
+    },
+    {
+      "file": "fortran/linguist__sample1.for",
+      "pred": "postgresql",
+      "true": "fortran"
+    },
+    {
+      "file": "gap/linguist__PackageInfo.g",
+      "pred": "python",
+      "true": "gap"
+    },
+    {
+      "file": "gdscript/linguist__pong.gd",
+      "pred": "python",
+      "true": "gdscript"
+    },
+    {
+      "file": "go/linguist__gen-go-linguist-thrift.go",
+      "pred": "c++",
+      "true": "go"
+    },
+    {
+      "file": "golo/linguist__closures.golo",
+      "pred": "python",
+      "true": "golo"
+    },
+    {
+      "file": "golo/linguist__collection-literals.golo",
+      "pred": "python",
+      "true": "golo"
+    },
+    {
+      "file": "golo/linguist__http-server.golo",
+      "pred": "python",
+      "true": "golo"
+    },
+    {
+      "file": "golo/linguist__matching-operator.golo",
+      "pred": "python",
+      "true": "golo"
+    },
+    {
+      "file": "html/linguist__Crear_logo.hta",
+      "pred": "javascript",
+      "true": "html"
+    },
+    {
+      "file": "hy/linguist__hello-world.hy",
+      "pred": "c++",
+      "true": "hy"
+    },
+    {
+      "file": "ini/linguist__TOVR.dof",
+      "pred": "python",
+      "true": "ini"
+    },
+    {
+      "file": "ini/linguist__ultimate-temp-controller.pro",
+      "pred": "transact-sql",
+      "true": "ini"
+    },
+    {
+      "file": "jasmin/linguist__if1.j",
+      "pred": "haskell",
+      "true": "jasmin"
+    },
+    {
+      "file": "javascript/linguist__entry.mjs",
+      "pred": "haskell",
+      "true": "javascript"
+    },
+    {
+      "file": "json/linguist__code-scanning.sarif",
+      "pred": "python",
+      "true": "json"
+    },
+    {
+      "file": "julia/linguist__stockcorr.jl",
+      "pred": "python",
+      "true": "julia"
+    },
+    {
+      "file": "koka/linguist__official-tutorial1.kk",
+      "pred": "javascript",
+      "true": "koka"
+    },
+    {
+      "file": "lasso/linguist__json.lasso9",
+      "pred": "java",
+      "true": "lasso"
+    },
+    {
+      "file": "lasso/linguist__knop.las",
+      "pred": "haskell",
+      "true": "lasso"
+    },
+    {
+      "file": "logos/linguist__NoCarrier.x",
+      "pred": "ruby",
+      "true": "logos"
+    },
+    {
+      "file": "lua/linguist__treegen.p8",
+      "pred": "haskell",
+      "true": "lua"
+    },
+    {
+      "file": "lua/linguist__vidya-file-modder.pd_lua",
+      "pred": "haskell",
+      "true": "lua"
+    },
+    {
+      "file": "makefile/linguist__filenames_Makefile.inc",
+      "pred": "php",
+      "true": "makefile"
+    },
+    {
+      "file": "markdown/linguist__symlink.md",
+      "pred": "python",
+      "true": "markdown"
+    },
+    {
+      "file": "matlab/linguist__FTLE_reg.m",
+      "pred": "delphi",
+      "true": "matlab"
+    },
+    {
+      "file": "matlab/linguist__Integrate2.m",
+      "pred": "delphi",
+      "true": "matlab"
+    },
+    {
+      "file": "matlab/linguist__Lagr.m",
+      "pred": "delphi",
+      "true": "matlab"
+    },
+    {
+      "file": "matlab/linguist__convert_variable.m",
+      "pred": "haskell",
+      "true": "matlab"
+    },
+    {
+      "file": "modelica/linguist__System.mo",
+      "pred": "delphi",
+      "true": "modelica"
+    },
+    {
+      "file": "nasm/linguist__A8514.i",
+      "pred": "haskell",
+      "true": "nasm"
+    },
+    {
+      "file": "nasm/linguist__fftfpu.nas",
+      "pred": "php",
+      "true": "nasm"
+    },
+    {
+      "file": "ncl/linguist__gsn_csm_xy2_time_series_inputs.ncl",
+      "pred": "delphi",
+      "true": "ncl"
+    },
+    {
+      "file": "nit/linguist__clock_more.nit",
+      "pred": "python",
+      "true": "nit"
+    },
+    {
+      "file": "nit/linguist__int_stack.nit",
+      "pred": "python",
+      "true": "nit"
+    },
+    {
+      "file": "nit/linguist__meetup.nit",
+      "pred": "javascript",
+      "true": "nit"
+    },
+    {
+      "file": "nit/linguist__opengles2_hello_triangle.nit",
+      "pred": "python",
+      "true": "nit"
+    },
+    {
+      "file": "nit/linguist__print_arguments.nit",
+      "pred": "python",
+      "true": "nit"
+    },
+    {
+      "file": "objectivec/linguist__SBJsonParser.m",
+      "pred": "ruby",
+      "true": "objectivec"
+    },
+    {
+      "file": "objectivec/linguist__StyleViewController.h",
+      "pred": "ruby",
+      "true": "objectivec"
+    },
+    {
+      "file": "ocaml/linguist__Foo.ml",
+      "pred": "haskell",
+      "true": "ocaml"
+    },
+    {
+      "file": "ocaml/linguist__example.eliom",
+      "pred": "haskell",
+      "true": "ocaml"
+    },
+    {
+      "file": "pan/linguist__cluster-A.pan",
+      "pred": "python",
+      "true": "pan"
+    },
+    {
+      "file": "pan/linguist__databases.pan",
+      "pred": "python",
+      "true": "pan"
+    },
+    {
+      "file": "pan/linguist__mysql.pan",
+      "pred": "python",
+      "true": "pan"
+    },
+    {
+      "file": "pan/linguist__onevm.pan",
+      "pred": "python",
+      "true": "pan"
+    },
+    {
+      "file": "pawn/linguist__fixes.inc",
+      "pred": "java",
+      "true": "pawn"
+    },
+    {
+      "file": "pawn/linguist__foo.sma",
+      "pred": "java",
+      "true": "pawn"
+    },
+    {
+      "file": "perl/linguist__fib.pl",
+      "pred": "python",
+      "true": "perl"
+    },
+    {
+      "file": "perl/linguist__filenames_cpanfile",
+      "pred": "haskell",
+      "true": "perl"
+    },
+    {
+      "file": "perl/linguist__oo3.pl",
+      "pred": "java",
+      "true": "perl"
+    },
+    {
+      "file": "pike/linguist__Error.pmod",
+      "pred": "delphi",
+      "true": "pike"
+    },
+    {
+      "file": "pony/linguist__circle.pony",
+      "pred": "c#",
+      "true": "pony"
+    },
+    {
+      "file": "powershell/linguist__ZLocation.psd1",
+      "pred": "python",
+      "true": "powershell"
+    },
+    {
+      "file": "powershell/linguist__pwsh-shebang.ps1",
+      "pred": "python",
+      "true": "powershell"
+    },
+    {
+      "file": "praat/linguist__randomiseArticles.praat",
+      "pred": "postgresql",
+      "true": "praat"
+    },
+    {
+      "file": "prolog/linguist__ex6.pl",
+      "pred": "cplint",
+      "true": "prolog"
+    },
+    {
+      "file": "python/linguist__standalone.gypi",
+      "pred": "haskell",
+      "true": "python"
+    },
+    {
+      "file": "python/linguist__toolchain.gypi",
+      "pred": "haskell",
+      "true": "python"
+    },
+    {
+      "file": "r/linguist__git-punchcard",
+      "pred": "haskell",
+      "true": "r"
+    },
+    {
+      "file": "r/linguist__scholar.Rd",
+      "pred": "tex",
+      "true": "r"
+    },
+    {
+      "file": "red/linguist__example.red",
+      "pred": "delphi",
+      "true": "red"
+    },
+    {
+      "file": "red/linguist__example.reds",
+      "pred": "ruby",
+      "true": "red"
+    },
+    {
+      "file": "ruby/linguist__filenames_.pryrc",
+      "pred": "python",
+      "true": "ruby"
+    },
+    {
+      "file": "ruby/linguist__filenames_.simplecov",
+      "pred": "haskell",
+      "true": "ruby"
+    },
+    {
+      "file": "ruby/linguist__filenames_Appraisals",
+      "pred": "haskell",
+      "true": "ruby"
+    },
+    {
+      "file": "ruby/linguist__filenames_Fastfile",
+      "pred": "python",
+      "true": "ruby"
+    },
+    {
+      "file": "ruby/linguist__filenames_Podfile",
+      "pred": "haskell",
+      "true": "ruby"
+    },
+    {
+      "file": "sas/linguist__proc.sas",
+      "pred": "delphi",
+      "true": "sas"
+    },
+    {
+      "file": "sass/linguist__screen.sass",
+      "pred": "php",
+      "true": "sass"
+    },
+    {
+      "file": "shen/linguist__graph.shen",
+      "pred": "haskell",
+      "true": "shen"
+    },
+    {
+      "file": "shen/linguist__json.shen",
+      "pred": "haskell",
+      "true": "shen"
+    },
+    {
+      "file": "sieve/linguist__dovecot-spam2.sieve",
+      "pred": "ruby",
+      "true": "sieve"
+    },
+    {
+      "file": "smali/linguist__ActionBarDrawerToggle.smali",
+      "pred": "php",
+      "true": "smali"
+    },
+    {
+      "file": "smali/linguist__DoodleMobileAnaylise.smali",
+      "pred": "ruby",
+      "true": "smali"
+    },
+    {
+      "file": "smali/linguist__ModernAsyncTask.smali",
+      "pred": "java",
+      "true": "smali"
+    },
+    {
+      "file": "sparql/linguist__foaf.sparql",
+      "pred": "c++",
+      "true": "sparql"
+    },
+    {
+      "file": "stata/linguist__include.ihlp",
+      "pred": "scdoc",
+      "true": "stata"
+    },
+    {
+      "file": "stata/linguist__odkmeta.sthlp",
+      "pred": "haskell",
+      "true": "stata"
+    },
+    {
+      "file": "stata/linguist__tanh.mata",
+      "pred": "tera term macro",
+      "true": "stata"
+    },
+    {
+      "file": "supercollider/linguist__WarpPreset.sc",
+      "pred": "javascript",
+      "true": "supercollider"
+    },
+    {
+      "file": "supercollider/linguist__WarpTrack.sc",
+      "pred": "javascript",
+      "true": "supercollider"
+    },
+    {
+      "file": "swift/linguist__section-11.swift",
+      "pred": "haskell",
+      "true": "swift"
+    },
+    {
+      "file": "swift/linguist__section-25.swift",
+      "pred": "haskell",
+      "true": "swift"
+    },
+    {
+      "file": "swift/linguist__section-33.swift",
+      "pred": "go",
+      "true": "swift"
+    },
+    {
+      "file": "swift/linguist__section-41.swift",
+      "pred": "c#",
+      "true": "swift"
+    },
+    {
+      "file": "swig/linguist__CGAL_AABB_tree.i",
+      "pred": "python",
+      "true": "swig"
+    },
+    {
+      "file": "tex/linguist__beispiel.toc",
+      "pred": "ruby",
+      "true": "tex"
+    },
+    {
+      "file": "tex/linguist__english.lbx",
+      "pred": "haskell",
+      "true": "tex"
+    },
+    {
+      "file": "tex/linguist__problemset.cls",
+      "pred": "c#",
+      "true": "tex"
+    },
+    {
+      "file": "text/linguist__filenames_LICENSE.mysql",
+      "pred": "haskell",
+      "true": "text"
+    },
+    {
+      "file": "text/linguist__filenames_README.nss",
+      "pred": "haskell",
+      "true": "text"
+    },
+    {
+      "file": "text/linguist__filenames_click.me",
+      "pred": "haskell",
+      "true": "text"
+    },
+    {
+      "file": "text/linguist__filenames_keep.me",
+      "pred": "text only",
+      "true": "text"
+    },
+    {
+      "file": "text/linguist__filenames_package.use.stable.mask",
+      "pred": "python",
+      "true": "text"
+    },
+    {
+      "file": "toml/linguist__filenames_Pipfile",
+      "pred": "c++",
+      "true": "toml"
+    },
+    {
+      "file": "toml/linguist__filenames_uv.lock",
+      "pred": "haskell",
+      "true": "toml"
+    },
+    {
+      "file": "turtle/linguist__rdf-syntax-grammar.ttl",
+      "pred": "php",
+      "true": "turtle"
+    },
+    {
+      "file": "typescript/linguist__cache.ts",
+      "pred": "java",
+      "true": "typescript"
+    },
+    {
+      "file": "verilog/linguist__mux.v",
+      "pred": "haskell",
+      "true": "verilog"
+    },
+    {
+      "file": "verilog/linguist__sqrt_pipelined.v",
+      "pred": "c#",
+      "true": "verilog"
+    },
+    {
+      "file": "verilog/linguist__t_sqrt_pipelined.v",
+      "pred": "c#",
+      "true": "verilog"
+    },
+    {
+      "file": "x10/linguist__HelloWholeWorld.x10",
+      "pred": "ruby",
+      "true": "x10"
+    },
+    {
+      "file": "x10/linguist__Integrate.x10",
+      "pred": "delphi",
+      "true": "x10"
+    },
+    {
+      "file": "xml/linguist__Application.xib",
+      "pred": "haskell",
+      "true": "xml"
+    },
+    {
+      "file": "xml/linguist__JSBrowser.jsproj",
+      "pred": "python",
+      "true": "xml"
+    },
+    {
+      "file": "xml/linguist__MDM.admx",
+      "pred": "c#",
+      "true": "xml"
+    },
+    {
+      "file": "xml/linguist__NDepends_Example.ndproj",
+      "pred": "java",
+      "true": "xml"
+    }
+  ],
+  "overall": {
+    "code_only_lenient_accuracy": 0.1412,
+    "code_only_strict_accuracy": 0.1299,
+    "code_only_strict_correct": 23,
+    "files": 177,
+    "with_filename_lenient_accuracy": 0.4972,
+    "with_filename_strict_accuracy": 0.4802,
+    "with_filename_strict_correct": 85
+  },
+  "top_confusions": {
+    "c#>java": 2,
+    "c++>haskell": 2,
+    "c++>java": 2,
+    "cirru>haskell": 2,
+    "clojure>ruby": 3,
+    "cypher>ruby": 2,
+    "d>c++": 2,
+    "emacslisp>haskell": 2,
+    "golo>python": 4,
+    "lua>haskell": 2,
+    "matlab>delphi": 3,
+    "nit>python": 4,
+    "objectivec>ruby": 2,
+    "ocaml>haskell": 2,
+    "pan>python": 4,
+    "pawn>java": 2,
+    "powershell>python": 2,
+    "python>haskell": 2,
+    "ruby>haskell": 3,
+    "ruby>python": 2,
+    "shen>haskell": 2,
+    "supercollider>javascript": 2,
+    "swift>haskell": 2,
+    "text>haskell": 3,
+    "verilog>c#": 2
+  }
+}
