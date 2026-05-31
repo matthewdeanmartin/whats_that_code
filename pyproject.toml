@@ -1,6 +1,6 @@
 [project]
 name = "whats_that_code"
-version = "0.2.0"
+version = "0.3.0"
 description = "Guess programming language from a string or file."
 readme = "README.md"
 authors = [{ name = "Matthew Martin", email = "matthewdeanmartin@gmail.com" }]

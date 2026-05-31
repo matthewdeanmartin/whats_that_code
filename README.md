@@ -94,7 +94,7 @@ extraction tool I wrote.
 - [TODO](https://github.com/matthewdeanmartin/whats_that_code/tree/main/docs/TODO.md)
 - [LICENSE](https://github.com/matthewdeanmartin/whats_that_code/tree/main/LICENSE)
 - [Prior Art](https://github.com/matthewdeanmartin/whats_that_code/tree/main/docs/prior_art.md) Every similar project/tool, including defunct
-- [ChangeLog](https://github.com/matthewdeanmartin/whats_that_code/tree/main/docs/CHANGES.md)
+- [ChangeLog](https://github.com/matthewdeanmartin/whats_that_code/tree/main/docs/CHANGELOG.md)
 
 ## Notable Similar Tools
 
