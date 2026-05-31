@@ -145,6 +145,13 @@ data/
 !/test/data/sample_files/
 !/test/data/characterization/
 !/test/data/characterization/**
+
+# Phase 1 corpus: the data and source clones are large/mixed-license — never
+# committed. The manifest and split (small metadata) ARE committed.
+/corpus/_sources/
+/corpus/data/
+!/corpus/MANIFEST.json
+!/corpus/split.json
 package/
 output
 

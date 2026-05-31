@@ -20,6 +20,7 @@ ABOUT_FILE := whats_that_code/__about__.py
 	spell \
 	docs-check docs-check-docstrings docs-check-links docs-check-pydoctest griffe \
 	api-snapshot api-check \
+	data split evaluate evaluate-baseline \
 	build-docs \
 	dead-code vulture deadcode \
 	explore refurb crosshair deptry import-linter \
@@ -64,6 +65,11 @@ help:
 	@echo "  api-snapshot           Update spec/api_surface.json (public API snapshot)"
 	@echo "  api-check              Fail if public API changed vs snapshot (in check-ci)"
 	@echo "  build-docs             Build mkdocs documentation"
+	@echo ""
+	@echo "  data                   Rebuild the labelled corpus (DATA_LIMIT files/lang)"
+	@echo "  split                  Write deterministic train/dev/test split"
+	@echo "  evaluate               Score test split + diff vs spec/eval_baseline.json"
+	@echo "  evaluate-baseline      Record a new spec/eval_baseline.json"
 	@echo ""
 	@echo "  dead-code              vulture + deadcode (advisory, non-blocking)"
 	@echo ""
@@ -175,6 +181,25 @@ api-check:
 
 build-docs:
 	@$(UV) run mkdocs build
+
+# ── Dataset & evaluation (Phase 1; corpus is gitignored) ─────────────────────
+
+DATA_LIMIT ?= 20
+
+data:
+	@echo "=== Rebuilding corpus (limit $(DATA_LIMIT) files/language) ==="
+	@$(UV) run python scripts/build_dataset.py --limit $(DATA_LIMIT)
+
+split:
+	@$(UV) run python scripts/split_dataset.py
+
+evaluate:
+	@echo "=== Evaluating on held-out test split (seed pinned for reproducibility) ==="
+	@PYTHONHASHSEED=0 $(UV) run python scripts/evaluate.py --split test --baseline spec/eval_baseline.json
+
+evaluate-baseline:
+	@echo "=== Recording new baseline at spec/eval_baseline.json ==="
+	@PYTHONHASHSEED=0 $(UV) run python scripts/evaluate.py --split test --out spec/eval_baseline.json
 
 # ── Dead code analysis (advisory — non-blocking) ─────────────────────────────
 

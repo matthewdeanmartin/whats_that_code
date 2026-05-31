@@ -67,26 +67,34 @@ backwards compatibility; flagged as non-language labels.
 A legacy `FILE_EXTENSIONS`/`RELATED_TAGS` label. The election only rejects
 uppercase and `.` in votes, so a space is tolerated. Left as-is.
 
-### 6. Output is nondeterministic across Python hash seeds
-`guess_language_all_methods` is **not** reproducible run-to-run. Several voters
-return `list(some_set)` (e.g. `extension_based`, `tag_based`), so the ranked-ballot
-order depends on `set` iteration order, which depends on `PYTHONHASHSEED`. When the
-result comes down to an IRV tie among fallback candidates, different seeds pick
-different winners. Measured on the characterization corpus (23 snippets × 3 axes =
-69 cases): **52 stable / 17 unstable** across 8 seeds. The code-only axis is the
-worst affected; strong evidence (extension/tag) usually — not always — produces a
-single dominant candidate and a stable result.
+### 6. Output is nondeterministic run-to-run (two causes)
+`guess_language_all_methods` is **not** reproducible. There are two sources, and
+Phase 1 work pinned down which dominates:
 
-Examples of seed-dependent answers: `ruby/hello.rb` code-only flips
-`ruby`↔`haskell`; `sql/query.sql` with filename flips `sql`↔`delphi`↔`transactsql`;
-`perl/script.pl` with filename flips among `perl`/`perl6`/`php`/`prolog`.
+1. **`pyrankvote` tie-breaking uses the unseeded `random` module (dominant).**
+   When the IRV election has tied candidates it breaks the tie with `random`, so
+   the winner changes from run to run *even with `PYTHONHASHSEED` fixed*. Verified
+   in Phase 1: with `random.seed(0)` set, `scripts/evaluate.py` returns identical
+   numbers every run; without it they wobble several points.
+2. **Set-iteration order (secondary).** Several voters return `list(some_set)`
+   (`extension_based`, `tag_based`), so ballot order depends on `PYTHONHASHSEED`.
 
-**Fix later (recommended, low risk):** sort candidate lists deterministically before
-building ballots (e.g. sort the set-derived vote lists, and/or break IRV ties by a
-stable key such as popularity then name). This makes results reproducible without
-materially changing the intended answer, and would let the characterization test
-pin every axis exactly. Until then, the characterization test asserts the 52 stable
-cases exactly and only requires the unstable ones to return a known label or `None`.
+Measured on the characterization corpus (69 cases) across 8 hash seeds: 52 stable /
+17 unstable — but note that measurement varied `PYTHONHASHSEED` only, so it
+*understates* the `random`-driven variance. Examples of nondeterministic answers:
+`ruby/hello.rb` code-only `ruby`↔`haskell`; `sql/query.sql` with filename
+`sql`↔`delphi`↔`transactsql`.
+
+**Fix later (recommended, low risk):** make the election deterministic — sort the
+set-derived vote lists, and break IRV ties by a stable key (e.g. popularity then
+name) instead of `random` (or pass a seeded RNG / avoid `pyrankvote`'s random
+path). This makes results reproducible without materially changing the intended
+answer, and would let the characterization test pin every axis exactly.
+
+Until then: the characterization test asserts the 52 stable cases exactly and only
+requires unstable ones to be a known label or `None`; and `scripts/evaluate.py`
+seeds `random` (default `--seed 0`) so the baseline in `spec/eval_baseline.json` is
+reproducible.
 
 ## Note on Pygments
 `pygments_based.language_by_pygments` can emit *any* lowercased Pygments lexer name
