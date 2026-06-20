@@ -1,0 +1,32 @@
+---
+name: Create Draft Release
+concurrency: changelog
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Python 3.13
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with: {python-version: '3.13'}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39  # v8.2.0
+        with:
+          enable-cache: true
+      - name: Sync dependencies
+        run: uv sync --frozen --group dev
+      - name: Creating Draft release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: uv run changelogmanager github-release --repository ${{ github.repository }}

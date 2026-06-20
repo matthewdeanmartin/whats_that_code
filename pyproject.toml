@@ -73,6 +73,7 @@ dev = [
     "black>=26.0.0",
     "isort>=6.0.0",
     "jiggle-version>=2.1.0",
+    "keepachangelog-manager-fork>=6.1.1,<7",
     "codespell>=2.4.1",
     "mdformat>=1.0.0",
     "metametameta>=0.1.5",
@@ -205,6 +206,24 @@ convention = "google"
 [tool.bandit]
 exclude_dirs = ["test"]
 skips = ["B101"]
+
+# changelogmanager (keepachangelog-manager-fork) drives the release workflows.
+# See .github/workflows/create_draft_release.yml and release.yml.
+[tool.changelogmanager.versioning]
+scheme = "semver"
+
+[tool.changelogmanager.validation]
+enforce_preamble = true
+format = "auto"
+
+[tool.changelogmanager.defaults]
+error_format = "github"
+commit_schema = "keepachangelog"
+schema_version = "current"
+
+[[tool.changelogmanager.components]]
+name = "default"
+changelog = "CHANGELOG.md"
 
 [tool.coverage.report]
 exclude_also = [
