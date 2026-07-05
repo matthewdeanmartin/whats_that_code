@@ -29,4 +29,4 @@ jobs:
       - name: Creating Draft release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: uv run changelogmanager github-release --repository ${{ github.repository }}
+        run: uv run kaclm github-release --repository ${{ github.repository }}

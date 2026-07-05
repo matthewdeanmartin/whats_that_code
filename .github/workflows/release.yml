@@ -13,7 +13,7 @@ jobs:
       contents: write
       pull-requests: write
     outputs:
-      branch: ${{ steps.push.outputs.branch }}
+      branch: ${{ steps.release.outputs.branch }}
       version: ${{ steps.release.outputs.version }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
@@ -30,70 +30,39 @@ jobs:
           enable-cache: false
       - name: Sync dependencies
         run: uv sync --frozen --group dev
-      - name: Bump changelog and version files
-        id: release
-        env:
-          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+      - name: Configure git author
         run: |
-          VERSION="${RELEASE_VERSION#v}"
-          uv run changelogmanager release \
-            --override-version "$VERSION" \
-            --bump-versions \
-            --yes
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-      - name: Commit and push bump branch
-        id: push
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          RELEASE_ID: ${{ github.event.release.id }}
-          REPO: ${{ github.repository }}
-          RELEASE_VERSION: ${{ steps.release.outputs.version }}
-        run: |
-          BRANCH="release/bump-${RELEASE_ID}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b "${BRANCH}"
-          git add CHANGELOG.md pyproject.toml
-          git add -u
-          if git diff --cached --quiet; then
-            echo "::warning::No files changed after release --bump-versions; is the version already bumped?"
-            exit 1
-          fi
-          git commit -m "chore: release ${RELEASE_VERSION}"
-          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git"
-          REMOTE_SHA="$(git ls-remote --heads origin "${BRANCH}" | awk '{print $1}')"
-          if [ -n "${REMOTE_SHA}" ]; then
-            git push \
-              --force-with-lease="refs/heads/${BRANCH}:${REMOTE_SHA}" \
-              origin \
-              "HEAD:refs/heads/${BRANCH}"
-          else
-            git push origin "HEAD:refs/heads/${BRANCH}"
-          fi
-          echo "branch=${BRANCH}" >> "$GITHUB_OUTPUT"
-      - name: Open pull request
+
+      - name: Bump, commit, push branch and open PR
+        id: release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+          RELEASE_ID: ${{ github.event.release.id }}
           BASE_BRANCH: ${{ github.event.release.target_commitish }}
           REPO: ${{ github.repository }}
-          BUMP_BRANCH: ${{ steps.push.outputs.branch }}
         run: |
-          uv run changelogmanager github-pr \
-            --repository "${REPO}" \
-            --head "${BUMP_BRANCH}" \
-            --base "${BASE_BRANCH}" \
-            --title "chore: release ${RELEASE_VERSION}" \
-            --body "$(cat <<EOF
-          Automated release PR for **${RELEASE_VERSION}**.
-          Changes:
-          - \`CHANGELOG.md\`: promoted \`[Unreleased]\` to \`${RELEASE_VERSION}\`
-          - \`pyproject.toml\`: version bumped to \`${RELEASE_VERSION}\`
-          - Source version strings updated to \`${RELEASE_VERSION}\`
-          This PR was opened automatically by the Release workflow.
-          Merge it once the PyPI publish below succeeds.
-          EOF
-          )"
+          # One command does everything the bump job used to do in shell:
+          # bump changelog + version files, branch, [skip ci] commit,
+          # --force-with-lease push, and open the release PR. The [skip ci]
+          # decision follows [defaults].skip_ci (default true).
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git"
+          VERSION="${RELEASE_VERSION#v}"
+          # --json is a global flag, so it must precede the `release-bump`
+          # subcommand (argparse rejects it if placed after).
+          uv run kaclm --json release-bump \
+            --version "$VERSION" \
+            --base "$BASE_BRANCH" \
+            --release-id "$RELEASE_ID" \
+            --repository "$REPO" \
+            --open-pr \
+            --title "chore: release ${VERSION}" \
+            --body "Automated release PR for ${VERSION}. Merge once the PyPI publish succeeds." \
+            --yes > release-bump.json
+          echo "version=$(python -c "import json;print(json.load(open('release-bump.json'))['version'])")" >> "$GITHUB_OUTPUT"
+          echo "branch=$(python -c "import json;print(json.load(open('release-bump.json'))['branch'])")" >> "$GITHUB_OUTPUT"
   build:
     runs-on: ubuntu-latest
     needs: bump

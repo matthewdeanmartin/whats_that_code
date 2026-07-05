@@ -217,6 +217,7 @@ enforce_preamble = true
 format = "auto"
 
 [tool.changelogmanager.defaults]
+skip_ci = true
 error_format = "github"
 commit_schema = "keepachangelog"
 schema_version = "current"
