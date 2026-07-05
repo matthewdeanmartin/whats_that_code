@@ -70,7 +70,6 @@ def test_characterization(rel, language_dir, filename, code):
     for axis, record in expected.items():
         got = actual[axis]
 
-
         if record["stable"]:
             # Can't tell these apart anymore?
             # if got == "html" and record["value"] == "xml" or \

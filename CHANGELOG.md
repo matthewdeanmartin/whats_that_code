@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Correctly detect dotenv examples, Makefiles and Make shebangs, Dockerfiles, MDX files, and `.dockerignore` files.
+
 ## [0.3.0] - 2026-05-31
 
 ### Changed

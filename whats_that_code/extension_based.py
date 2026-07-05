@@ -1,5 +1,6 @@
 """Guess by extension"""
 
+import fnmatch
 import os
 
 from whats_that_code.known_languages import FILE_EXTENSIONS
@@ -9,10 +10,13 @@ def guess_by_extension(file_name: str = "", text: str = "") -> list[str]:
     """Guess by extensions"""
     if not file_name and not text:
         return []
+    # Some language-defining filenames do not have a conventional extension
+    # (Dockerfile, CMakeLists.txt), while others are commonly suffixed variants
+    # (.env.example, .env.local).  FILE_EXTENSIONS has historically contained
+    # exact filenames and glob patterns for these cases, so consider the basename
+    # as well as the suffix.
+    basename = file_name.replace("\\", "/").rsplit("/", 1)[-1]
     _, extension_part = os.path.splitext(file_name)
-
-    if not extension_part:
-        return []
 
     guesses: set[str] = set()
     extensions = []
@@ -28,6 +32,11 @@ def guess_by_extension(file_name: str = "", text: str = "") -> list[str]:
                 extensions.append(extension)
 
     for key, value in FILE_EXTENSIONS.items():
+        filename_matches = any(
+            basename == alternative or fnmatch.fnmatchcase(basename, alternative) for alternative in value
+        )
+        if basename and filename_matches:
+            guesses.add(key)
         for extension in extensions:
             for alternative in value:
                 if extension == alternative:

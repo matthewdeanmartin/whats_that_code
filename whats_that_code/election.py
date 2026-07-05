@@ -104,6 +104,9 @@ def guess_language_all_methods(
         vote_by_extension,
         vote_by_extension_in_text,
         vote_by_parser,
+        # A valid interpreter directive is more authoritative than a generic
+        # filename suffix (for example, a Make script stored as ``file.txt``).
+        vote_by_shebang,
         # mid tier
         vote_by_priors,
         vote_by_regex_features,
