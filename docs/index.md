@@ -1,15 +1,15 @@
 # whats_that_code
 
-`whats_that_code` is a pure-Python programming language detection library. Given a code snippet — with or without a filename, file extension, or tag — it returns the most likely language name.
+`whats_that_code` is a Python programming language detection library. Given a code snippet — with or without a filename, file extension, or tag — it returns the most likely language name.
 
-It is intentionally dependency-light. The runtime dependencies are `pygments`, `pyrankvote`, `lxml`, `google-re2`, `tree-sitter`, and `tree-sitter-language-pack`. There are no machine-learning frameworks to install or model files to download.
+It is intentionally lighter-weight than ML-based alternatives. The runtime dependencies are `pygments`, `pyrankvote`, `lxml`, `google-re2`, `tree-sitter`, and `tree-sitter-language-pack`. There are no machine-learning frameworks to install or model files to download.
 
 ## What it does
 
 - identifies the programming language of an arbitrary source-code string
 - accepts optional hints: filename, surrounding text, StackOverflow-style tags, or prior probabilities
 - combines multiple classifiers through a ranked-choice voting algorithm
-- currently identifies 60 %+ of samples without any filename or tag hint
+- accuracy is best when you can supply hints such as a filename or tag; see [Accuracy](accuracy.md) for the checked-in reports
 - works as a Python library or a command-line tool
 
 ## What it is good for

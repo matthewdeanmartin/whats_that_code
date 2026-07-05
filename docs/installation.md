@@ -3,7 +3,7 @@
 ## Requirements
 
 - Python 3.10 or newer
-- No C extensions, ML frameworks, or model downloads required
+- No machine-learning frameworks or model downloads required
 
 ## Install from PyPI
 
@@ -24,7 +24,7 @@ pipx install whats_that_code
 ```bash
 git clone https://github.com/matthewdeanmartin/whats_that_code.git
 cd whats_that_code
-uv sync --all-extras
+pip install -e .
 ```
 
 ## Verifying the install
@@ -48,6 +48,6 @@ python -m whats_that_code --version
 | `lxml` | XML parsing for the XML/HTML vote validator |
 | `google-re2` | Fast linear-time regex for the regex-feature classifier (falls back to `re` if unavailable) |
 | `tree-sitter` | Parser-based detection engine (opt-in via `Options(use_parsers=True)`) |
-| `tree-sitter-language-pack` | Bundled tree-sitter grammars for ~26 languages (opt-in, same as above) |
+| `tree-sitter-language-pack` | Bundled tree-sitter grammars for ~26 languages; only used when `Options(use_parsers=True)` is enabled |
 
 These are installed automatically with `pip install whats_that_code`.

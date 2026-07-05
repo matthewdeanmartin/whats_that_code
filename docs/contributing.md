@@ -7,7 +7,7 @@ The full contributing guide lives in the repository at [`CONTRIBUTING.md`](https
 ```bash
 git clone https://github.com/matthewdeanmartin/whats_that_code.git
 cd whats_that_code
-uv sync --all-extras
+uv sync
 uv run make check-ci
 ```
 

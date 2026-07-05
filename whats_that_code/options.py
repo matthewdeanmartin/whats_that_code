@@ -31,7 +31,7 @@ class Options:
         use_parsers: If True, also identify the language by actually parsing the
             code (the "parser trick", see ``whats_that_code.parser_detect``):
             stdlib validators (python/json/xml/toml) always, plus many more
-            grammars when the ``whats_that_code[fast]`` extra is installed. A clean
+            grammars from the installed tree-sitter dependencies. A clean
             parse is treated as strong evidence. ``False`` (the default) never runs
             parsers, so the result is identical to calling without options.
     """

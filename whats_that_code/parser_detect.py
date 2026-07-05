@@ -5,7 +5,7 @@ strong evidence it is X. Two layers:
 
 * **stdlib validators** (always available, no extra): Python (``ast``), JSON,
   XML (``lxml``), and TOML (``tomllib`` on 3.11+). See ``parsing_based``.
-* **tree-sitter grammars** (optional ``whats_that_code[fast]`` extra): dozens of
+* **tree-sitter grammars** (installed dependency, opt-in at runtime): dozens of
   real grammars via ``tree-sitter-language-pack``, used to confirm/disambiguate
   many more languages (go, rust, ruby, java, …) that have no stdlib parser.
 
@@ -134,7 +134,7 @@ TREE_SITTER_AVAILABLE: bool = _TS_CLEAN is not None
 def detect_by_parsing(code: str, candidates: set[str] | None = None) -> list[str]:
     """Return canonical languages that ``code`` provably parses as.
 
-    stdlib validators always run. tree-sitter grammars run too when the extra is
+    stdlib validators always run. tree-sitter grammars run too when the dependency is
     installed: restricted to ``candidates`` when given (precise disambiguation),
     otherwise across the full curated strict set (broader identification). Results
     are deduped, stdlib-first.

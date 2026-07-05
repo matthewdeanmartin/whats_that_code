@@ -1,14 +1,14 @@
 # whats_that_code
 
-This is a programming language detection library.
+This is a Python programming language detection library.
 
-It will detect programming language of source in pure python from an ensemble of classifiers.
-Use this when a quick and dirty first approximation is good enough.
-whats_that_code can currently identify 60%+ of samples without knowing the extension or tag.
+It detects the programming language of source code with an ensemble of classifiers.
+Use this when a quick first approximation is good enough.
+Accuracy depends heavily on the available hints; checked-in reports live in `docs/accuracy.md`.
 
 I created this because I wanted
 
-- a pure python programming language detector
+- a Python programming language detector
 - no machine learning dependencies
 
 Tested on python 3.10 through 3.14.
@@ -54,18 +54,13 @@ dependency, installed automatically — which is linear-time and ~6× faster on 
 inputs, with **identical results**. If a platform has no `re2` wheel it transparently
 falls back to stdlib `re`. Nothing to configure.
 
-### The parser trick (optional)
+### The parser trick (optional at runtime)
 
 With `Options(use_parsers=True)` the code is actually parsed; a clean parse is
 strong evidence for that language. This uses stdlib parsers (Python/JSON/XML/TOML)
-out of the box, and adds ~26 `tree-sitter` grammars when the optional extra is
-installed:
+plus ~26 `tree-sitter` grammars that are installed with the main package.
 
-```bash
-pip install whats_that_code[fast]
-```
-
-On the eval corpus this lifts code-only accuracy from ~13% to ~21%. It is off by
+On the evaluation corpus this lifted code-only accuracy from ~13% to ~21% when added. It is off by
 default, so existing callers are unaffected.
 
 ```python
@@ -78,7 +73,7 @@ guess_language_all_methods(go_source, options=Options(use_parsers=True))  # -> "
 1. Inspects shebang
 1. Looks for keywords
 1. Counts regexes for common patterns
-1. Attempts to parse python, json, yaml
+1. Attempts to parse Python, JSON, XML, and TOML
 1. Inspects tags if available.
 
 Each is imperfect and can error. The classifier then combines the results of each using a voting algorithm

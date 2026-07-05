@@ -56,9 +56,10 @@ also tries to identify the language by *actually parsing* the code:
 
 - **stdlib validators** (no extra required): Python (`ast`), JSON (`json`), XML (`lxml`),
   and TOML (`tomllib`, Python 3.11+).
-- **tree-sitter grammars** (`tree-sitter-language-pack` extra): ~26 curated grammars
+- **tree-sitter grammars** (`tree-sitter-language-pack` dependency): ~26 curated grammars
   (Go, Rust, C, C++, Java, JavaScript, TypeScript, Ruby, …) that reject unrelated code
-  reliably.
+  reliably. They are installed with the package, but only consulted when
+  `Options(use_parsers=True)` is enabled.
 
 A clean parse counts as strong evidence and is double-weighted in the election.
 When other classifiers have already proposed candidates, parsing is restricted to those
@@ -90,7 +91,7 @@ The IRV winner is returned as the detected language.
 ## Performance characteristics
 
 - **Speed:** sub-millisecond for short snippets; the regex classifier is the most expensive step.
-- **Accuracy:** ~60 %+ on unlabelled snippets; significantly higher when a file extension or tag is available.
+- **Accuracy:** code-only detection is materially weaker than extension- or tag-aided detection; see [Accuracy](accuracy.md) for the current checked-in numbers.
 - **False positives:** most common for languages with small or overlapping keyword sets (e.g. short SQL vs. HTML fragments).
 
 ## Module map
