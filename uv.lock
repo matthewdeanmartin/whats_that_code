@@ -1791,7 +1791,7 @@ wheels = [
 
 [[package]]
 name = "keepachangelog-manager-fork"
-version = "6.5.0"
+version = "6.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "inquirer" },
@@ -1802,9 +1802,9 @@ dependencies = [
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9d/3a/3e017a06b0a2533294dc036073ee2a13bf1fc41ceeee229fd18f5fd8e929/keepachangelog_manager_fork-6.5.0.tar.gz", hash = "sha256:efeb2063be46b1eb1bfab521c2ae7be91f3d67985988f9a28160a91149b37a0a", size = 1331186, upload-time = "2026-06-29T22:34:40.475Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9e/f5/6461361cb54028a5aa6a35cdc61f492b6f1bc2c9b0e36b70f04c78c07b50/keepachangelog_manager_fork-6.6.0.tar.gz", hash = "sha256:4d1c05dcb2558847ad3a102e85df2fc51e1ddaba3652b063a1e1fff4530ae0cf", size = 1336568, upload-time = "2026-07-05T14:17:19.521Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/64/3c/3d1e168c7e7e34a18f4535b09874c38948c1fb15ff45ec710189c0f669b8/keepachangelog_manager_fork-6.5.0-py3-none-any.whl", hash = "sha256:e01ef70c74d84fedd3f803b70c672eb1018e9dfbcfbcfb6b92903606ae015cf9", size = 185297, upload-time = "2026-06-29T22:34:39.091Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/17/f9817db0c46851fe109897ac9d9f64b6f74a68174db87fbc3d23592067ba/keepachangelog_manager_fork-6.6.0-py3-none-any.whl", hash = "sha256:a4152c4f9a8f0d8698a580ff1680b7a60265d60fff299b482cc3c8d1220cb7fd", size = 191399, upload-time = "2026-07-05T14:17:17.911Z" },
 ]
 
 [package.optional-dependencies]
@@ -4762,7 +4762,7 @@ dev = [
     { name = "interrogate", specifier = ">=1.5.0" },
     { name = "isort", specifier = ">=6.0.0" },
     { name = "jiggle-version", specifier = ">=2.1.0" },
-    { name = "keepachangelog-manager-fork", extras = ["all"], specifier = ">=6.5.0" },
+    { name = "keepachangelog-manager-fork", extras = ["all"], specifier = ">=6.6.0" },
     { name = "linkcheckmd", specifier = ">=1.4.0" },
     { name = "lxml-stubs" },
     { name = "mdformat", specifier = ">=1.0.0" },
