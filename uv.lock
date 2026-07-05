@@ -9,9 +9,6 @@ resolution-markers = [
     "python_full_version < '3.11'",
 ]
 
-[options]
-exclude-newer = "2026-07-02T13:17:36Z"
-
 [[package]]
 name = "aiohappyeyeballs"
 version = "2.7.1"
@@ -2272,7 +2269,7 @@ wheels = [
 
 [[package]]
 name = "metametameta"
-version = "0.1.13"
+version = "0.1.14"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorlog" },
@@ -2280,9 +2277,9 @@ dependencies = [
     { name = "toml" },
     { name = "totalhelp" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/74/fa/5669f2f1f7bf891f4d3cf801b831593133b9715489e7938a7d8790dc7462/metametameta-0.1.13.tar.gz", hash = "sha256:a99393ebe83bb5255f710f99a9a25f11d335d16a9800d15b7d58115883c36577", size = 33395, upload-time = "2026-05-24T23:13:49.098Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6a/e1/3adee847a9f0e8ad19d2b97adde18e1dc45883b1007000b2a23503d9b7c5/metametameta-0.1.14.tar.gz", hash = "sha256:a76d81383bd1c159fd12ddb3d3af45236bfd48a90c9f617debe293bcbe4ec03b", size = 35054, upload-time = "2026-07-04T21:28:41.981Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b6/5c/e8a7a9d1679eefc8b5a2a014dd5344bf53b088b3a770a8ac91394c1bc1b3/metametameta-0.1.13-py3-none-any.whl", hash = "sha256:ced688f4a46057c0c5e1e2da423662b08c09a4bb4cf3c3757aa8b2804555e267", size = 41927, upload-time = "2026-05-24T23:13:47.469Z" },
+    { url = "https://files.pythonhosted.org/packages/32/be/9fb9be93101ce71458652f16e71d12797f7747858007e117e6d5916e5b92/metametameta-0.1.14-py3-none-any.whl", hash = "sha256:fde0ce2c2ac41b6e335e049526a8af496e7b2748cd12e6456d031515a00398df", size = 43491, upload-time = "2026-07-04T21:28:40.626Z" },
 ]
 
 [[package]]
@@ -4769,7 +4766,7 @@ dev = [
     { name = "linkcheckmd", specifier = ">=1.4.0" },
     { name = "lxml-stubs" },
     { name = "mdformat", specifier = ">=1.0.0" },
-    { name = "metametameta", specifier = ">=0.1.5" },
+    { name = "metametameta", specifier = ">=0.1.14" },
     { name = "mkdocs", specifier = ">=1.6.0" },
     { name = "mkdocstrings", extras = ["python"], specifier = ">=0.26.0" },
     { name = "mypy", specifier = ">=1.18.0" },

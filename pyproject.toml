@@ -76,7 +76,7 @@ dev = [
     "keepachangelog-manager-fork[all]>=6.5.0",
     "codespell>=2.4.1",
     "mdformat>=1.0.0",
-    "metametameta>=0.1.5",
+    "metametameta>=0.1.14",
     "mypy>=1.18.0",
     "lxml-stubs",
     "pylint[spelling]>=4.0.0",
