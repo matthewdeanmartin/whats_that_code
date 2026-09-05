@@ -31,6 +31,7 @@ ABOUT_FILE := whats_that_code/__about__.py
 	gha-validate gha-pin gha-upgrade publish-gha \
 	prerelease publish-check publish \
 	check check-ci \
+	venv315 venv315-clean test315 check315 check-dist \
 	help
 
 help:
@@ -83,6 +84,12 @@ help:
 	@echo "  gha-pin                Pin GHA action refs to commit SHAs"
 	@echo "  gha-upgrade            Pin + validate (gha-pin then gha-validate)"
 	@echo "  publish-gha            Dispatch the GitHub Actions publish workflow"
+	@echo ""
+	@echo "  venv315                Create the Python 3.15 trial venv (idempotent)"
+	@echo "  venv315-clean          Delete the Python 3.15 trial venv"
+	@echo "  test315                Run the test suite on Python 3.15"
+	@echo "  check315               Import + test the package on Python 3.15 (-W error)"
+	@echo "  check-dist             Build wheel+sdist and verify their contents"
 	@echo ""
 	@echo "  check                  Full local quality gate"
 	@echo "  check-ci               CI quality gate (no formatting mutations)"
@@ -326,6 +333,42 @@ publish-gha:
 	@echo "Dispatching GitHub Actions publish workflow"
 	gh workflow run publish_to_pypi.yml --ref main
 
+# ── Python 3.15 trial environment ──────────────────────────
+
+# A *separate* venv so the normal .venv is never clobbered: `uv sync --python 3.15`
+# would replace it. google-re2 has no cp315 wheel (and its sdist will not build on
+# Windows), so the 3.15 env installs only the core deps + test tooling; regex_based
+# falls back to stdlib `re` with identical results, just slower.
+PY315        := 3.15.0rc2
+VENV315      := .venv315rc2
+PY315_EXE    := $(VENV315)/Scripts/python.exe
+TEST315_DEPS := pytest pytest-cov pytest-xdist pytest-timeout pytest-mock pytest-randomly hypothesis
+
+venv315:
+	@test -x $(PY315_EXE) || $(UV) venv $(VENV315) --python $(PY315)
+	@$(UV) pip install -e . $(TEST315_DEPS) --python $(PY315_EXE) -q
+	@$(PY315_EXE) --version
+
+venv315-clean:
+	@rm -rf $(VENV315)
+
+test315: venv315
+	@$(PY315_EXE) -m pytest -q --timeout=60 test/
+
+# -W error surfaces DeprecationWarnings that become hard errors in a later release.
+check315: venv315
+	@echo "=== importing every module under -W error on $(PY315) ==="
+	@$(PY315_EXE) -W error -c "import importlib, pkgutil, $(PACKAGE); [importlib.import_module('$(PACKAGE).' + m.name) for m in pkgutil.iter_modules($(PACKAGE).__path__)]; print('all modules import clean')"
+	@$(PY315_EXE) -W error -m pytest -q --timeout=60 test/
+
+# ── Distribution contents ─────────────────────────────────
+
+# Guards against a venv / uv cache leaking dependency licenses into the sdist.
+check-dist:
+	@rm -rf .build
+	@$(UV) build -o .build
+	@$(UV) run python scripts/verify_distribution.py .build
+
 # ── Release gates ─────────────────────────────────────────────────────────────
 
 publish-check:
@@ -337,10 +380,10 @@ publish:
 	@echo "Publishing via uv (set UV_PUBLISH_TOKEN or configure OIDC trusted publishing)"
 	@$(UV) publish
 
-check: lint-check security test typecheck version-check api-check
+check: lint-check security test typecheck version-check api-check check-dist
 	@echo "All checks passed."
 
-check-ci: lint-check security test-ci typecheck version-check api-check
+check-ci: lint-check security test-ci typecheck version-check api-check check-dist
 	@echo "CI checks passed."
 
 prerelease: check dev-status docs-check smoke spell publish-check

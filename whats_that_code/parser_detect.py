@@ -23,10 +23,11 @@ Two hard lessons baked into the design (see spec/phase3_notes.md):
    languages, we only test those grammars — turning the parser into a precise
    disambiguator rather than a noisy from-scratch guesser.
 
-The tree-sitter binding shipped by the language pack is non-standard (accessors are
-methods, ``parse`` wants ``str``); a capability probe at import confirms it works
-and disables it gracefully otherwise, so a broken/absent binding silently falls
-back to the stdlib validators.
+The tree-sitter binding shipped by the language pack is non-standard and has drifted
+between releases (accessors may be methods; ``parse`` wants ``str`` on <1.16 and
+``bytes`` on >=1.16). Both shapes are handled, and a capability probe at import
+confirms the binding works, disabling it gracefully otherwise so a broken/absent
+binding silently falls back to the stdlib validators.
 """
 
 from __future__ import annotations
@@ -105,7 +106,16 @@ def _make_tree_sitter() -> Callable[[str, str], bool] | None:
                 return False
             parsers[grammar] = parser
         try:
-            tree = parser.parse(code)
+            # Binding drift: older tree-sitter-language-pack releases accept ``str``;
+            # newer ones (>=1.16) require a bytestring and raise TypeError on ``str``.
+            # Try str first (cheapest, matches the older binding) then fall back to
+            # utf-8 bytes, so both vintages work instead of silently disabling the
+            # whole tree-sitter layer via the capability probe below.
+            try:
+                tree = parser.parse(code)
+            except TypeError:
+                # stubs describe the older str-only signature; bytes is correct for >=1.16
+                tree = parser.parse(code.encode("utf-8"))  # type: ignore[arg-type]
             if tree is None:
                 return False
             root = _call(tree.root_node)

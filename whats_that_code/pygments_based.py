@@ -3,8 +3,6 @@
 from pygments import lexers
 from pygments.lexers import LEXERS
 
-from whats_that_code.known_languages import FILE_EXTENSIONS
-
 KNOWN_PYGMENTS: dict[str, list[str]] = {}
 
 if not KNOWN_PYGMENTS:
@@ -23,10 +21,21 @@ def language_by_pygments(code: str) -> list[str]:
         return []
     guess = lexers.guess_lexer(code)
 
-    if guess.name not in FILE_EXTENSIONS:
-        lexer_name = str(guess.language_lexer.name if hasattr(guess, "language_lexer") else guess.name).lower()
-        if lexer_name in KNOWN_PYGMENTS:
-            FILE_EXTENSIONS[guess.name] = KNOWN_PYGMENTS[lexer_name]
+    # NOTE: this function used to *mutate* the shared FILE_EXTENSIONS registry here,
+    # inserting the pygments lexer name and its extension globs ("learning" new
+    # extensions at runtime). That was removed because it made results depend on call
+    # history, in two distinct ways:
+    #
+    #   1. Pygments lexer names are display-cased ("Python"), but FILE_EXTENSIONS keys
+    #      are read back as *votes* by extension_based, and the election rejects any
+    #      vote that is not lowercase -> `TypeError("Bad casing")` on a later call.
+    #   2. Learned entries claim extensions the curated table deliberately assigns
+    #      elsewhere. One prolog snippet inserts `cplint` owning `*.pl`, after which
+    #      `script.pl` is detected as cplint instead of perl -- a silent accuracy
+    #      regression in every subsequent call in the process.
+    #
+    # Both are order-dependent and invisible in a single-call run. FILE_EXTENSIONS is
+    # a curated registry (guarded by test_label_registry.py); it must stay immutable.
 
     # pygments confuses java & python
     if guess.name.lower().startswith("python"):
