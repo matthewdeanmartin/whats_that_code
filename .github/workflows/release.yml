@@ -83,6 +83,11 @@ jobs:
         run: uv sync --frozen
       - name: Build
         run: uv build --no-sources
+      # Fail before uploading: the publish action's bundled twine rejects
+      # metadata it cannot parse (e.g. Metadata-Version 2.5 from hatchling),
+      # which otherwise only surfaces after the release is already tagged.
+      - name: Validate distribution metadata
+        run: uv run --with 'twine>=7' twine check --strict dist/*
       - name: Verify dist version matches release
         env:
           EXPECTED: ${{ needs.bump.outputs.version }}
