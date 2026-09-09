@@ -2078,7 +2078,7 @@ wheels = [
 
 [[package]]
 name = "keepachangelog-manager-fork"
-version = "6.6.0"
+version = "6.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "inquirer" },
@@ -2089,15 +2089,14 @@ dependencies = [
     { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9e/f5/6461361cb54028a5aa6a35cdc61f492b6f1bc2c9b0e36b70f04c78c07b50/keepachangelog_manager_fork-6.6.0.tar.gz", hash = "sha256:4d1c05dcb2558847ad3a102e85df2fc51e1ddaba3652b063a1e1fff4530ae0cf", size = 1336568, upload-time = "2026-07-05T14:17:19.521Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/47/75/dfadeb2a8e43701165030b414ebdabb800e2952d220f98e6d1c574077d51/keepachangelog_manager_fork-6.8.0.tar.gz", hash = "sha256:ebc90046ff374f6b9e2bebbc1e505910b40d4d2637677e787a55ab6fc9ad27a3", size = 1414432, upload-time = "2026-09-09T18:11:25.024Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6a/17/f9817db0c46851fe109897ac9d9f64b6f74a68174db87fbc3d23592067ba/keepachangelog_manager_fork-6.6.0-py3-none-any.whl", hash = "sha256:a4152c4f9a8f0d8698a580ff1680b7a60265d60fff299b482cc3c8d1220cb7fd", size = 191399, upload-time = "2026-07-05T14:17:17.911Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/13/d3d17ac45bd68d31e85ccace9f7d8b6f3610f81ee7cfb902b95f1c0f49dc/keepachangelog_manager_fork-6.8.0-py3-none-any.whl", hash = "sha256:0fdc1dd648308fb46c225b92ff92738d8b6581188a2564aecc3dbca4c635c550", size = 193172, upload-time = "2026-09-09T18:11:23.067Z" },
 ]
 
 [package.optional-dependencies]
-all = [
+fast = [
     { name = "google-re2" },
-    { name = "mdformat" },
     { name = "orjson" },
 ]
 
@@ -5152,7 +5151,9 @@ dev = [
     { name = "interrogate" },
     { name = "isort" },
     { name = "jiggle-version" },
-    { name = "keepachangelog-manager-fork", extra = ["all"] },
+    { name = "keepachangelog-manager-fork" },
+    { name = "keepachangelog-manager-fork", extra = ["fast"], marker = "python_full_version < '3.15'" },
+    { name = "keepachangelog-manager-fork", marker = "python_full_version >= '3.15'" },
     { name = "linkcheckmd" },
     { name = "lxml-stubs" },
     { name = "mdformat" },
@@ -5214,7 +5215,8 @@ dev = [
     { name = "interrogate", specifier = ">=1.5.0" },
     { name = "isort", specifier = ">=6.0.0" },
     { name = "jiggle-version", specifier = ">=2.1.0" },
-    { name = "keepachangelog-manager-fork", extras = ["all"], specifier = ">=6.6.0" },
+    { name = "keepachangelog-manager-fork", extras = ["fast"], marker = "python_full_version < '3.15'", specifier = ">=6.8.0" },
+    { name = "keepachangelog-manager-fork", extras = ["stdlib"], marker = "python_full_version >= '3.15'", specifier = ">=6.8.0" },
     { name = "linkcheckmd", specifier = ">=1.4.0" },
     { name = "lxml-stubs" },
     { name = "mdformat", specifier = ">=1.0.0" },
