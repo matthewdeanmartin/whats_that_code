@@ -104,3 +104,7 @@ extraction tool I wrote.
 - [PyPI](https://pypi.org/project/whats-that-code/)
 - [Bug Tracker](https://github.com/matthewdeanmartin/whats_that_code/issues)
 - [Change Log](https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md)
+
+## Python 3.15 wheel verification — 2026-10-04
+
+On Python 3.15 and later, core installation uses the existing stdlib-parser/regex fallbacks without requiring tree-sitter wheels. The `parsers` extra enables the native parser stack when compatible wheels exist; older Python retains its existing dependencies. Recognition for languages handled by native grammars is reduced without that stack. Windows RC3 fast-suite checks pass 126 tests with six native-parser skips using both stable dependencies and lxml 7.0.0b1 prerelease wheels; Python 3.14 passes 132. Slow corpus tests were excluded. Published 0.3.1 does not yet include this dependency change.

@@ -39,8 +39,8 @@ dependencies = [
     # Options(use_parsers=True): a clean parse is strong evidence for a language.
     # Without this extra the parser trick still works using only the stdlib validators
     # (python/json/xml/toml); installing it adds ~26 tree-sitter grammars.
-    "tree-sitter>=0.23",
-    "tree-sitter-language-pack>=1.0",
+    "tree-sitter>=0.23; python_version < '3.15'",
+    "tree-sitter-language-pack>=1.0; python_version < '3.15'",
 ]
 
 
@@ -69,6 +69,10 @@ include = [
 
 [tool.hatch.build.targets.sdist]
 include = ["/README.md", "/LICENSE", "/whats_that_code", "/test"]
+
+[project.optional-dependencies]
+# Opt in when compatible native parser wheels are available.
+parsers = ["tree-sitter>=0.23", "tree-sitter-language-pack>=1.0"]
 
 [dependency-groups]
 dev = [
@@ -107,7 +111,7 @@ dev = [
     "interrogate>=1.5.0",
     "linkcheckmd>=1.4.0",
     "pyenchant>=3.2.2",
-    "mkdocs>=1.6.0",
+    "mkdocs>=1.6.0,<2",
     "mkdocstrings[python]>=0.26.0",
     "git2md>=0.1.0",
     "pyclean>=3.0.0",
@@ -115,8 +119,8 @@ dev = [
     "vulture>=2.11",
     # the optional [fast] extra, so tests exercise the tree-sitter parser path
     # (google-re2 is a core dependency now, so it is already present)
-    "tree-sitter>=0.23",
-    "tree-sitter-language-pack>=1.0",
+    "tree-sitter>=0.23; python_version < '3.15'",
+    "tree-sitter-language-pack>=1.0; python_version < '3.15'",
     "deadcode>=2.4.0",
     # API surface / doc checks
     "griffe>=1.0.0",
