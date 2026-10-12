@@ -24,7 +24,9 @@ from whats_that_code.election import guess_language_all_methods
 from whats_that_code.known_languages import FILE_EXTENSIONS
 from whats_that_code.pygments_based import language_by_pygments
 
-PERL = 'use strict;\nuse warnings;\n\nmy @nums = (1, 2, 3);\nmy $total = 0;\n$total += $_ for @nums;\nprint "$total\\n";\n'
+PERL = (
+    'use strict;\nuse warnings;\n\nmy @nums = (1, 2, 3);\nmy $total = 0;\n$total += $_ for @nums;\nprint "$total\\n";\n'
+)
 PROLOG = "main :- write(hello), nl.\n"
 
 # Snippets chosen to make pygments reach for a variety of exotic lexers.
@@ -33,9 +35,9 @@ SNIPPETS = [
     PERL,
     "def f(x):\n    return x + 1\n",
     '{"a": [1, 2, 3]}',
-    "package main\nimport \"fmt\"\nfunc main() { fmt.Println(1) }\n",
+    'package main\nimport "fmt"\nfunc main() { fmt.Println(1) }\n',
     "SELECT id, name FROM users WHERE id = 1;\n",
-    "<?xml version=\"1.0\"?><root><child/></root>",
+    '<?xml version="1.0"?><root><child/></root>',
 ]
 
 
@@ -44,7 +46,7 @@ def test_pygments_does_not_mutate_the_extension_registry():
     before = copy.deepcopy(FILE_EXTENSIONS)
     for snippet in SNIPPETS:
         language_by_pygments(snippet)
-    assert FILE_EXTENSIONS == before, "language_by_pygments mutated the shared FILE_EXTENSIONS registry"
+    assert before == FILE_EXTENSIONS, "language_by_pygments mutated the shared FILE_EXTENSIONS registry"
 
 
 def test_registry_keys_stay_lowercase():

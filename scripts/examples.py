@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import random
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -90,7 +90,7 @@ def build_rows() -> tuple[list[dict], int]:
 def render_markdown(rows: list[dict]) -> str:
     lines: list[str] = []
 
-    ts = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    ts = datetime.now(tz=UTC).strftime("%Y-%m-%d %H:%M UTC")
     lines += [
         "# Detection Accuracy",
         "",
@@ -121,10 +121,7 @@ def render_markdown(rows: list[dict]) -> str:
     correct_totals = {ax: 0 for ax in AXES}
     for row in rows:
         cells = [cell(row["correct"][ax], row["results"][ax]) for ax in AXES]
-        lines.append(
-            f"| `{row['file']}` | {row['expected'] or '—'} "
-            f"| {cells[0]} | {cells[1]} | {cells[2]} |"
-        )
+        lines.append(f"| `{row['file']}` | {row['expected'] or '—'} | {cells[0]} | {cells[1]} | {cells[2]} |")
         for ax in AXES:
             if row["correct"][ax]:
                 correct_totals[ax] += 1
@@ -154,9 +151,7 @@ def render_markdown(rows: list[dict]) -> str:
         "with_tag": "With tag",
     }
     for ax in AXES:
-        lines.append(
-            f"| {axis_labels[ax]} | {correct_totals[ax]} | {n} | **{pcts[ax]:.1%}** |"
-        )
+        lines.append(f"| {axis_labels[ax]} | {correct_totals[ax]} | {n} | **{pcts[ax]:.1%}** |")
 
     lines.append("")
     return "\n".join(lines)
@@ -167,7 +162,7 @@ def main() -> int:
     random.seed(0)
 
     print("Classifying corpus…", flush=True)
-    rows, total = build_rows()
+    rows, _total = build_rows()
 
     md = render_markdown(rows)
     OUT.write_text(md, encoding="utf-8")
@@ -175,7 +170,7 @@ def main() -> int:
     n = len(rows)
     for ax in AXES:
         ok = sum(1 for r in rows if r["correct"][ax])
-        print(f"  {ax:16} {ok}/{n}  ({ok/n:.0%})")
+        print(f"  {ax:16} {ok}/{n}  ({ok / n:.0%})")
     print(f"\nWrote {OUT}")
     return 0
 

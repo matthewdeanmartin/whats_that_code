@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [{ name = "Matthew Martin", email = "matthewdeanmartin@gmail.com" }]
 keywords = ["language detection", "programming language detection"]
 license = "MIT"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -14,7 +14,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -124,11 +123,11 @@ dev = [
     "deadcode>=2.4.0",
     # API surface / doc checks
     "griffe>=1.0.0",
-    "pydoclint>=0.8.0; python_version >= '3.10'",
+    "pydoclint>=0.8.0",
     "pydoctest==0.2.1",
     # advisory / exploratory tools (standalone make targets, not quality gates)
-    "refurb>=2.0.0; python_version >= '3.10'",
-    "crosshair-tool>=0.0.80; python_version >= '3.10'",
+    "refurb>=2.0.0",
+    "crosshair-tool>=0.0.80",
     "deptry>=0.20.0",
     "import-linter>=2.0",
 ]
@@ -204,7 +203,7 @@ select = [
     "RUF", # ruff-specific
     "W",   # pycodestyle warnings
 ]
-ignore = [
+ignore = ["RUF100", 
     "E501",   # line too long (black handles this)
 ]
 

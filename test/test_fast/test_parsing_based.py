@@ -41,7 +41,7 @@ def test_parses_as_xml_rejects_html_root():
 
 def test_parses_as_xml_rejects_xhtml_namespace():
     """XHTML with explicit namespace should NOT be reported as XML."""
-    xhtml = '<?xml version="1.0"?>' '<html xmlns="http://www.w3.org/1999/xhtml">' "<head/><body/>" "</html>"
+    xhtml = '<?xml version="1.0"?><html xmlns="http://www.w3.org/1999/xhtml"><head/><body/></html>'
     assert not parses_as_xml(xhtml)
 
 
