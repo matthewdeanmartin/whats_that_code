@@ -252,11 +252,15 @@ security: bandit
 bandit:
 	@$(UV) run bandit -q -c pyproject.toml -r $(PACKAGE)
 
+# PYSEC-2026-3740: nltk model-artifact APIs bypass pathsec; no fixed release yet. nltk is a
+# dev-only transitive dependency (troml-dev-status -> textstat -> nltk), never imported at runtime.
+AUDIT_IGNORE = PYSEC-2026-3740
+
 audit:
 	@echo "=== uv audit ==="
-	@$(UV) audit
+	@$(UV) audit $(foreach id,$(AUDIT_IGNORE),--ignore-until-fixed $(id))
 	@echo "=== pip-audit ==="
-	@$(UV) run pip-audit
+	@$(UV) run pip-audit $(foreach id,$(AUDIT_IGNORE),--ignore-vuln $(id))
 
 # ── Tests ─────────────────────────────────────────────────────────────────────
 

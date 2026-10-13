@@ -112,7 +112,7 @@ def _make_tree_sitter() -> Callable[[str, str], bool] | None:
             # utf-8 bytes, so both vintages work instead of silently disabling the
             # whole tree-sitter layer via the capability probe below.
             try:
-                tree = parser.parse(code)
+                tree = parser.parse(code)  # type: ignore[call-overload]  # older bindings take str
             except TypeError:
                 # stubs describe the older str-only signature; bytes is correct for >=1.16
                 tree = parser.parse(code.encode("utf-8"))  # type: ignore[arg-type]
