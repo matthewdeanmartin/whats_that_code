@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a23">
+  <title>{{ .Site.Title }} — identify the language behind a snippet</title>
+  <meta name="description" content="{{ .Site.Params.description }}">
+  <meta property="og:title" content="{{ .Site.Title }} — identify the language behind a snippet">
+  <meta property="og:description" content="{{ .Site.Params.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ .Site.BaseURL }}">
+  <link rel="canonical" href="{{ .Site.BaseURL }}">
+  {{ $css := resources.Get "css/site.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+</head>
+<body>
+  {{ block "main" . }}{{ end }}
+  <script>
+    document.querySelectorAll('[data-copy]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        navigator.clipboard.writeText(button.dataset.copy).then(function () {
+          var label = button.querySelector('[data-copy-label]');
+          label.textContent = 'Copied';
+          window.setTimeout(function () { label.textContent = 'Copy'; }, 1800);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

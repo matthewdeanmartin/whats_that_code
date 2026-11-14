@@ -46,10 +46,10 @@ dependencies = [
 
 
 [project.urls]
+Homepage = "https://matthewdeanmartin.github.io/whats_that_code/"
 Repository = "https://github.com/matthewdeanmartin/whats_that_code"
 Documentation = "https://whats-that-code.readthedocs.io/en/latest/"
 Changelog = "https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md"
-homepage = "https://github.com/matthewdeanmartin/whats_that_code"
 issues = "https://github.com/matthewdeanmartin/whats_that_code/issues"
 
 [build-system]

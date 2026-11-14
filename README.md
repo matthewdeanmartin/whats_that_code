@@ -1,6 +1,6 @@
 # whats_that_code
 
-This is a Python programming language detection library.
+This is a Python programming language detection library. See the [homepage](https://matthewdeanmartin.github.io/whats_that_code/) for a quick introduction and the [documentation](https://whats-that-code.readthedocs.io/en/latest/) for the full guide.
 
 It detects the programming language of source code with an ensemble of classifiers.
 Use this when a quick first approximation is good enough.
@@ -67,6 +67,11 @@ default, so existing callers are unaffected.
 guess_language_all_methods(go_source, options=Options(use_parsers=True))  # -> "go"
 ```
 
+On Python 3.15, the current source uses standard-library parser and regex fallbacks
+when native parser or `re2` wheels are unavailable. Detection for languages that
+rely on native grammars is reduced without them. Published 0.3.1 predates these
+source changes.
+
 ## How it Works
 
 1. Inspects file extension if available.
@@ -86,10 +91,12 @@ extraction tool I wrote.
 
 ## Docs
 
-- [TODO](https://github.com/matthewdeanmartin/whats_that_code/tree/main/docs/TODO.md)
-- [LICENSE](https://github.com/matthewdeanmartin/whats_that_code/tree/main/LICENSE)
-- [Prior Art](https://github.com/matthewdeanmartin/whats_that_code/tree/main/docs/prior_art.md) Every similar project/tool, including defunct
-- [ChangeLog](https://github.com/matthewdeanmartin/whats_that_code/tree/main/docs/CHANGELOG.md)
+- [Installation](https://whats-that-code.readthedocs.io/en/latest/installation/)
+- [Usage](https://whats-that-code.readthedocs.io/en/latest/usage/)
+- [Accuracy](https://whats-that-code.readthedocs.io/en/latest/accuracy/)
+- [Prior Art](https://whats-that-code.readthedocs.io/en/latest/prior_art/) — comparable tools and research
+- [Changelog](https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md)
+- [License](https://github.com/matthewdeanmartin/whats_that_code/blob/main/LICENSE)
 
 ## Notable Similar Tools
 
@@ -101,10 +108,8 @@ extraction tool I wrote.
 ## Project Links
 
 - [GitHub](https://github.com/matthewdeanmartin/whats_that_code)
+- [Homepage](https://matthewdeanmartin.github.io/whats_that_code/)
+- [Documentation](https://whats-that-code.readthedocs.io/en/latest/)
 - [PyPI](https://pypi.org/project/whats-that-code/)
 - [Bug Tracker](https://github.com/matthewdeanmartin/whats_that_code/issues)
 - [Change Log](https://github.com/matthewdeanmartin/whats_that_code/blob/main/CHANGELOG.md)
-
-## Python 3.15 wheel verification — 2026-10-04
-
-On Python 3.15 and later, core installation uses the existing stdlib-parser/regex fallbacks without requiring tree-sitter wheels. The `parsers` extra enables the native parser stack when compatible wheels exist; older Python retains its existing dependencies. Recognition for languages handled by native grammars is reduced without that stack. Windows RC3 fast-suite checks pass 126 tests with six native-parser skips using both stable dependencies and lxml 7.0.0b1 prerelease wheels; Python 3.14 passes 132. Slow corpus tests were excluded. Published 0.3.1 does not yet include this dependency change.

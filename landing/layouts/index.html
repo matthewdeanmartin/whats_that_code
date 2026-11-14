@@ -1,0 +1,55 @@
+{{ define "main" }}
+{{ $p := .Site.Params }}
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="wordmark" href="#top" aria-label="whats_that_code home"><span class="mark">{ ? }</span> whats_that_code</a>
+    <nav aria-label="Main navigation">
+      <a href="#how">How it works</a>
+      <a href="#examples">Examples</a>
+      <a href="{{ $p.docs }}">Documentation</a>
+      <a class="nav-github" href="{{ $p.github }}">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse"></span> Python library <span class="eyebrow-rule"></span> v{{ $p.version }}</p>
+        <h1>Code without a label?<br><em>Find its language.</em></h1>
+        <p class="hero-lead">A small Python library for making a best-effort language guess from source code. Give it a snippet, add a filename or tags when you have them, and get a language name back.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="{{ $p.docs }}installation/">Get started <span aria-hidden="true">↗</span></a>
+          <a class="button button-quiet" href="#examples">See an example <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="install-line"><code>pip install whats-that-code</code><button type="button" data-copy="pip install whats-that-code" aria-label="Copy install command"><span data-copy-label>Copy</span></button></div>
+        <p class="hero-note">No machine learning model or model download. <a href="{{ $p.docs }}accuracy/">See measured accuracy</a> before relying on a guess.</p>
+      </div>
+      <div class="hero-visual" aria-label="Illustration of a code snippet receiving a Python language label">
+        <div class="visual-top"><span class="window-dots" aria-hidden="true">● ● ●</span><span>unlabeled snippet</span><span>01 / 03</span></div>
+        <div class="visual-code"><span class="line-no">01</span><code><span class="syntax-purple">def</span> greet(name):</code><span class="line-no">02</span><code>    <span class="syntax-purple">return</span> <span class="syntax-orange">f"hello, {name}"</span></code><span class="line-no">03</span><code>&nbsp;</code></div>
+        <div class="visual-rail"><span class="rail-label">SIGNALS FOUND</span><div><b>.py</b><span>file extension</span></div><div><b>def</b><span>keyword</span></div><div><b>f"…"</b><span>syntax pattern</span></div></div>
+        <div class="visual-result"><span>BEST GUESS</span><strong><span class="result-dot"></span> python</strong><span class="result-arrow" aria-hidden="true">↗</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="signal-strip" aria-label="Detection inputs"><div class="container signal-inner"><span>Bring what you have</span><span>01 <b>Source code</b></span><span>02 <b>Filename</b></span><span>03 <b>Tags &amp; context</b></span><span>→ <b>Language guess</b></span></div></section>
+  <section class="section section-how" id="how"><div class="container"><div class="section-heading"><p class="kicker">Under the hood / 01</p><h2>Several clues.<br>One informed guess.</h2><p>Code can be ambiguous. The detector combines independent signals through ranked-choice voting so a single keyword does not have to carry the decision.</p></div><div class="method-grid"><article><span class="method-number">01 / METADATA</span><div class="method-icon">.py</div><h3>Start with context</h3><p>File extensions, shebangs, tags, and surrounding text can give the classifier a strong lead.</p></article><article><span class="method-number">02 / CONTENT</span><div class="method-icon">{ }</div><h3>Read the snippet</h3><p>Keywords, syntax patterns, and optional parser checks add evidence from the code itself.</p></article><article><span class="method-number">03 / ELECTION</span><div class="method-icon">↗</div><h3>Combine the votes</h3><p>Methods rank their candidates. The ensemble returns a lower-case language name or <code>None</code> when it cannot decide.</p></article></div></div></section>
+  <section class="section example-section" id="examples"><div class="container"><div class="section-heading light"><p class="kicker">In practice / 02</p><h2>From snippet to signal.</h2><p>A direct call fits into an ingestion pipeline, a documentation tool, or any workflow that needs an approximate label.</p></div><div class="example-grid"><div class="code-panel"><div class="panel-head"><span class="window-dots" aria-hidden="true">● ● ●</span><span>detect.py</span><span>Python API</span></div><pre><code><span class="syntax-purple">from</span> whats_that_code.election <span class="syntax-purple">import</span> guess_language_all_methods
+
+code = <span class="syntax-orange">"def greet(name):\n    return f'hello {name}'"</span>
+
+language = guess_language_all_methods(
+    code,
+    file_name=<span class="syntax-orange">"greet.py"</span>,
+)
+
+<span class="syntax-muted"># "python"</span>
+<span class="syntax-purple">print</span>(language)</code></pre></div><div class="example-aside"><span class="aside-index">INPUT → OUTPUT</span><h3>Give it the clue you already know.</h3><p>The filename supplies an extension; the snippet supplies syntax. You can also pass tags, surrounding text, and prior language guesses through the Python API.</p><a href="{{ $p.docs }}usage/">Explore the API <span aria-hidden="true">↗</span></a><div class="cli-card"><span>Prefer the command line?</span><code>python -m whats_that_code -c "print('hello')"</code><strong>→ python</strong></div></div></div></div></section>
+  <section class="section use-section"><div class="container use-grid"><div><p class="kicker">Where it fits / 03</p><h2>For unlabeled code<br>in the wild.</h2></div><div class="use-list"><div><span>01</span><p>Label pasted snippets or scraped examples before storing them.</p></div><div><span>02</span><p>Add a language hint to code blocks with no declared language.</p></div><div><span>03</span><p>Sort extracted Q&amp;A code when tags and filenames offer partial context.</p></div></div></div></section>
+  <section class="section reality-section"><div class="container reality-grid"><div><p class="kicker">Know the limits / 04</p><h2>A guess is a starting point.</h2></div><div><p>Short or ambiguous snippets are difficult to classify, especially without context. Results improve when you can supply a filename or tags. Parser checks are optional, and native grammar availability depends on your Python environment.</p><a href="{{ $p.docs }}accuracy/">Read the accuracy report <span aria-hidden="true">↗</span></a></div></div></section>
+  <section class="closing"><div class="container closing-inner"><div><p class="kicker">Ready to try it?</p><h2>Put a name to that code.</h2></div><div class="closing-links"><a class="button button-primary" href="{{ $p.docs }}installation/">Installation guide ↗</a><a href="{{ $p.pypi }}">View on PyPI ↗</a></div></div></section>
+</main>
+<footer><div class="container footer-inner"><span class="wordmark"><span class="mark">{ ? }</span> whats_that_code</span><span>Built for uncertain snippets.</span><div><a href="{{ $p.docs }}">Docs</a><a href="{{ $p.github }}">GitHub</a><a href="{{ $p.pypi }}">PyPI</a></div></div></footer>
+{{ end }}

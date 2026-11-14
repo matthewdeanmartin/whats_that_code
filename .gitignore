@@ -11,6 +11,9 @@ __pycache__/
 build/
 develop-eggs/
 dist/
+/landing/public/
+/landing/resources/
+/landing/.hugo_build.lock
 downloads/
 eggs/
 .eggs/
